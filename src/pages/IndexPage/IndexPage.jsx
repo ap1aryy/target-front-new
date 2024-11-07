@@ -1,44 +1,271 @@
-import { Section, Cell, Image, List } from '@telegram-apps/telegram-ui';
+import { Section, Cell, Title, Link, Card, Info, Placeholder, Avatar, Badge, Divider } from '@telegram-apps/telegram-ui';
 
-import { Link } from '@/components/Link/Link.jsx';
-
-import tonSvg from './ton.svg';
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './IndexPage.css';
 
+import { UserContext } from '@/contexts/UserContext';
+
+
+import { useNavigate } from 'react-router-dom';
+import { useContext, useState, useEffect } from 'react';
+
+
+import { course } from '@/Utils/Constants';
+import { getAllCourses } from '@/Utils/thinkificAPI';
+
+import {Icon20ChevronRightOutline, Icon20FireAltOutline, Icon24Clock } from '@vkontakte/icons';
 /**
  * @returns {JSX.Element}
  */
 export function IndexPage() {
+  const {user} = useContext(UserContext)
+  const [courses, setCourses] = useState(course);
+  const navigate = useNavigate()
+  window.Telegram.WebApp.MainButton.hide(); 
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const courseList = await getAllCourses(user.id);
+        setCourses(courseList);
+      } catch (error) {
+        console.error('Не удалось загрузить курсы:', error);
+      }
+    };
+
+    fetchCourses();
+  }, [user]);
+  
+  const handleGoToCourse = (course) => {
+        navigate(`/courses/${course.id}`, { state: { course } });
+  }
+
+  if (!courses) {
+        return <Spinner/>;  // Показать текст загрузки, пока данные курса не загружены
+  }
+
+
   return (
-    <List>
-      <Section
-        header="Features"
-        footer="You can use these pages to learn more about features, provided by Telegram Mini Apps and other useful projects"
-      >
-        <Link to="/ton-connect">
-          <Cell
-            before={<Image src={tonSvg} style={{ backgroundColor: '#007AFF' }}/>}
-            subtitle="Connect your TON wallet"
+    <div>
+      <div style={{
+              padding:16, gap:8
+            }}>
+<Title weight="2" style={{
+              marginBottom:4
+            }}
+            >Best choice</Title>
+<Card
+            style={{
+              width: "100%",
+              textAlign: "left",
+              height: "250px",
+              marginTop:8
+            }}
+            onClick={() => handleGoToCourse(course[0])}
           >
-            TON Connect
+            <img
+              alt="Course Image"
+              src="https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png"
+              style={{
+                display: 'block',
+                height: "170px", 
+                objectFit: 'cover',
+                width: "100%"
+              }}
+            />
+            <Card.Cell readOnly
+              subtitle={<div>
+                Course
+                
+              </div>}
+            >
+            TON Blockchain & Telegram
+            </Card.Cell>
+          </Card>
+          </div>
+      {/* <List>
+
+        <Section
+          header={<Cell
+           
+            before=""
+            description=""
+            hint=""
+            interactiveAnimation=""
+            subhead=""
+            subtitle=""
+            titleBadge=""
+          >
+            Choise of the day
+          </Cell>} />
+
+
+
+
+            <div className='centered'>
+          {courses.map((course, index) => (
+          <Card
+            key={index}
+            style={{
+              width: "85%",
+              textAlign: "left",
+              height: "250px" 
+            }}
+            onClick={() => handleGoToCourse(course)}
+          >
+            <img
+              alt="Course Image"
+              src="https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png"
+              style={{
+                display: 'block',
+                height: "170px", 
+                objectFit: 'cover',
+                width: "100%"
+              }}
+            />
+            <Card.Cell readOnly
+              subtitle={<div>
+                Course
+                
+              </div>}
+            >
+              {course.title}
+            </Card.Cell>
+          </Card>
+        ))}
+</div>
+      </List> */}
+
+      <Section style={{ height: "100%", marginBottom:80}}>
+
+        <Section
+          header={
+            <Cell
+             
+              before={<Icon20FireAltOutline style={{marginRight:-10}}/>}
+              description=""
+              hint=""
+              interactiveAnimation=""
+              subhead=""
+              subtitle=""
+              titleBadge=""
+            >
+              Popular courses
+            </Cell>
+          }
+        >
+          
+          <Cell
+             after={<Icon20ChevronRightOutline />}
+            before={<Avatar 
+              size={48}
+              style={{borderRadius: "5px"}} 
+              src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
+            />}
+            subtitle="9 chapters"
+            onClick={() => handleGoToCourse(course[0])}
+          >
+            TON Blockchain & Telegram
           </Cell>
-        </Link>
+{/* https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png */}
+          <Cell
+             after={<Icon20ChevronRightOutline />}
+            before={<Avatar
+              src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
+              size={48} style={{borderRadius: "5px"}} />}
+            subtitle="3 chapters"
+            onClick={() => handleGoToCourse(course[1])}
+          >
+            ProProduct
+          </Cell>
+
+        </Section>
+
+        <Section
+          header={
+            <Cell
+              
+              before=""
+              description=""
+              hint=""
+              interactiveAnimation=""
+              subhead=""
+              subtitle=""
+              titleBadge=""
+            >
+              TON & Telegram courses
+            </Cell>
+          }
+        >
+          
+          <Cell
+             after={<Icon20ChevronRightOutline />}
+            before={<Avatar 
+              size={48}
+              style={{borderRadius: "5px"}} 
+              src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
+            />}
+            subtitle="9 chapters"
+            onClick={() => handleGoToCourse(course[0])}
+          >
+            TON Blockchain & Telegram
+          </Cell>
+
+          <Cell
+          before={<Avatar 
+            size={48}
+            style={{borderRadius: "5px"}} 
+            children={<Icon24Clock />}
+          />}
+          subtitle={
+            <Link>Coming soon</Link>
+          }
+        >
+          Telegram Mini Apps
+        </Cell>
+
+        </Section>
+
+        <Section
+          header={
+            <Cell
+              
+              before=""
+              description=""
+              hint=""
+              interactiveAnimation=""
+              subhead=""
+              subtitle=""
+              titleBadge=""
+            >
+              Product Management courses
+            </Cell>
+          }
+        >
+          
+          <Cell
+             after={<Icon20ChevronRightOutline />}
+            before={<Avatar
+              src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
+              size={48} style={{borderRadius: "5px"}} />}
+            subtitle="3 chapters"
+            onClick={() => handleGoToCourse(course[1])}
+          >
+            ProProduct
+          </Cell>
+
+        </Section>
+
+        <Section>
+        <Placeholder style={{paddingTop: 20, paddingBottom: 20}} description="Gotcha! That's the end!">
+          <img
+            width="75%"
+            alt="Telegram sticker"
+            src="https://s1.gifyu.com/images/Sy9DJ.gif"
+          />
+        </Placeholder>  
       </Section>
-      <Section
-        header="Application Launch Data"
-        footer="These pages help developer to learn more about current launch information"
-      >
-        <Link to="/init-data">
-          <Cell subtitle="User data, chat information, technical data">Init Data</Cell>
-        </Link>
-        <Link to="/launch-params">
-          <Cell subtitle="Platform identifier, Mini Apps version, etc.">Launch Parameters</Cell>
-        </Link>
-        <Link to="/theme-params">
-          <Cell subtitle="Telegram application palette information">Theme Parameters</Cell>
-        </Link>
+
       </Section>
-    </List>
+    </div>
   );
 }

@@ -5,6 +5,8 @@ import WebApp from '@twa-dev/sdk';
 import { App } from '@/components/App.jsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary.jsx';
 
+import { UserProvider } from '@/contexts/UserContext';
+import { CoursesProvider } from '@/contexts/CoursesContext';
 /**
  * @param {unknown} error
  * @returns {JSX.Element}
@@ -44,7 +46,11 @@ export function Inner() {
 
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
+      <UserProvider>
+      <CoursesProvider>
       <App/>
+      </CoursesProvider>
+      </UserProvider>
     </TonConnectUIProvider>
   );
 }

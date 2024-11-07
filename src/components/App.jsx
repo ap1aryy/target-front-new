@@ -11,6 +11,12 @@ import {
 } from 'react-router-dom';
 
 import { routes } from '@/navigation/routes.jsx';
+import { UserContext } from '@/contexts/UserContext';
+import { CoursesProvider } from '@/contexts/CoursesContext';
+import { Navbar } from './NavBar';
+
+import { useContext } from 'react';
+
 
 function BackButtonManipulator() {
   const location = useLocation();
@@ -40,6 +46,33 @@ function BackButtonManipulator() {
  * @return {JSX.Element}
  */
 export function App() {
+  const {user, setUser }= useContext(UserContext);
+  useEffect(() => {
+    window.Telegram.WebApp.isVerticalSwipesEnabled = false
+
+    const initializeTelegramWebApp = async () => {
+      if (window.Telegram && window.Telegram.WebApp) {
+        const webAppData = window.Telegram.WebApp.initDataUnsafe;
+        const user = webAppData.user;
+  
+        if (user) {
+          setUser(user);
+        } else {
+          const defaultUser = {
+            username: "bogdan_krvsk",
+            first_name: "Bogdan",
+            last_name: "",
+            id: 874423521,
+            is_premium: true,
+          };
+          setUser(defaultUser);
+        }
+      }
+    };
+    initializeTelegramWebApp();
+  }, [setUser]);
+  
+
   return (
     <AppRoot
       appearance={WebApp.colorScheme}
@@ -50,7 +83,9 @@ export function App() {
         <Routes>
           {routes.map((route) => <Route key={route.path} {...route} />)}
           <Route path='*' element={<Navigate to='/'/>}/>
+         
         </Routes>
+        <Navbar/>
       </BrowserRouter>
     </AppRoot>
   );

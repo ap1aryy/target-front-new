@@ -1,0 +1,57 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000; /* Поверх другого контента */
+  }
+  
+  .popup-menu {
+    
+    overflow-y: auto;
+    background: var(--tg-theme-secondary-bg-color, white);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%; /* Немного меньше ширины экрана */
+    height: 65%;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    position: relativ   e;
+    transform: translateY(100vh); /* Начальное положение */
+    animation-timing-function: ease-in-out;
+  }
+  
+  /* Анимация появления модального окна */
+  @keyframes slideIn {
+    from {
+      transform: translateY(100vh);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Анимация исчезновения */
+  @keyframes slideOut {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100vh);
+    }
+  }
+  
+  .popup-slide-in {
+    animation-name: slideIn;
+  }
+  
+  .popup-slide-out {
+    animation-name: slideOut;
+  }
+  
