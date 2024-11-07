@@ -1,10 +1,6 @@
-import { CoursesContext } from "@/contexts/CoursesContext";
 import axios from "axios";
-import { useContext } from "react";
 
 const BASE_URL = "https://mini-app-back.friendsdao.com/dev";
-
-const { courses, setCourses } = useContext(CoursesContext);
 
 export const getAllCourses = async (userId) => {
   try {
@@ -88,15 +84,4 @@ export const getAllChapters = async (app_id, user_id) => {
     console.error("Ошибка при получении списка уроков:", error);
     throw error;
   }
-};
-
-const updateCourseStatus = (courseId) => {
-  const updatedCourses = courses.map((course) => {
-    if (course.id === courseId) {
-      return { ...course, my: true }; // Обновляем курс
-    }
-    return course; // Возвращаем остальные курсы без изменений
-  });
-
-  setCourses(updatedCourses);
 };
