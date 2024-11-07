@@ -46,11 +46,11 @@ export function Inner() {
 
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
-      <UserProvider>
       <CoursesProvider>
-      <App/>
-      </CoursesProvider>
-      </UserProvider>
+      <UserProvider>
+          <App/>
+        </UserProvider>
+        </CoursesProvider>
     </TonConnectUIProvider>
   );
 }

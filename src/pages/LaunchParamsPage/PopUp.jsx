@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import {
   Section, Cell, List, Button, Text
 } from '@telegram-apps/telegram-ui';
@@ -6,13 +6,15 @@ import { UserContext } from '@/contexts/UserContext';
 import { options, mentors } from '@/Utils/Constants';
 import { Icon16StarAlt, Icon24PenOutline } from '@vkontakte/icons';
 import './PopUp.css';
-
+import { generateInvoice } from '@/Utils/thinkificAPI';
 export function PopUp({ course_data, onClose }) {
   const { user } = useContext(UserContext);
   const [isClosing, setIsClosing] = useState(false);
   const [stage, setStage] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [selectedMentor, setSelectedMentor] = useState(null);
+  const invoiceGenerated = useRef(false)
+
   window.Telegram.WebApp.MainButton.hide();
 
   const handleClose = () => {
@@ -35,8 +37,9 @@ export function PopUp({ course_data, onClose }) {
     setStage(3);
   };
 
-  const handleConfirmPurchase = () => {
-    console.log("Confirming purchase...");
+  const handleConfirmPurchase = async () => {
+    const price = selectedPlan.price + (selectedMentor ? selectedMentor.price : 0)
+    await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type)
   };
 
   return (

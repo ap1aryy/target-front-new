@@ -10,16 +10,16 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 
 
-import { course } from '@/Utils/Constants';
 import { getAllCourses } from '@/Utils/thinkificAPI';
 
 import {Icon20ChevronRightOutline, Icon20FireAltOutline, Icon24Clock } from '@vkontakte/icons';
+import { CoursesContext } from '@/contexts/CoursesContext';
 /**
  * @returns {JSX.Element}
  */
 export function IndexPage() {
-  const {user} = useContext(UserContext)
-  const [courses, setCourses] = useState(course);
+  const {user, setUser} = useContext(UserContext)
+  const {courses, setCourses} = useContext(CoursesContext)
   const navigate = useNavigate()
   window.Telegram.WebApp.MainButton.hide(); 
   useEffect(() => {
@@ -60,7 +60,7 @@ export function IndexPage() {
               height: "250px",
               marginTop:8
             }}
-            onClick={() => handleGoToCourse(course[0])}
+            onClick={() => handleGoToCourse(courses[0])}
           >
             <img
               alt="Course Image"
@@ -162,7 +162,7 @@ export function IndexPage() {
               src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
             />}
             subtitle="9 chapters"
-            onClick={() => handleGoToCourse(course[0])}
+            onClick={() => handleGoToCourse(courses[0])}
           >
             TON Blockchain & Telegram
           </Cell>
@@ -173,7 +173,7 @@ export function IndexPage() {
               src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
               size={48} style={{borderRadius: "5px"}} />}
             subtitle="3 chapters"
-            onClick={() => handleGoToCourse(course[1])}
+            onClick={() => handleGoToCourse(courses[1])}
           >
             ProProduct
           </Cell>
@@ -205,7 +205,7 @@ export function IndexPage() {
               src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
             />}
             subtitle="9 chapters"
-            onClick={() => handleGoToCourse(course[0])}
+            onClick={() => handleGoToCourse(courses[0])}
           >
             TON Blockchain & Telegram
           </Cell>
@@ -248,7 +248,7 @@ export function IndexPage() {
               src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
               size={48} style={{borderRadius: "5px"}} />}
             subtitle="3 chapters"
-            onClick={() => handleGoToCourse(course[1])}
+            onClick={() => handleGoToCourse(courses[1])}
           >
             ProProduct
           </Cell>

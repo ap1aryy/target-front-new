@@ -16,7 +16,8 @@ export const course = [{
     "avatar": "https://import.cdn.thinkific.com/999858/r676HFMETTqeDFcWXdP6_photo_2024-11-05_15-03-56.jpg",
     "rate": 4.5,
     "my": true,
-    "chapters":9
+    "chapters": 9,
+    'slug':"my-course"
 },
 {
     "description": "Learn essential skills in product management, from market research and product strategy to development and launch. This course covers key concepts, tools, and best practices to manage product life cycles, drive innovation, and meet customer needs.",
@@ -26,6 +27,7 @@ export const course = [{
     "avatar": "https://import.cdn.thinkific.com/999858/hQK1qjTj6ytCgZKOjCng_0_diagram.png",
     "rate": 4.5,
     "my": false,
-    "chapters":3
+    "chapters":3,
+    'slug':"new-course"
 }
 ]

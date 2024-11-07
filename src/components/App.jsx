@@ -12,11 +12,10 @@ import {
 
 import { routes } from '@/navigation/routes.jsx';
 import { UserContext } from '@/contexts/UserContext';
-import { CoursesProvider } from '@/contexts/CoursesContext';
 import { Navbar } from './NavBar';
-
+import * as amplitude from '@amplitude/analytics-browser';
 import { useContext } from 'react';
-
+amplitude.init('fd29d14d4b8f347fb378fe00c445fe7a', {"autocapture":true});
 
 function BackButtonManipulator() {
   const location = useLocation();
@@ -46,6 +45,7 @@ function BackButtonManipulator() {
  * @return {JSX.Element}
  */
 export function App() {
+  amplitude.track('Sign Up');
   const {user, setUser }= useContext(UserContext);
   useEffect(() => {
     window.Telegram.WebApp.isVerticalSwipesEnabled = false

@@ -9,40 +9,38 @@ import { UserContext } from '@/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 
-import { Navbar } from '../../components/NavBar';
-
 import { course } from '@/Utils/Constants';
-import { getAllCourses } from '@/Utils/thinkificAPI';
 
+import { EnrolledPopUp } from './EnrolledPopUp';
+import { CoursesContext } from '@/contexts/CoursesContext';
 /**
  * @returns {JSX.Element}
  */
 export function EnrollmentsPage() {
-  const {user} = useContext(UserContext)
-  const [courses, setCourses] = useState(course);
-  const navigate = useNavigate()
-  window.Telegram.WebApp.MainButton.hide(); 
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     try {
-  //       const courseList = await getAllCourses(user.id);
-  //       setCourses(courseList);
-  //     } catch (error) {
-  //       console.error('Не удалось загрузить курсы:', error);
-  //     }
-  //   };
+  const { user } = useContext(UserContext);
+  const {courses, setCourses} = useContext(CoursesContext);
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [popUpUrl, setPopUpUrl] = useState('');
+  const navigate = useNavigate();
 
-  //   fetchCourses();
-  // }, [user]);
-  
+  window.Telegram.WebApp.MainButton.hide();
+
   const handleGoToCourse = (course) => {
-        navigate(`/courses/${course.id}`, { state: { course } });
-  }
+    navigate(`/courses/${course.id}`, { state: { course } });
+  };
+
+  const handleOpenPopUp = (url) => {
+    setPopUpUrl(url);
+    setIsPopUpOpen(true);
+  };
+
+  const handleClosePopUp = () => {
+    setIsPopUpOpen(false);
+  };
 
   if (!courses) {
-        return <Spinner/>;  // Показать текст загрузки, пока данные курса не загружены
+    return <Spinner />;
   }
-
 
   return (
     <div>
@@ -142,18 +140,26 @@ export function EnrollmentsPage() {
           }
         >
           
-          <Cell
-             after={<Icon20ChevronRightOutline />}
-            before={<Avatar 
-              size={48}
-              style={{borderRadius: "5px"}} 
-              src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
-            />}
-            subtitle="9 chapters"
-            onClick={() => handleGoToCourse(course[0])}
-          >
-            {courses[0].title}
-          </Cell>
+          {Array.isArray(courses) && courses.length > 0 && 
+  courses.filter(course => course.my === true) // Only show courses where `my` is true
+    .map((course, index) => (
+      <Cell
+        key={index}
+        after={<Icon20ChevronRightOutline />}
+        before={
+          <Avatar
+            size={48}
+            style={{ borderRadius: "5px" }}
+            src="https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png"
+          />
+        }
+        subtitle="9 chapters"
+        onClick={() => handleGoToCourse(course)}
+      >
+        {course.title}
+      </Cell>
+    ))}
+
 {/* https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png */}
 
         </Section>
@@ -168,6 +174,9 @@ export function EnrollmentsPage() {
       </Section>
 
       </Section>
+      {isPopUpOpen && (
+        <EnrolledPopUp url={popUpUrl} onClose={handleClosePopUp} />
+      )}
     </div>
   );
 }

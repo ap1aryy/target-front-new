@@ -1,7 +1,6 @@
 import { IndexPage } from '@/pages/IndexPage/IndexPage';
 import { CoursePage } from '@/pages/InitDataPage/CoursePage';
 import { EnrollmentsPage } from '@/pages/ThemeParamsPage/Enrolled';
-
 /**
  * @typedef {object} Route
  * @property {string} path
@@ -16,5 +15,5 @@ import { EnrollmentsPage } from '@/pages/ThemeParamsPage/Enrolled';
 export const routes = [
   { path: '/', Component: IndexPage },
   { path: "/courses/:courseId", Component: CoursePage, title: 'Course' },
-  { path: "/enrollments", Component: EnrollmentsPage, title: 'Enroll' }
+  { path: "/enrollments", Component: EnrollmentsPage, title: 'Enroll' },
 ];

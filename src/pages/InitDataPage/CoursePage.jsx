@@ -10,7 +10,7 @@ import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '@/contexts/UserContext';
 import { getAllChapters } from '@/Utils/thinkificAPI';
 import { PopUp } from '../LaunchParamsPage/PopUp';
-
+import { Chapters } from '../Courses/Chapters1';
 import { Icon24Clock, Icon20PlayCircle, Icon16StarAlt , Icon24Message} from '@vkontakte/icons';
 
 /**
@@ -23,11 +23,17 @@ export function CoursePage() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [isPopUpOpen, setPopUpOpen] = useState(false);
+  const [isChaptersOpen, setChaptersOpen] = useState(false);
+  const [selectedChapterIndex, setSelectedChapterIndex] = useState(null); 
+
 
   useEffect(() => {
     if (!user) {
       navigate("/");
       return;
+    }
+    if (course.my) {
+      window.Telegram.WebApp.MainButton.hide();
     }
 
     const handleGetAllChapters = async () => {
@@ -51,6 +57,15 @@ export function CoursePage() {
       window.Telegram.WebApp.MainButton.offClick(handleOpenPopUp);
     };
   }, [course.id, user, navigate]);
+
+   const handleOpenChapters = (index) => {
+    setSelectedChapterIndex(index);  // Set the selected chapter index
+    setChaptersOpen(true);
+  };
+  const handleCloseChapters = () => {
+    setChaptersOpen(false)
+    window.Telegram.WebApp.MainButton.hide();
+  }
 
   const handleOpenPopUp = () => setPopUpOpen(true);
   const handleClosePopUp = () => {
@@ -119,6 +134,7 @@ export function CoursePage() {
                   before={<Icon20PlayCircle />}
                   size="s"
                   mode="bezeled"
+                 onClick={() => handleOpenChapters(index + 1)} 
                 >
                   Open
                 </Button>
@@ -176,9 +192,9 @@ export function CoursePage() {
           />
           </Section>
         )}
-  
-        {isPopUpOpen && <PopUp course_data={course} onClose={handleClosePopUp} />}
+        { isPopUpOpen && <PopUp course_data={course} onClose={handleClosePopUp} /> }
+        { isChaptersOpen && <Chapters onClose={handleCloseChapters} index={selectedChapterIndex} /> }
       </List>
     </div>
   );
-} 
+}
