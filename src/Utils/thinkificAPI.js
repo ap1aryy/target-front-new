@@ -62,10 +62,12 @@ export const generateInvoice = async (
             },
           }
         );
-        updateCourseStatus(response.data.id);
         console.log("User successfully enrolled in course!");
+        return invoiceLink;
       }
+
       setInvoiceGenerated.current = true;
+      return invoiceLink;
     });
   } catch (e) {
     console.error("Ошибка при получении линка курса:", e);

@@ -13,6 +13,8 @@ import { PopUp } from '../LaunchParamsPage/PopUp';
 import { Chapters } from '../Courses/Chapters1';
 import { Icon24Clock, Icon20PlayCircle, Icon16StarAlt , Icon24Message} from '@vkontakte/icons';
 
+import { format } from 'date-fns';
+
 /**
  * @returns {JSX.Element}
  */
@@ -26,6 +28,7 @@ export function CoursePage() {
   const [isChaptersOpen, setChaptersOpen] = useState(false);
   const [selectedChapterIndex, setSelectedChapterIndex] = useState(null); 
 
+  const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp * 1000), "dd.MM.yyyy HH:mm") : null;
 
   useEffect(() => {
     if (!user) {
@@ -103,11 +106,11 @@ export function CoursePage() {
         </div>
   
         {/* If the course belongs to the user, show validity date */}
-        {course?.my && (
+        {course.my && course.type == 1 && (
           <Section яstyle={{marginTop: 8}}>
           <Cell
             before={<Icon24Clock />}
-            hint="28.11.2024 15:52"
+            hint={formattedTimestamp}
             subhead="Valid until"
           />
           </Section>
@@ -168,8 +171,8 @@ export function CoursePage() {
         {!course?.my ? (
           <Section style={{ marginTop: 8 }}>
             <Cell
-              subtitle="Engage Labs"
-              children="Mark Okhman"
+              subtitle="Krud Live"
+              children="David Kruel"
               before={<Avatar size={32} src={`https://t.me/i/userpic/320/markokhman.jpg`} />}
               after={<Button style={{borderRadius:"50px"}} after={<Icon16StarAlt/>}>50</Button>}
             />
@@ -177,14 +180,15 @@ export function CoursePage() {
         ) : (
           <Section style={{marginTop: 8}}>
           <Cell
-            hint="Mark Okhman"
-            subhead="Engage Labs"
+            hint="David Kruel"
+            subhead="Krud Live"
             subtitle={
               <Button
                 style={{ marginTop: 8 }}
                 before={<Icon24Message />}
                 size="s"
                 mode="bezeled"
+                onClick={() => window.open('https://t.me/markokhman', '_blank')}
               >
                 Contact via Telegram
               </Button>

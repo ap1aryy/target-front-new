@@ -6,8 +6,11 @@ import { UserContext } from '@/contexts/UserContext';
 import { options, mentors } from '@/Utils/Constants';
 import { Icon16StarAlt, Icon24PenOutline } from '@vkontakte/icons';
 import './PopUp.css';
-import { generateInvoice } from '@/Utils/thinkificAPI';
+import { generateInvoice , getAllCourses} from '@/Utils/thinkificAPI';
+import { CoursesContext } from '@/contexts/CoursesContext';
+
 export function PopUp({ course_data, onClose }) {
+  const {courses, setCourses} = useContext(CoursesContext)
   const { user } = useContext(UserContext);
   const [isClosing, setIsClosing] = useState(false);
   const [stage, setStage] = useState(1);
@@ -38,9 +41,23 @@ export function PopUp({ course_data, onClose }) {
   };
 
   const handleConfirmPurchase = async () => {
-    const price = selectedPlan.price + (selectedMentor ? selectedMentor.price : 0)
-    await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type)
-  };
+  const price = selectedPlan.price + (selectedMentor ? selectedMentor.price : 0);
+
+  try {
+    const result = await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type);
+    if (result) {
+      // Close the popup
+      handleClose();
+      
+      // Fetch updated courses after successful purchase
+      const updatedCourses = await getAllCourses(user.id);
+      setCourses(updatedCourses);
+    }
+  } catch (error) {
+    console.error("Error during the purchase process:", error);
+  }
+};
+
 
   return (
     <div className="popup-overlay" onClick={handleClose}>

@@ -9,7 +9,7 @@ import { UserContext } from '@/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 
-import { course } from '@/Utils/Constants';
+import { getAllCourses } from '@/Utils/thinkificAPI';
 
 import { EnrolledPopUp } from './EnrolledPopUp';
 import { CoursesContext } from '@/contexts/CoursesContext';
@@ -18,7 +18,21 @@ import { CoursesContext } from '@/contexts/CoursesContext';
  */
 export function EnrollmentsPage() {
   const { user } = useContext(UserContext);
-  const {courses, setCourses} = useContext(CoursesContext);
+  const { courses, setCourses } = useContext(CoursesContext);
+  
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const courseList = await getAllCourses(user.id);
+        setCourses(courseList);
+      } catch (error) {
+        console.error('Не удалось загрузить курсы:', error);
+      }
+    };
+
+    fetchCourses();
+  }, [user]);
+
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popUpUrl, setPopUpUrl] = useState('');
   const navigate = useNavigate();
