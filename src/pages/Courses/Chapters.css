@@ -55,4 +55,7 @@
   }
   
 
-    
+    /* styles.css */
+li {
+  font-family: var(--tgui--font-family);
+}
