@@ -2,10 +2,17 @@ import axios from "axios";
 
 const BASE_URL = "https://mini-app-back.friendsdao.com/dev";
 
+// Helper to get User from Telegram WebApp
+const getInitData = () => {
+  const initData = window.Telegram?.WebApp?.initData || "";
+  return btoa(initData);
+};
+
 export const getAllCourses = async (userId) => {
   try {
     const response = await axios.post(`${BASE_URL}/courses`, null, {
       params: { user_id: userId },
+      headers: { User: getInitData() },
     });
     return response.data;
   } catch (error) {
@@ -16,10 +23,16 @@ export const getAllCourses = async (userId) => {
 
 export const getCourseDetails = async (userId, courseId) => {
   try {
-    const response = await axios.post(`${BASE_URL}/courses/${courseId}`, {
-      app_id: courseId,
-      user_id: userId,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/courses/${courseId}`,
+      {
+        app_id: courseId,
+        user_id: userId,
+      },
+      {
+        headers: { User: getInitData() },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Ошибка при получении данных курса:", error);
@@ -37,16 +50,21 @@ export const generateInvoice = async (
   if (setInvoiceGenerated.current) return;
 
   try {
-    const response = await axios.post(`${BASE_URL}/generate-invoice`, {
-      app_id: appId,
-      user_id: userId,
-      count: count,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/generate-invoice`,
+      {
+        app_id: appId,
+        user_id: userId,
+        count: count,
+      },
+      {
+        headers: { User: getInitData() },
+      }
+    );
 
     const invoiceLink = response.data;
 
     // Открытие инвойса в Telegram
-    console.log(invoiceLink);
     window.Telegram.WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === "paid") {
         const response = await axios.post(
@@ -60,6 +78,7 @@ export const generateInvoice = async (
             params: {
               type: type,
             },
+            headers: { User: getInitData() },
           }
         );
         console.log("User successfully enrolled in course!");
@@ -77,10 +96,16 @@ export const generateInvoice = async (
 
 export const getAllChapters = async (app_id, user_id) => {
   try {
-    const response = await axios.post(`${BASE_URL}/chapters`, {
-      user_id: user_id,
-      app_id: app_id,
-    });
+    const response = await axios.post(
+      `${BASE_URL}/chapters`,
+      {
+        user_id: user_id,
+        app_id: app_id,
+      },
+      {
+        headers: { User: getInitData() },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Ошибка при получении списка уроков:", error);

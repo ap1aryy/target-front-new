@@ -46,7 +46,7 @@ function BackButtonManipulator() {
  */
 export function App() {
   amplitude.track('Sign Up');
-  const {user, setUser }= useContext(UserContext);
+  const {setInitData, setUser }= useContext(UserContext);
   useEffect(() => {
     window.Telegram.WebApp.isVerticalSwipesEnabled = false
 
@@ -54,9 +54,10 @@ export function App() {
       if (window.Telegram && window.Telegram.WebApp) {
         const webAppData = window.Telegram.WebApp.initDataUnsafe;
         const user = webAppData.user;
-  
+        
         if (user) {
           setUser(user);
+          setInitData(window.Telegram.WebApp.initData)
         } else {
           const defaultUser = {
             username: "bogdan_krvsk",
