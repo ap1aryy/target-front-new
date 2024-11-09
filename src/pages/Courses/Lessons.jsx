@@ -4763,6 +4763,7 @@ export const Lesson5_4 = () => {
     {
       <video >
         <source src="https://cdn.stepik.net/video/326957/1080/c48cdf514daf44e93ee8a049d137d1e4.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
     }; {
       <video>

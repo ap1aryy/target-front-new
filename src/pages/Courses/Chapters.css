@@ -115,3 +115,8 @@ code {
     /* Это гарантирует, что длинные слова будут переноситься */
     word-break: break-word;
   }
+
+video {
+  width: 60vw;
+  height: auto;
+}
