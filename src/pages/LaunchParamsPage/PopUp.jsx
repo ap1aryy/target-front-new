@@ -45,15 +45,19 @@ export function PopUp({ course_data, onClose }) {
   const price = selectedPlan.price + (selectedMentor ? selectedMentor.price : 0);
 
   try {
-    const result = await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type);
-    if (result) {
-      // Close the popup
-      handleClose();
-      
-      // Fetch updated courses after successful purchase
-      const updatedCourses = await getAllCourses(user.id);
-      setCourses(updatedCourses);
-    }
+    const result = await generateInvoice(user.id,
+      course_data.id,
+      price,
+      invoiceGenerated,
+      selectedPlan.type,
+      async () => {
+          
+          handleClose();
+
+          const updatedCourses = await getAllCourses(user.id);
+          setCourses(updatedCourses);
+        });
+   
   } catch (error) {
     console.error("Error during the purchase process:", error);
   }

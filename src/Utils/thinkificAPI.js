@@ -45,7 +45,8 @@ export const generateInvoice = async (
   appId,
   count,
   setInvoiceGenerated,
-  type
+  type,
+  onSuccess
 ) => {
   if (setInvoiceGenerated.current) return;
 
@@ -81,10 +82,10 @@ export const generateInvoice = async (
             headers: { User: getInitData() },
           }
         );
-        console.log("User successfully enrolled in course!");
-        return response;
       }
-
+      if (onSuccess) {
+        onSuccess();
+      }
       setInvoiceGenerated.current = true;
       return invoiceLink;
     });
