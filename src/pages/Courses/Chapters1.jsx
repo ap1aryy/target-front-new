@@ -83,7 +83,6 @@ export function Chapters({ onClose, index }) {
     return (lessons[index] || []).map((LessonComponent, i) => (
       <div key={i} ref={i === lessons[index].length - 1 ? lastLessonRef : null}>
         <LessonComponent />
-        <Button  style={{width:"100%", marginTop:16, marginBottom: 16}} onClick={() => handleFinishLesson(i + 1)}>Finish</Button>
       </div>
     ));
 };
