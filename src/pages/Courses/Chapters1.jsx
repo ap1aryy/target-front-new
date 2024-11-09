@@ -83,6 +83,7 @@ export function Chapters({ onClose, index }) {
     return (lessons[index] || []).map((LessonComponent, i) => (
       <div key={i} ref={i === lessons[index].length - 1 ? lastLessonRef : null}>
         <LessonComponent />
+        <Button  style={{width:"100%", marginTop:16, marginBottom: 16}} onClick={() => handleFinishLesson(i + 1)}>Finish</Button>
       </div>
     ));
 };
@@ -95,20 +96,7 @@ export function Chapters({ onClose, index }) {
         style={{height:"90%"}}
         onClick={(e) => e.stopPropagation()}
       >
-        <Section header={
-            <Cell
-             
-              before={<Icon16Cancel style={{marginRight:-10}}/>}
-              description=""
-              hint=""
-              interactiveAnimation=""
-              subhead=""
-              subtitle=""
-              titleBadge=""
-            >
-              Back
-            </Cell>
-          }></Section>
+      
         {renderLessons()}
       </div>
     </div>
