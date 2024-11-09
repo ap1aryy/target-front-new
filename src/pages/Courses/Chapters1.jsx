@@ -21,39 +21,42 @@ export function Chapters({ onClose, index }) {
   const lastLessonRef = useRef(null);
 
   useEffect(() => {
-    // Show main button
-    window.Telegram.WebApp.MainButton.show();
-    window.Telegram.WebApp.MainButton.text = "Back";
-    window.Telegram.WebApp.MainButton.onClick(() => handleClose());
+  // Show and set up the Back button
+  window.Telegram.WebApp.BackButton.show();
+  window.Telegram.WebApp.BackButton.onClick(handleClose);
 
-    // Swipe event listeners
-    const handleTouchStart = (e) => {
-      startTouch.current = e.touches[0].clientY;
-    };
-    const handleTouchMove = (e) => {
-      if (startTouch.current !== null) {
-        const delta = e.touches[0].clientY - startTouch.current;
-        if (delta < -50) setIsFullScreen(true);
-      }
-    };
-    const handleTouchEnd = () => { startTouch.current = null; };
-
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove);
-    window.addEventListener('touchend', handleTouchEnd);
-
-    // Scroll to last completed lesson on component mount
-    const lastCompletedLesson = localStorage.getItem(`chapter_${index}_lastLesson`);
-    if (lastLessonRef.current && lastCompletedLesson) {
-      lastLessonRef.current.scrollIntoView();
+  // Swipe event listeners
+  const handleTouchStart = (e) => {
+    startTouch.current = e.touches[0].clientY;
+  };
+  const handleTouchMove = (e) => {
+    if (startTouch.current !== null) {
+      const delta = e.touches[0].clientY - startTouch.current;
+      if (delta < -50) setIsFullScreen(true);
     }
+  };
+  const handleTouchEnd = () => { startTouch.current = null; };
 
-    return () => {
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
-    };
-  }, [index]);
+  window.addEventListener('touchstart', handleTouchStart);
+  window.addEventListener('touchmove', handleTouchMove);
+  window.addEventListener('touchend', handleTouchEnd);
+
+  // Scroll to last completed lesson on component mount
+  const lastCompletedLesson = localStorage.getItem(`chapter_${index}_lastLesson`);
+  if (lastLessonRef.current && lastCompletedLesson) {
+    lastLessonRef.current.scrollIntoView();
+  }
+
+  return () => {
+    // Clean up Back button and swipe listeners
+    window.Telegram.WebApp.BackButton.hide();
+    window.Telegram.WebApp.BackButton.onClick(null);
+    window.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchmove', handleTouchMove);
+    window.removeEventListener('touchend', handleTouchEnd);
+  };
+}, [index]);
+
 
   const handleClose = () => {
     setIsClosing(true);
@@ -62,7 +65,7 @@ export function Chapters({ onClose, index }) {
 
   const handleFinishLesson = (lessonNumber) => {
     // Save progress in local storage
-    localStorage.setItem(`chapter_${index}_lastLesson`, lessonNumber);
+    localStorage.setItem(`chapter_${index}_finished`, lessonNumber);
     // Call onClose after finishing lesson
     handleClose();
   };
@@ -96,8 +99,13 @@ export function Chapters({ onClose, index }) {
         style={{height:"100%"}}
         onClick={(e) => e.stopPropagation()}
       >
-      
         {renderLessons()}
+      <Button
+          style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
+          onClick={handleFinishLesson}
+        >
+          Finish
+        </Button>
       </div>
     </div>
   );
