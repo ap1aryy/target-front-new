@@ -177,7 +177,7 @@ export const Lesson1_2 = () => {
         <li>Консенсус предотвращает двойные траты со стороны валидаторов.</li>
       </ul>
       <video controls>
-        <source src="public\videos\1.2.mp4" type="video/mp4" />
+        <source src="/videos\1.2.mp4" type="video/mp4" />
 
       </video>
       <Title weight="4">Двухуровневый блокчейн в TON</Title>
@@ -847,7 +847,7 @@ export const Lesson3_2 = () => {
       </ul>
 
       <video controls>
-        <source src="public\videos\3.2.mp4" type="video/mp4" />
+        <source src="/videos\3.2.mp4" type="video/mp4" />
 
       </video>
 
@@ -975,7 +975,7 @@ export const Lesson3_3 = () => {
       </Title >
 
       <video controls>
-        <source src="public\videos\3.3.mp4" type="video/mp4" />
+        <source src="/videos\3.3.mp4" type="video/mp4" />
 
       </video>
 
@@ -1106,7 +1106,7 @@ deployScript();`}
       <Title style={{ fontSize: 16, marginTop: 4 }}>...</Title >
 
       <video controls>
-        <source src="public\videos\3.5.mp4" type="video/mp4" />
+        <source src="/videos\3.5.mp4" type="video/mp4" />
 
       </video>
 
@@ -1139,7 +1139,7 @@ export const Lesson3_6 = () => {
       <pre><code>{`"onchaintest:mainnet": "ts-node ./scripts/onchaintest.ts"`}</code></pre>
 
       <video controls>
-        <source src="public\videos\3.6.mp4" type="video/mp4" />
+        <source src="/videos\3.6.mp4" type="video/mp4" />
 
       </video>
 
@@ -1184,7 +1184,7 @@ export const Lesson8_4 = () => {
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
 
           <video controls>
-            <source src="public\videos\8.4.mp4" type="video/mp4" />
+            <source src="/videos\8.4.mp4" type="video/mp4" />
 
           </video>
 
@@ -1383,7 +1383,7 @@ export const Lesson8_3 = () => {
       <h2>📚 Конспект урока</h2>
 
       <video controls>
-        <source src="public\videos\8.3.mp4" type="video/mp4" />
+        <source src="/videos\8.3.mp4" type="video/mp4" />
 
       </video>
 
@@ -1504,7 +1504,7 @@ export const Lesson8_2 = () => (
     <h2>📚 Конспект урока</h2>
 
     <video controls>
-      <source src="public\videos\8.2.mp4" type="video/mp4" />
+      <source src="/videos\8.2.mp4" type="video/mp4" />
 
     </video>
 
@@ -1821,7 +1821,7 @@ export const Lesson7_5 = () => {
       </p>
 
       <video controls>
-        <source src="public\videos\7.5.mp4" type="video/mp4" />
+        <source src="/videos\7.5.mp4" type="video/mp4" />
 
       </video>
 
@@ -1843,7 +1843,7 @@ export const Lesson7_4 = () => {
 
       {/* Video Section */}
       <video controls>
-        <source src="public\videos\7.4.mp4" type="video/mp4" />
+        <source src="/videos\7.4.mp4" type="video/mp4" />
 
       </video>
 
@@ -2048,7 +2048,7 @@ export const Lesson7_2 = () => {
         </section>
 
         <video controls>
-          <source src="public\videos\7.2.mp4" type="video/mp4" />
+          <source src="/videos\7.2.mp4" type="video/mp4" />
 
         </video>
 
@@ -2366,7 +2366,7 @@ export const Lesson6_4 = () => {
       <div>
 
         <video controls>
-          <source src="public\videos\6.4.mp4" type="video/mp4" />
+          <source src="/videos\6.4.mp4" type="video/mp4" />
 
         </video>
       </div>
@@ -2478,7 +2478,7 @@ export const Lesson6_3 = () => {
       {/* Video Section */}
       <div>
         <video controls>
-          <source src="public\videos\6.3.mp4" type="video/mp4" />
+          <source src="/videos\6.3.mp4" type="video/mp4" />
 
         </video>
       </div>
@@ -2624,7 +2624,7 @@ export const Lesson6_2 = () => {
   return (
     <div>
       <video controls>
-        <source src="public\videos\6.2.mp4" type="video/mp4" />
+        <source src="/videos\6.2.mp4" type="video/mp4" />
 
       </video>
       <div>
@@ -2804,7 +2804,7 @@ export const Lesson4_1 = () => {
     <div>
       <h1>💎 Добро пожаловать в четвертую часть!</h1>
       <video controls>
-        <source src="public\videos\4.1.mp4" type="video/mp4" />
+        <source src="/videos/4.1.mp4" type="video/mp4" />
 
       </video>
 
@@ -3009,7 +3009,7 @@ export const Lesson4_2 = () => {
     <div>
 
       <video controls>
-        <source src="public\videos\4.2.mp4" type="video/mp4" />
+        <source src="/videos\4.2.mp4" type="video/mp4" />
 
       </video>
 
@@ -3272,7 +3272,7 @@ export const Lesson4_3 = () => {
   return (
     <div>
       <video controls>
-        <source src="public\videos\4.3.mp4" type="video/mp4" />
+        <source src="/videos\4.3.mp4" type="video/mp4" />
 
       </video>
       <h1>📚 Конспект урока</h1>
@@ -3648,7 +3648,7 @@ export const Lesson4_4 = () => {
       <p>Обратите внимание: мы проверяем, что баланс контракта больше, чем 4,99 TON, поскольку мы знаем, что часть средств будет потеряна на комиссиях.</p>
 
       <video controls>
-        <source src="public\videos\4.4.mp4" type="video/mp4" />
+        <source src="/videos\4.4.mp4" type="video/mp4" />
 
       </video>
     </div>
@@ -3990,7 +3990,7 @@ export const Lesson5_5 = () => {
     <div>
 
       <video controls>
-        <source src="public\videos\5.5.mp4" type="video/mp4" />
+        <source src="/videos\5.5.mp4" type="video/mp4" />
 
       </video>
       <h1>📚 Конспект урока</h1>
@@ -4123,7 +4123,7 @@ describe("main.fc contract tests", () => {
 export const Lesson4_6 = () => (
   <div>
     <video controls>
-      <source src="public\videos\4.6.mp4" type="video/mp4" />
+      <source src="/videos\4.6.mp4" type="video/mp4" />
 
     </video>
     <h3>📚Конспект урока</h3>
@@ -4286,7 +4286,7 @@ export default defineConfig({
 `}
     </code></pre>
     <video controls>
-      <source src="public\videos\5.1.mp4" type="video/mp4" />
+      <source src="/videos\5.1.mp4" type="video/mp4" />
 
     </video>
     <p>Чтобы увидеть пустой шаблон приложения, запустите его в командной строке:</p>
@@ -4302,7 +4302,7 @@ export default defineConfig({
 export const Lesson5_2 = () => (
   <div>
     <video controls>
-      <source src="public\videos\5.2.mp4" type="video/mp4" />
+      <source src="/videos\5.2.mp4" type="video/mp4" />
 
     </video>
     <h2>📚 Конспект урока</h2>
@@ -4622,7 +4622,7 @@ export const Lossen5_3 = () => {
       </p>
 
       <video controls>
-        <source src="public\videos\5.3.mp4" type="video/mp4" />
+        <source src="/videos\5.3.mp4" type="video/mp4" />
 
       </video>
 
@@ -4635,7 +4635,7 @@ export const Lesson5_4 = () => {
     <div>
       <div>
         <video controls>
-          <source src="public\videos\5.4.mp4" type="video/mp4" />
+          <source src="/videos\5.4.mp4" type="video/mp4" />
 
         </video>
         <p>Here must be video</p>

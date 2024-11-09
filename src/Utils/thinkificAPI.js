@@ -82,7 +82,7 @@ export const generateInvoice = async (
           }
         );
         console.log("User successfully enrolled in course!");
-        return invoiceLink;
+        return response;
       }
 
       setInvoiceGenerated.current = true;

@@ -5,7 +5,7 @@ export const options = [
 ];
 
 export const mentors = [
-    { name: "David Kruel", status: "1", price: 1 }, // Add price for mentor selection
+    { name: "David Kruel", status: "1", price: 1, company: "Kruel Live" }, // Add price for mentor selection
 ];
 
 export const course = [{

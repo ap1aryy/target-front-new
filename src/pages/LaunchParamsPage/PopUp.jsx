@@ -99,7 +99,7 @@ export function PopUp({ course_data, onClose }) {
     <Cell 
     multiline
       subhead="Mentor" 
-      children={selectedMentor?.name || "None"} 
+      children={selectedMentor?.name || "Not selected"} 
       subtitle={
         <Button
           style={{ marginTop: 8 }}
@@ -151,7 +151,7 @@ export function PopUp({ course_data, onClose }) {
                 {mentors.map((mentor, index) => (
                   <Cell
                     key={index}
-                    subhead={`${mentor.status} ⭐`}
+                    subhead={`${mentor.company}`}
                     hint={mentor.name}
                     after={
                       <Button
