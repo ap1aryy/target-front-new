@@ -177,7 +177,7 @@ export const Lesson1_2 = () => {
         <li>Консенсус предотвращает двойные траты со стороны валидаторов.</li>
       </ul>
       <video controls>
-        <source src="/videos/1.2.mp4" type="video/mp4" />
+        <source src={`/videos/1.2.mp4`} type="video/mp4" />
 
       </video>
       <Title weight="4">Двухуровневый блокчейн в TON</Title>
@@ -349,7 +349,7 @@ export const Lesson1_5 = () => {
       <Title style={{ fontSize: 16, marginTop: 4 }}>Масштабируемость токенов означает, что операции перевода между пользователями не влияют на переводы между другими пользователями в сети. Это делает возможным создание неограниченно масштабируемых токенов без ограничений.</Title >
 
       <video controls>
-        <source src="./videos/1.5.mp4" type="video/mp4" />
+        <source  src={`/videos/1.5.mp4`} type="video/mp4" />
 
       </video>
 
@@ -847,7 +847,7 @@ export const Lesson3_2 = () => {
       </ul>
 
       <video controls>
-        <source src="/videos/3.2.mp4" type="video/mp4" />
+        <source src={`/videos/3.2.mp4`} type="video/mp4" />
 
       </video>
 
@@ -975,7 +975,7 @@ export const Lesson3_3 = () => {
       </Title >
 
       <video controls>
-        <source src="/videos/3.3.mp4" type="video/mp4" />
+        <source src={`/videos/3.3.mp4`} type="video/mp4" />
 
       </video>
 
@@ -1032,7 +1032,7 @@ Compile script is running, let's find some FunC code to compile...
 `}
 
         <video controls>
-          <source src="https://cdn.stepik.net/video/326904/1080/0ca4e213567348d4338e11870be61b32.mp4" type="video/mp4" />
+          <source  src={`/videos/3.3.mp4`} type="video/mp4" />
 
         </video>
 
@@ -1106,7 +1106,7 @@ deployScript();`}
       <Title style={{ fontSize: 16, marginTop: 4 }}>...</Title >
 
       <video controls>
-        <source src="/videos/3.5.mp4" type="video/mp4" />
+        <source src={`/videos/3.5.mp4`} type="video/mp4" />
 
       </video>
 
@@ -1139,7 +1139,7 @@ export const Lesson3_6 = () => {
       <pre><code>{`"onchaintest:mainnet": "ts-node ./scripts/onchaintest.ts"`}</code></pre>
 
       <video controls>
-        <source src="/videos/3.6.mp4" type="video/mp4" />
+        <source src={`/videos/3.6.mp4`} type="video/mp4" />
 
       </video>
 
@@ -1184,7 +1184,7 @@ export const Lesson8_4 = () => {
         <div style={{ textAlign: 'center', marginBottom: '20px' }}>
 
           <video controls>
-            <source src="/videos/8.4.mp4" type="video/mp4" />
+            <source src={`/videos/8.4.mp4`} type="video/mp4" />
 
           </video>
 
@@ -1383,7 +1383,7 @@ export const Lesson8_3 = () => {
       <h2>📚 Конспект урока</h2>
 
       <video controls>
-        <source src="/videos/8.3.mp4" type="video/mp4" />
+        <source src={`/videos/8.3.mp4`} type="video/mp4" />
 
       </video>
 
@@ -1504,7 +1504,7 @@ export const Lesson8_2 = () => (
     <h2>📚 Конспект урока</h2>
 
     <video controls>
-      <source src="/videos/8.2.mp4" type="video/mp4" />
+      <source src={`/videos/8.2.mp4`} type="video/mp4" />
 
     </video>
 
@@ -1821,7 +1821,7 @@ export const Lesson7_5 = () => {
       </p>
 
       <video controls>
-        <source src="/videos/7.5.mp4" type="video/mp4" />
+        <source src={`/videos/7.5.mp4`} type="video/mp4" />
 
       </video>
 
@@ -1843,7 +1843,7 @@ export const Lesson7_4 = () => {
 
       {/* Video Section */}
       <video controls>
-        <source src="/videos/7.4.mp4" type="video/mp4" />
+        <source src={`/videos/7.4.mp4`} type="video/mp4" />
 
       </video>
 
@@ -1964,7 +1964,7 @@ int gas_consumption() asm "15000000 PUSHINT"; ;; 0.015 TON`}
         </p>
 
         <video controls>
-          <source src="https://cdn.stepik.net/video/326930/1080/abe56f44e1ef5ea0718a4daa410d3f6e.mp4" type="video/mp4" />
+          <source  src={`/videos/7.3.mp4`}  type="video/mp4" />
 
         </video>
 
@@ -2048,7 +2048,7 @@ export const Lesson7_2 = () => {
         </section>
 
         <video controls>
-          <source src="/videos/7.2.mp4" type="video/mp4" />
+          <source src={`/videos/7.2.mp4`} type="video/mp4" />
 
         </video>
 
@@ -2366,7 +2366,7 @@ export const Lesson6_4 = () => {
       <div>
 
         <video controls>
-          <source src="/videos/6.4.mp4" type="video/mp4" />
+          <source src={`/videos/6.4.mp4`} type="video/mp4" />
 
         </video>
       </div>
@@ -2478,7 +2478,7 @@ export const Lesson6_3 = () => {
       {/* Video Section */}
       <div>
         <video controls>
-          <source src="/videos/6.3.mp4" type="video/mp4" />
+          <source src={`/videos/6.3.mp4`} type="video/mp4" />
 
         </video>
       </div>
@@ -2624,7 +2624,7 @@ export const Lesson6_2 = () => {
   return (
     <div>
       <video controls>
-        <source src="/videos/6.2.mp4" type="video/mp4" />
+        <source src={`/videos/6.2.mp4`} type="video/mp4" />
 
       </video>
       <div>
@@ -2804,7 +2804,7 @@ export const Lesson4_1 = () => {
     <div>
       <h1>💎 Добро пожаловать в четвертую часть!</h1>
       <video controls>
-        <source src="/videos/4.1.mp4" type="video/mp4" />
+        <source src={`/videos/4.1.mp4`} type="video/mp4" />
 
       </video>
 
@@ -3009,7 +3009,7 @@ export const Lesson4_2 = () => {
     <div>
 
       <video controls>
-        <source src="/videos/4.2.mp4" type="video/mp4" />
+        <source src={`/videos/4.2.mp4`} type="video/mp4" />
 
       </video>
 
@@ -3272,7 +3272,7 @@ export const Lesson4_3 = () => {
   return (
     <div>
       <video controls>
-        <source src="/videos/4.3.mp4" type="video/mp4" />
+        <source src={`/videos/4.3.mp4`} type="video/mp4" />
 
       </video>
       <h1>📚 Конспект урока</h1>
@@ -3648,7 +3648,7 @@ export const Lesson4_4 = () => {
       <p>Обратите внимание: мы проверяем, что баланс контракта больше, чем 4,99 TON, поскольку мы знаем, что часть средств будет потеряна на комиссиях.</p>
 
       <video controls>
-        <source src="/videos/4.4.mp4" type="video/mp4" />
+        <source src={`/videos/4.4.mp4`} type="video/mp4" />
 
       </video>
     </div>
@@ -3990,7 +3990,7 @@ export const Lesson5_5 = () => {
     <div>
 
       <video controls>
-        <source src="/videos/5.5.mp4" type="video/mp4" />
+        <source src={`/videos/5.5.mp4`} type="video/mp4" />
 
       </video>
       <h1>📚 Конспект урока</h1>
@@ -4123,7 +4123,7 @@ describe("main.fc contract tests", () => {
 export const Lesson4_6 = () => (
   <div>
     <video controls>
-      <source src="/videos/4.6.mp4" type="video/mp4" />
+      <source src={`/videos/4.6.mp4`} type="video/mp4" />
 
     </video>
     <h3>📚Конспект урока</h3>
@@ -4286,7 +4286,7 @@ export default defineConfig({
 `}
     </code></pre>
     <video controls>
-      <source src="/videos/5.1.mp4" type="video/mp4" />
+      <source src={`/videos/5.1.mp4`} type="video/mp4" />
 
     </video>
     <p>Чтобы увидеть пустой шаблон приложения, запустите его в командной строке:</p>
@@ -4302,7 +4302,7 @@ export default defineConfig({
 export const Lesson5_2 = () => (
   <div>
     <video controls>
-      <source src="/videos/5.2.mp4" type="video/mp4" />
+      <source src={`/videos/5.2.mp4`} type="video/mp4" />
 
     </video>
     <h2>📚 Конспект урока</h2>
@@ -4622,7 +4622,7 @@ export const Lossen5_3 = () => {
       </p>
 
       <video controls>
-        <source src="/videos/5.3.mp4" type="video/mp4" />
+        <source src={`/videos/5.3.mp4`} type="video/mp4" />
 
       </video>
 
@@ -4635,7 +4635,7 @@ export const Lesson5_4 = () => {
     <div>
       <div>
         <video controls>
-          <source src="/videos/5.4.mp4" type="video/mp4" />
+          <source src={`/videos/5.4.mp4`} type="video/mp4" />
 
         </video>
         <p>Here must be video</p>
@@ -4763,22 +4763,22 @@ export const Lesson9 = () => {
   return (
     <div>
       <video controls>
-        <source src="/videos/9.2.mp4" type="video/mp4" />
+        <source src={`/videos/9.2.mp4`} type="video/mp4" />
         Ваш браузер не поддерживает видео.
       </video>
       
       <video controls>
-        <source src="/videos/9.3.mp4" type="video/mp4" />
+        <source src={`/videos/9.3.mp4`} type="video/mp4" />
         Ваш браузер не поддерживает видео.
       </video>
       
       <video controls>
-        <source src="/videos/9.4.mp4" type="video/mp4" />
+        <source src={`/videos/9.4.mp4`} type="video/mp4" />
         Ваш браузер не поддерживает видео.
       </video>
       
       <video controls >
-        <source src="/videos/9.5.mp4" type="video/mp4" />
+        <source src={`/videos/9.5.mp4`} type="video/mp4" />
         Ваш браузер не поддерживает видео.
       </video>
     </div>
