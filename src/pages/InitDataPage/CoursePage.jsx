@@ -100,7 +100,7 @@ export function CoursePage() {
         <Title level="1" weight="2">
           {course.title}
         </Title>
-        <Text weight="3">Course</Text>
+        <Text weight="3">{t('Course')}</Text>
 
         <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
           <Chip mode="mono">Digital</Chip>
@@ -114,7 +114,7 @@ export function CoursePage() {
             <Cell
               before={<Icon24Clock />}
               hint={formattedTimestamp}
-              subhead="Valid until"
+              subhead={t('valid')}
             />
           </Section>
         )}
@@ -130,7 +130,7 @@ export function CoursePage() {
             <Section style={{ marginTop: 8 }}>
               {chapters.map((chapter, index) => (
                 <Cell
-                  subhead={`Chapter ${index + 1}`}
+                  subhead={`${t('Chapter')} ${index + 1}`}
                   multiline={true}
                   subtitle={
                     <Button
