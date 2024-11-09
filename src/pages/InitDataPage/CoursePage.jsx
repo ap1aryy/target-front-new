@@ -120,7 +120,7 @@ export function CoursePage() {
         )}
 
         <Card>
-          <Cell multiline subhead="Description" children={course.description} />
+          <Cell multiline subhead={t('Description')} children={course.description} />
         </Card>
 
         <Text weight="1">{t('Chapters')}</Text>
