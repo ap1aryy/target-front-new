@@ -41,10 +41,25 @@
   "option3_price": "1",
   "option3_stars": "1",
   "option3_benefits": ["Полный доступ к курсу навсегда", "Шаблоны FunC", "Репозитории для обучения", "Список чатов и каналов для мини-приложений"],
-  "Buy_for": "Купить за",
   "Choose_a_menthor": "Выбрать ментора",
   "Skip_this_step": "Пропустить этот шаг",
   "Change": "Изменить",
   "Confirm_and_pay": "Подтвердить и оплатить",
-  "Not_selected": "Не выбран"
+  "Not_selected": "Не выбран",
+  
+  "subscribe_1_month": "Подписка на 1 месяц",
+  "buy_forever": "Купить навсегда",
+  "exclusive_pack": "Эксклюзивный пакет дополнительных материалов",
+  
+  "full_access": "Полный доступ к курсу",
+  "online_support": "Онлайн поддержка",
+  "full_access_forever": "Полный доступ к курсу навсегда",
+  "community": "Сообщество",
+  "func_templates": "Шаблоны FunC",
+  "repositories_for_learning": "Репозитории для обучения",
+  "list_of_chats_and_channels": "Список чатов и каналов для мини-приложений",
+  
+  "Buy_for": "Купить за"
 }
+
+

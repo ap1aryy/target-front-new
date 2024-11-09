@@ -81,7 +81,7 @@ export function PopUp({ course_data, onClose }) {
     <Cell 
     multiline
       subhead={t('Plan')}
-      children={selectedPlan.name} 
+      children={t(selectedPlan.name)}
       subtitle={
         <Button
           style={{ marginTop: 8 }}
@@ -119,30 +119,30 @@ export function PopUp({ course_data, onClose }) {
           
           {/* Stage 1: Select Plan */}
           {stage === 1 && (
-            <div>
-              <Text weight="1">{t("Plan")} </Text>
-              <Section style={{ marginTop: 8 }}>
-                {options.map((option) => (
-                  <Cell
-                    multiline
-                    key={option.id}
-                    subtitle={option.benefits.join(', ')}
-                    children={`${option.name}`}
-                    after={
-                      <Button style={{marginTop:8}}
-                      after={<Icon16StarAlt size={24} />}
-                      size="s"
-                      mode="bezeled"
-                      onClick={() => handlePlanSelect(option)}
-                      >
-                        {t("Buy_for")} {option.stars}
-                      </Button>
-                    }
-                  />
-                ))}
-              </Section>
-            </div>
-          )}
+  <div>
+    <Text weight="1">{t("Plan")}</Text>
+    <Section style={{ marginTop: 8 }}>
+      {options.map((option) => (
+        <Cell
+          multiline
+          key={option.id}
+          subtitle={option.benefits.map(benefit => t(benefit)).join(', ')}
+          children={t(option.name)} // Переводим name через t()
+          after={
+            <Button style={{ marginTop: 8 }}
+              after={<Icon16StarAlt size={24} />}
+              size="s"
+              mode="bezeled"
+              onClick={() => handlePlanSelect(option)}
+            >
+              {t("Buy_for")} {option.stars}
+            </Button>
+          }
+        />
+      ))}
+    </Section>
+  </div>
+)}
 
           {/* Stage 2: Select Mentor */}
           {stage === 2 && (

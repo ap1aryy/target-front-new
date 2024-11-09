@@ -42,11 +42,27 @@
   "option3_price": "1",
   "option3_stars": "1",
   "option3_benefits": ["Full access to course forever", "FunC Templates", "Repositories for learning", "List of chats and channels for mini apps"],
-  "Buy_for": "Buy for",
+  "Buy_for_op": "Buy for",
   "Choose_a_menthor": "Choose a menthor",
   "Skip_this_step": "Skip this step",
   "Change": "Change",
   "Confirm_and_pay": "Confirm and pay",
-  "Not_selected":"Not selected"
+  "Not_selected":"Not selected",
+  
+  "subscribe_1_month": "Subscribe for 1 month",
+  "buy_forever": "Buy forever",
+  "exclusive_pack": "Exclusive pack of additional materials",
+  
+  "full_access": "Full access to course",
+  "online_support": "Online support",
+  "full_access_forever": "Full access to course forever",
+  "community": "Community",
+  "func_templates": "FunC Templates",
+  "repositories_for_learning": "Repositories for learning",
+  "list_of_chats_and_channels": "List of chats and channels for mini apps",
+  
+  "Buy_for": "Buy for"
+
+
 }
 
