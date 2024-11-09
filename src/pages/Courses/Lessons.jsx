@@ -2433,8 +2433,8 @@ export const Lesson6_4 = () => {
 
 			<p>Импортируем `Telegraf` и создаем экземпляр бота:</p>
 			<pre>
-				import { Telegraf } from "telegraf";
-				const bot = new Telegraf(process.env.TG_BOT_TOKEN!);
+				{`import { Telegraf } from "telegraf";
+				const bot = new Telegraf(process.env.TG_BOT_TOKEN!);`}
 			</pre>
 
 			<p>Используем dotenv для загрузки переменной среды:</p>
