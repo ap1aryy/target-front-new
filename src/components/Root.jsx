@@ -5,6 +5,8 @@ import WebApp from '@twa-dev/sdk';
 import { App } from '@/components/App.jsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary.jsx';
 
+import '../../i18n';
+
 import { UserProvider } from '@/contexts/UserContext';
 import { CoursesProvider } from '@/contexts/CoursesContext';
 /**

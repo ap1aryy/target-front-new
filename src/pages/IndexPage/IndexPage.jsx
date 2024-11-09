@@ -9,6 +9,7 @@ import { UserContext } from '@/contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 
+import { useTranslation } from 'react-i18next';
 
 import { getAllCourses } from '@/Utils/thinkificAPI';
 
@@ -18,6 +19,8 @@ import { CoursesContext } from '@/contexts/CoursesContext';
  * @returns {JSX.Element}
  */
 export function IndexPage() {
+ const { t, i18n  } = useTranslation();
+
   const {user, setUser} = useContext(UserContext)
   const {courses, setCourses} = useContext(CoursesContext)
   const navigate = useNavigate()
@@ -43,7 +46,7 @@ export function IndexPage() {
         return <Spinner/>;  // Показать текст загрузки, пока данные курса не загружены
   }
 
-
+console.log(i18n.language); 
   return (
     <div>
       <div style={{
@@ -52,7 +55,7 @@ export function IndexPage() {
 <Title weight="2" style={{
               marginBottom:4
             }}
-            >Best choice</Title>
+        > {t('best_choice')}</Title>
 <Card
             style={{
               width: "100%",
@@ -74,7 +77,7 @@ export function IndexPage() {
             />
             <Card.Cell readOnly
               subtitle={<div>
-                Course
+                {t('Course')}
                 
               </div>}
             >
@@ -149,7 +152,7 @@ export function IndexPage() {
               subtitle=""
               titleBadge=""
             >
-              Popular courses
+              {t('Popular_courses')}
             </Cell>
           }
         >
@@ -161,7 +164,7 @@ export function IndexPage() {
               style={{borderRadius: "5px"}} 
               src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
             />}
-            subtitle="9 chapters"
+            subtitle={`9 ${t("chapters")}`}
             onClick={() => handleGoToCourse(courses[0])}
           >
             TON Blockchain & Telegram
@@ -172,7 +175,7 @@ export function IndexPage() {
             before={<Avatar
               src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
               size={48} style={{borderRadius: "5px"}} />}
-            subtitle="3 chapters"
+            subtitle={`3 ${t("chapters")}`}
             onClick={() => handleGoToCourse(courses[1])}
           >
             ProProduct
@@ -192,7 +195,7 @@ export function IndexPage() {
               subtitle=""
               titleBadge=""
             >
-              TON & Telegram courses
+              TON & Telegram {t("courses")}
             </Cell>
           }
         >
@@ -204,7 +207,7 @@ export function IndexPage() {
               style={{borderRadius: "5px"}} 
               src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
             />}
-            subtitle="9 chapters"
+            subtitle={`9 ${t("chapters")}`}
             onClick={() => handleGoToCourse(courses[0])}
           >
             TON Blockchain & Telegram
@@ -217,7 +220,7 @@ export function IndexPage() {
             children={<Icon24Clock />}
           />}
           subtitle={
-            <Link>Coming soon</Link>
+            <Link>{t('Coming_sson')}</Link>
           }
         >
           Telegram Mini Apps
@@ -237,7 +240,7 @@ export function IndexPage() {
               subtitle=""
               titleBadge=""
             >
-              Product Management courses
+              Product Management {t('courses')}
             </Cell>
           }
         >
@@ -247,7 +250,7 @@ export function IndexPage() {
             before={<Avatar
               src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
               size={48} style={{borderRadius: "5px"}} />}
-            subtitle="3 chapters"
+            subtitle={`3 ${t("chapters")}`}
             onClick={() => handleGoToCourse(courses[1])}
           >
             ProProduct

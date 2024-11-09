@@ -14,7 +14,7 @@ import { Chapters } from '../Courses/Chapters1';
 import { Icon24Clock, Icon20PlayCircle, Icon16StarAlt , Icon24Message} from '@vkontakte/icons';
 
 import { format } from 'date-fns';
-
+import { useTranslation } from 'react-i18next';
 /**
  * @returns {JSX.Element}
  */
@@ -27,7 +27,7 @@ export function CoursePage() {
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const [isChaptersOpen, setChaptersOpen] = useState(false);
   const [selectedChapterIndex, setSelectedChapterIndex] = useState(null);
-
+ const { t, i18n  } = useTranslation();
   const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp * 1000), "dd.MM.yyyy HH:mm") : null;
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export function CoursePage() {
           <Cell multiline subhead="Description" children={course.description} />
         </Card>
 
-        <Text weight="1">Chapters</Text>
+        <Text weight="1">{t('Chapters')}</Text>
 
         {course?.my ? (
           <div>
@@ -140,7 +140,7 @@ export function CoursePage() {
                       mode="bezeled"
                       onClick={() => handleOpenChapters(index + 1)}
                     >
-                      Open
+                      {t('Open')}
                     </Button>
                   }
                 >
@@ -169,7 +169,7 @@ export function CoursePage() {
           </>
         )}
 
-        <Text weight="1">Mentors</Text>
+        <Text weight="1">{t('Menthors')}</Text>
 
         {!course?.my ? (
           <Section style={{ marginTop: 8 }}>
@@ -193,7 +193,7 @@ export function CoursePage() {
                   mode="bezeled"
                   onClick={() => window.open('https://t.me/markokhman', '_blank')}
                 >
-                  Contact via Telegram
+                  {t('Contact_via_Telegram')}
                 </Button>
               }
             />

@@ -14,11 +14,15 @@ import {
 import './Chapters.css'
 import { Icon16Cancel } from '@vkontakte/icons';
 
+import { useTranslation } from 'react-i18next';
+
 export function Chapters({ onClose, index }) {
   const [isClosing, setIsClosing] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const startTouch = useRef(null);
   const lastLessonRef = useRef(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
   // Show and set up the Back button
@@ -104,7 +108,7 @@ export function Chapters({ onClose, index }) {
           style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
           onClick={handleFinishLesson}
         >
-          Finish
+          {t('chapters1_finish')}
         </Button>
       </div>
     </div>

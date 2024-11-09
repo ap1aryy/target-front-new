@@ -8,8 +8,9 @@ import { Icon16StarAlt, Icon24PenOutline } from '@vkontakte/icons';
 import './PopUp.css';
 import { generateInvoice , getAllCourses} from '@/Utils/thinkificAPI';
 import { CoursesContext } from '@/contexts/CoursesContext';
-
+import { useTranslation } from 'react-i18next';
 export function PopUp({ course_data, onClose }) {
+   const { t, i18n  } = useTranslation();
   const {courses, setCourses} = useContext(CoursesContext)
   const { user } = useContext(UserContext);
   const [isClosing, setIsClosing] = useState(false);
@@ -73,13 +74,13 @@ export function PopUp({ course_data, onClose }) {
           {/* Overview Section */}
        {/* Overview Section */}
 <Section style={{ marginTop: 8 }}>
-  <Cell subhead="Course name" children={course_data?.title} />
+  <Cell subhead={t('Course_name')} children={course_data?.title} />
   
   {/* Conditionally render the selectedPlan cell */}
   {stage > 1 && selectedPlan ? (
     <Cell 
     multiline
-      subhead="Plan" 
+      subhead={t('Plan')}
       children={selectedPlan.name} 
       subtitle={
         <Button
@@ -88,7 +89,7 @@ export function PopUp({ course_data, onClose }) {
           onClick={() => setStage(1)}
           size="s"
           mode="bezeled"
-          children="Change"
+          children={t('Change')}
         />
       }
     />
@@ -98,8 +99,8 @@ export function PopUp({ course_data, onClose }) {
   {stage === 3 ? (
     <Cell 
     multiline
-      subhead="Mentor" 
-      children={selectedMentor?.name || "Not selected"} 
+      subhead={t('Mentor')}
+      children={selectedMentor?.name || t("Not selected")} 
       subtitle={
         <Button
           style={{ marginTop: 8 }}
@@ -107,7 +108,7 @@ export function PopUp({ course_data, onClose }) {
           onClick={() => setStage(2)}
           size="s"
           mode="bezeled"
-          children="Change"
+          children={t("Change")} 
         />
       }  
     />
@@ -119,7 +120,7 @@ export function PopUp({ course_data, onClose }) {
           {/* Stage 1: Select Plan */}
           {stage === 1 && (
             <div>
-              <Text weight="1">Plan</Text>
+              <Text weight="1">{t("Plan")} </Text>
               <Section style={{ marginTop: 8 }}>
                 {options.map((option) => (
                   <Cell
@@ -134,7 +135,7 @@ export function PopUp({ course_data, onClose }) {
                       mode="bezeled"
                       onClick={() => handlePlanSelect(option)}
                       >
-                        Buy for {option.stars}
+                        {t("Buy_for")} {option.stars}
                       </Button>
                     }
                   />
@@ -146,7 +147,7 @@ export function PopUp({ course_data, onClose }) {
           {/* Stage 2: Select Mentor */}
           {stage === 2 && (
             <div>
-              <Text weight="1">Choose a Mentor (Optional)</Text>
+              <Text weight="1">{t("Choose_a_menthor")}</Text>
               <Section style={{ marginTop: 8, marginBottom:"5%" }}>
                 {mentors.map((mentor, index) => (
                   <Cell
@@ -174,7 +175,7 @@ export function PopUp({ course_data, onClose }) {
                 mode="gray" 
                 onClick={handleSkipMentor}
               >
-                Skip this step
+                {t("Skip_this_step")}
               </Button>
             </div>
           )}
@@ -194,7 +195,7 @@ export function PopUp({ course_data, onClose }) {
                     mode="filled"
                     size="s"
                     after={<Icon16StarAlt width="24" height="24" />}
-                    children={`Confirm and pay ${selectedPlan.price + (selectedMentor ? selectedMentor.price : 0)}`}
+                    children={`${t("Confirm_and_pay")} ${selectedPlan.price + (selectedMentor ? selectedMentor.price : 0)}`}
                   />
                 }
               />

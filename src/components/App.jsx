@@ -9,6 +9,8 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 import { routes } from '@/navigation/routes.jsx';
 import { UserContext } from '@/contexts/UserContext';
@@ -45,6 +47,7 @@ function BackButtonManipulator() {
  * @return {JSX.Element}
  */
 export function App() {
+  const { i18n } = useTranslation();
   amplitude.track('Sign Up');
   const {setInitData, setUser }= useContext(UserContext);
   useEffect(() => {
@@ -58,6 +61,9 @@ export function App() {
         if (user) {
           setUser(user);
           setInitData(window.Telegram.WebApp.initData)
+
+          const userLanguage = user.language_code || 'en';
+          i18n.changeLanguage(userLanguage);
         } else {
           const defaultUser = {
             username: "bogdan_krvsk",
