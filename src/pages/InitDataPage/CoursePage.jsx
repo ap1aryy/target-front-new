@@ -75,8 +75,8 @@ const handleOpenChapters = (index) => {
 
   // Function to check if a chapter is completed
   const isChapterCompleted = (index) => {
-  const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || [];
-  return completedChapters.includes(index + 1); // Проверяем, завершена ли глава
+    const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || [];
+  return completedChapters.includes(index); // Проверяем, завершена ли глава
 };
 
   const star = <svg width="14" height="15" viewBox="0 0 14 15" fill="#24A1DE" xmlns="http://www.w3.org/2000/svg">

@@ -65,15 +65,16 @@ export function Chapters() {
   navigate(-1);  // Вернуться на предыдущую страницу
 };
 
-  const handleFinishLesson = () => {
-    const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || [];
-    handleClose();
+ const handleFinishLesson = () => {
+  const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || [];
+  handleClose();
 
-    if (!completedChapters.includes(index + 1)) {
-      completedChapters.push(index + 1);
-      localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
-    }
-  };
+  if (!completedChapters.includes(index)) {
+    completedChapters.push(parseInt(index, 10));  // Преобразование в целое число с основанием 10
+    localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+  }
+};
+
 
   const renderLessons = () => {
     const lessons = i18n.language === 'ru' ? LessonsRU : LessonsEN;
