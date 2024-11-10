@@ -51,9 +51,12 @@ export function PopUp({ course_data, onClose }) {
       invoiceGenerated,
       selectedPlan.type,
       async () => {
-          
           handleClose();
-
+          if (i18n.language === 'ru') {
+          alert(`Курс ${course_data?.title} был добавлен в ваш аккаунт`);
+        } else {
+          alert(`Course ${course_data?.title} was added to your account`);
+        }
           const updatedCourses = await getAllCourses(user.id);
           setCourses(updatedCourses);
         });
@@ -104,7 +107,7 @@ export function PopUp({ course_data, onClose }) {
     <Cell 
     multiline
       subhead={t('Mentor')}
-      children={selectedMentor?.name || t("Not selected")} 
+      children={selectedMentor?.name || t("Not_selected")} 
       subtitle={
         <Button
           style={{ marginTop: 8 }}

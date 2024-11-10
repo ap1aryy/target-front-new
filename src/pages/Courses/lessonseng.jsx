@@ -164,6 +164,12 @@ export const Lesson1_2 = () => {
       <ul>
         <li>Validators prevent message duplication, double spending, and ensure transaction transparency.</li>
       </ul>
+
+        <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326892/1080/785d605452771a25b78dc7eb9a2480e4.mp4" />
+       
+      </video>
+
     </div>
   )
 }
@@ -308,9 +314,9 @@ export const Lesson1_5 = () => {
 
       <Title weight="7" style={{ marginTop: 16 }}>Token Scalability</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>Token scalability means that transfer operations between users do not affect transfers between other users in the network. This enables the creation of infinitely scalable tokens without limitations.</Title >
-
-      <video>
-        <source src="src\pages\Courses\videos\1.5.mp4" type="video/mp4" />
+ <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326895/1080/32605e586e7f267ca655e087bb683ce9.mp4" />
+       
       </video>
 
       <Title weight="7" style={{ marginTop: 16 }}>Conclusion</Title>
@@ -734,10 +740,10 @@ export const Lesson3_2 = () => {
         <li>A good IDE with support for FunC and TypeScript. We recommend Visual Studio Code with the FunC plugin. If you are using IntelliJ, here is a link to the <a href="https://plugins.jetbrains.com/plugin/xyz" target="_blank" rel="noopener noreferrer">FunC plugin</a> for it.</li>
       </ul>
 
-      <video >
-        <source src="src\pages\Courses\videos\3.2.mp4" type="video/mp4" />
+        <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326903/1080/5dc2efdb6283f4ed74949e73f1fe4aa4.mp4" />
+       
       </video>
-
       <Title weight="4">Project Setup</Title>
       <ol>
         <li>Create your project folder:
@@ -861,10 +867,11 @@ export const Lesson3_3 = () => {
         <code>impure</code> means that the function can have side effects.
       </Title >
 
-      <video >
-        <source src="src\pages\Courses\videos\3.3.mp4" type="video/mp4" />
+    
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326904/1080/0ca4e213567348d4338e11870be61b32.mp4" />
+       
       </video>
-
       <Title weight="4">🔹 Importing <code>stdlib.fc</code></Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>Add at the beginning of the file <code>#include "imports/stdlib.fc";</code></Title >
 
@@ -919,6 +926,15 @@ export const Lesson3_3 = () => {
     </div>
   );
 };
+
+
+export const Lesson3_4 = () => {
+  return (
+    <div></div>
+  )
+}
+
+
 export const Lesson3_5 = () => {
   return (
     <div>
@@ -980,10 +996,10 @@ deployScript();`}
 
       <Title style={{ fontSize: 16, marginTop: 4 }}>...</Title >
 
-      <video >
-        <source src="src\pages\Courses\videos\3.5.mp4" type="video/mp4" />
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326907/1080/eb93f2d96bf80ced9ce2bbe517e41025.mp4" />
+       
       </video>
-
       <Title weight="4">On-chain Tests after Deployment</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Yes, you’ve succeeded! But there’s one more important thing to take care of — on-chain testing after deployment. Once our contract is deployed, we need to check that it behaves as we expect.
@@ -1018,8 +1034,9 @@ export const Lesson3_6 = () => {
       <Title style={{ fontSize: 16, marginTop: 4 }}>Now, to deploy to the mainnet, let’s add a mainnet test command:</Title >
       <pre><code>{`"onchaintest:mainnet": "ts-node ./scripts/onchaintest.ts"`}</code></pre>
 
-      <video >
-        <source src="src\pages\Courses\videos\3.6.mp4" type="video/mp4" />
+     <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326908/1080/3503fd13daa78e30901b6b3eac9cd034.mp4" />
+       
       </video>
 
       <Title weight="4">Setting Up dotenv</Title>
@@ -1195,7 +1212,7 @@ global slice var3;
       <p>
         This code is from a real project. It can scare even an experienced developer with the number of magic numbers:
       </p>
-      <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+   <pre >
         {`var msg = begin_cell()
     .store_uint(0xc4ff, 17)         ;; 0 11000100 0xff
     .store_uint(config_addr, 256)
@@ -1208,7 +1225,7 @@ global slice var3;
 send_raw_message(msg.end_cell(), 1);`}
       </pre>
       <p>Introduce as many constants and wrappers as necessary to make the code more expressive:</p>
-      <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+   <pre >
         {`var msg = begin_cell()
     .store_msg_flags(BOUNCEABLE)
     .store_slice(to_wallet_address)
@@ -1224,7 +1241,7 @@ send_raw_message(msg.end_cell(), SEND_MODE_PAY_FEES_SEPARETELY);`}
       <p>
         Be aware of potential pitfalls and bugs not specific to TON. Here’s an example from a real project:
       </p>
-      <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+   <pre >
         {`() handle_transfer(...) impure {
   ...
   (slice from_user_info, int from_flag) = user_info_dict.udict_get?(256, from_addr_hash);
@@ -1259,11 +1276,10 @@ export const Lesson8_3 = () => {
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <h2>📚 Lesson Summary</h2>
-
-      <video>
-        <source src="src\pages\Courses\videos\8.3.mp4" type="video/mp4" />
+  <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326935/1080/24d1980f21269eb52645ec991229884c.mp4" />
+       
       </video>
-
       <section>
         <p>
           <strong>In EVM:</strong> If the user provides too little gas, everything will be reverted. If enough gas is provided, the actual costs will be automatically calculated and deducted from their balance.
@@ -1304,7 +1320,7 @@ export const Lesson8_3 = () => {
           <li>If excess gas is not returned to the sender, it will accumulate in contracts over time, which is inefficient.</li>
           <li>You can add a function to extract excess gas, as in the TON Jetton, where gas is returned to the sender with the message <code>op::excesses</code>.</li>
         </ul>
-        <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+     <pre >
           {`send_raw_message(msg, SEND_MODE_CARRY_ALL_REMAINING_MESSAGE_VALUE)`}
         </pre>
         <p>
@@ -1319,7 +1335,7 @@ export const Lesson8_3 = () => {
           <li>Event generation consumes the contract balance, not gas.</li>
           <li>Attaching values to messages or using SEND_MODE_PAY_FEES_SEPARATELY also consumes the balance.</li>
         </ul>
-        <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+     <pre >
           {`var msg = begin_cell().store_uint(0x18, 6).store_slice(destination)
       .store_coins(10000000)                ;; This will be deducted from contract balance
       .store_uint(1, 1 + 4 + 4 + 64 + 32 + 1 + 1).store_ref(msg_body);
@@ -1333,7 +1349,7 @@ export const Lesson8_3 = () => {
       <section>
         <h3>Standard Gas Cost Calculation</h3>
         <p>Example code from TON Wallet:</p>
-        <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px' }}>
+     <pre >
           {`int ton_balance_before_msg = my_ton_balance - msg_value;
 int storage_fee = const::min_tons_for_storage - min(ton_balance_before_msg, const::min_tons_for_storage);
 msg_value -= storage_fee + const::gas_consumption;
@@ -1371,10 +1387,10 @@ export const Lesson8_2 = () => (
   <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
     <h2>📚 Lesson Summary</h2>
 
-    <video>
-      <source src="src\pages\Courses\videos\8.2.mp4" type="video/mp4" />
-    </video>
-
+    <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326934/1080/26e0a455f14581add026c2734f582146.mp4" />
+       
+      </video>
     <section>
       <p>
         <strong>When developing for Ethereum Virtual Machine (EVM)</strong>, a project is often split into multiple contracts for convenience. In some cases, it is possible to implement all functionality in one contract, even when it's necessary to split it (e.g., liquidity pairs in AMM).
@@ -1637,8 +1653,9 @@ export const Lesson7_5 = () => {
         We also see that store_data is just a regular expression, as in other contracts we've seen.
       </p>
 
-      <video >
-        <source src="src\pages\Courses\videos\7.5.mp4" type="video/mp4" />
+       <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326932/1080/7f06a84d49db0754c1887926282cb2c3.mp4" />
+       
       </video>
 
       <h2>Conclusion</h2>
@@ -1656,10 +1673,12 @@ export const Lesson7_4 = () => {
     <div className="lesson-container">
       <h1>📚 Lesson Summary</h1>
 
-      {/* Video Section */}
-      <video >
-        <source src="src\pages\Courses\videos\7.4.mp4" type="video/mp4" />
+	{/* Video Section */}
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326931/1080/792cbc0c9fbf204e52f9fd208b885c75.mp4" />
+       
       </video>
+
 
       {/* Lesson Content */}
       <div className="lesson-content">
@@ -1776,7 +1795,7 @@ int gas_consumption() asm "15000000 PUSHINT"; ;; 0.015 TON`}
         </p>
 
         <video >
-          <source src="https://cdn.stepik.net/video/326930/1080/abe56f44e1ef5ea0718a4daa410d3f6e.mp4" type="video/mp4" />
+          <source src="https://cdn.stepik.net/video/326930/1080/abe56f44e1ef5ea0718a4daa410d3f6e.mp4" />
         </video>
 
         <h3>Storage Code:</h3>
@@ -1852,10 +1871,10 @@ export const Lesson7_2 = () => {
           </p>
         </section>
 
-        <video >
-          <source src="src\pages\Courses\videos\7.2.mp4" type="video/mp4" />
-        </video>
-
+        <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326929/1080/4c13da3f39da3968dfef53095d24487c.mp4" />
+       
+      </video>
         <section>
           <h2>Wallet Smart Contract Specification</h2>
           <p>
@@ -2016,9 +2035,10 @@ export const Lesson6_4 = () => {
       <h1>📚 Lesson Summary</h1>
 
       <div>
-        <video >
-          <source src="src\pages\Courses\videos\6.4.mp4" type="video/mp4" />
-        </video>
+      	<video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326944/1080/201850bae6ee407f6e23ef9b6c68c2c7.mp4" />
+       
+      </video>
       </div>
 
       <p>
@@ -2127,9 +2147,10 @@ export const Lesson6_3 = () => {
     <div>
       {/* Video Section */}
       <div>
-        <video >
-          <source src="src\pages\Courses\videos\6.3.mp4" type="video/mp4" />
-        </video>
+        	<video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326926/1080/485b1d3124559c640961a56c8e460be0.mp4" />
+       
+      </video>
       </div>
 
       {/* Lesson Content */}
@@ -2164,10 +2185,10 @@ export const Lesson6_3 = () => {
 
         <div className="Card">
           <b>Counter Value</b>
-          <div>{counter_value ?? "Loading..."}</div>
+          <div>{`{counter_value ?? "Loading..."}`}</div>
         </div>
 
-        <a onClick={showAlert}>Show Alert</a>
+        {`<a onClick={showAlert}>Show Alert</a>
 
         <br />
 
@@ -2186,7 +2207,7 @@ export const Lesson6_3 = () => {
         {connected && (
           <a onClick={sendWithdrawalRequest}>Request 0.7 TON withdrawal</a>
         )}
-
+`}
         <p>
           Everything is quite simple. Now we will save the files and commit them to GitHub:
         </p>
@@ -2270,8 +2291,9 @@ export const Lesson6_3 = () => {
 export const Lesson6_2 = () => {
   return (
     <div>
-      <video >
-        <source src="src\pages\Courses\videos\6.2.mp4" type="video/mp4" />
+    <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326943/1080/68b6596a40758e745bdf5046552fd7bd.mp4" />
+       
       </video>
       <div></div>
 
@@ -2433,8 +2455,9 @@ export const Lesson4_1 = () => {
   return (
     <div>
       <h1>💎 Welcome to Part Four!</h1>
-      <video>
-        <source src="src\pages\Courses\videos\4.1.mp4" type="video/mp4" />
+       <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326910/1080/02618b878c737c51dc95e99065e50e5a.mp4" />
+       
       </video>
 
       <p>
@@ -2593,9 +2616,9 @@ export const Lesson4_2 = () => {
   return (
     <div>
 
-      <video >
-        <source src="src\pages\Courses\videos\4.2.mp4" type="video/mp4" />
-
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326911/1080/805774a83a646748efaf97cc5796dd63.mp4" />
+       
       </video>
 
       <h1>📚 Lesson Notes</h1>
@@ -3232,9 +3255,9 @@ export const Lesson4_4 = () => {
 
       <p>Note: we’re checking that the contract balance is greater than 4.99 TON because we know that part of the funds will be lost to fees.</p>
 
-      <video >
-        <source src="src\pages\Courses\videos\4.4.mp4" type="video/mp4" />
-
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326913/1080/3b72ef0a4d650d0ffe529e26926c61d0.mp4" />
+       
       </video>
     </div>
   );
@@ -3243,7 +3266,10 @@ export const Lesson4_4 = () => {
 export const Lesson5_3 = () => {
   return (
     <div>
-      <p>Here must be video</p>
+       <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326920/1080/e78a3ca85d47d08c2585ab0b5aefddda.mp4" />
+       
+      </video>
       <h2>📚 Lesson Summary</h2>
       <p>
         At this point, we have already implemented user authorization to interact
@@ -3403,10 +3429,9 @@ describe("main.fc contract tests", () => {
 export const Lesson5_5 = () => {
   return (
     <div>
-
-      <video >
-        <source src="src\pages\Courses\videos\5.5.mp4" type="video/mp4" />
-
+<video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326914/1080/1e83cf3fe36c424aaa9721ba459d0015.mp4" />
+       
       </video>
       <h1>📚 Lesson Summary</h1>
       <p>
@@ -3535,9 +3560,10 @@ describe("main.fc contract tests", () => {
 };
 export const Lesson4_6 = () => (
   <div>
-    <video>
-      <source src="src/pages/Courses/videos/4.6.mp4" type="video/mp4" />
-    </video>
+   	<video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326915/1080/9cdf67c8e40c7ccfa0a89b60f9750939.mp4" />
+       
+      </video>
     <h3>📚 Lesson Summary</h3>
     <p>
       Now that our contract is deployed on the mainnet, we can begin checking the contract code. As we discussed in the previous lesson, it is crucial to ensure that the users of your contract know exactly what will happen to their funds when they send them to the contract address.
@@ -3695,9 +3721,10 @@ export default defineConfig({
 });
 `}
     </code></pre>
-    <video>
-      <source src="src\pages\Courses\videos\5.1.mp4" type="video/mp4" />
-    </video>
+   	<video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326918/1080/33d84092bd09e7dad7bc71e702ad4015.mp4" />
+       
+      </video>
     <p>To see the empty template of the app, run it in the terminal:</p>
     <pre><code>yarn dev</code></pre>
     <p>Then, open your web browser and visit the link from the CLI results (something like <code>http://localhost:5173/</code>). You will see a new page with the content of the Vite TypeScript template.</p>
@@ -3708,9 +3735,10 @@ export default defineConfig({
 );
 export const Lesson5_2 = () => (
   <div>
-    <video>
-      <source src="src\pages\Courses\videos\5.2.mp4" type="video/mp4" />
-    </video>
+     <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326919/1080/b79924b0bf9a6ff0fff2f0b92738a3d5.mp4" />
+       
+      </video>
     <h2>📚 Lesson Summary</h2>
     <p>The TON Connect React library will provide us with several useful services:</p>
     <ul>
@@ -3994,9 +4022,10 @@ export const Lesson5_4 = () => {
   return (
     <div>
       <div>
-        <video>
-          <source src="src\pages\Courses\videos\5.4.mp4" type="video/mp4" />
-        </video>
+       	<video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326921/1080/d3e709dcff55de269b1c991a69658353.mp4" />
+       
+      </video>
         <p>Here must be video</p>
         <h2>📚 Lesson Summary</h2>
         <p>
@@ -4102,25 +4131,27 @@ export const Lesson5_4 = () => {
   );
 };
 export const Lesson9 = () => {
-  {
-    <video >
-      <source src="src\pages\Courses\videos\9.2.mp4" type="video/mp4" />
-    </video>
-  }; {
-    <video>
-      <source src="src\pages\Courses\videos\9.3.mp4" type="video/mp4" />
-    </video>
-  };
-  {
-    <video >
-      <source src="src\pages\Courses\videos\9.4.mp4" type="video/mp4" />
+  return (
+    <>
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326957/1080/c48cdf514daf44e93ee8a049d137d1e4.mp4" />
+        Your browser does not support the video tag.
+      </video>
+      
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326958/1080/9fab44560cd2e1454acb3fab0cc06f14.mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-    </video>
-  };
-  {
-    <video >
-      <source src="src\pages\Courses\videos\9.5.mp4" type="video/mp4" />
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326959/1080/d059d5a9b5fb5c3866c8c8ed827a0dad.mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-    </video>
-  };
-};             
+      <video controls playsInline>
+        <source src="https://cdn.stepik.net/video/326960/1080/de7bea03b8a1fed81a8996b849fdf4b4.mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </>
+  );
+};

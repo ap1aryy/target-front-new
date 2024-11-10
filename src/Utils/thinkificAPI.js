@@ -68,6 +68,9 @@ export const generateInvoice = async (
     // Открытие инвойса в Telegram
     window.Telegram.WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === "paid") {
+        if (onSuccess) {
+          onSuccess();
+        }
         const response = await axios.post(
           `${BASE_URL}/enroll`,
           {
@@ -83,9 +86,7 @@ export const generateInvoice = async (
           }
         );
       }
-      if (onSuccess) {
-        onSuccess();
-      }
+
       setInvoiceGenerated.current = true;
       return invoiceLink;
     });
