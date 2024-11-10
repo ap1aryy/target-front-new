@@ -16,11 +16,35 @@
 }
 
 .navbar {
-  padding: 0; /* Ноль на десктопах */
+  padding-bottom: 0; /* Ноль на десктопах */
 }
 
 @media (max-width: 768px) {
   .navbar {
     padding: 16px; /* 16px на мобильных устройствах */
   }
+}
+
+.card-items-inf{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+    gap: 0.8rem;
+}
+
+.card-items-inf .item {
+  position: relative;
+}
+
+.card-items-inf .item:not(:last-child)::after {
+  content: '•';
+  position: absolute;
+  right: -0.5rem;
+  color: #333;
+  /* Adjust color as needed */
+  font-size: 1.2rem;
+  /* Adjust size as needed */
+  top: 50%;
+  transform: translateY(-50%);
 }

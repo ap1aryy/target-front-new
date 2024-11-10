@@ -3,11 +3,13 @@ import { useState } from 'react';
 import { Icon24HomeOutline, Icon24BookmarkCheckOutline } from '@vkontakte/icons'; // Import icons
 import { Tabbar } from '@telegram-apps/telegram-ui';
 import { useLocation } from 'react-router-dom';
-
+import './NavBar.css'
+import { useTranslation } from 'react-i18next';
 export const Navbar = () => {
+  const { i18n, t } = useTranslation();
   const tabs = [
-    { id: 'home', text: 'Home', Icon: Icon24HomeOutline, path: '/' },
-    { id: 'enrolled', text: 'Enrolled', Icon: Icon24BookmarkCheckOutline, path: '/enrollments' },
+    { id: 'home', text: t('Home'), Icon: Icon24HomeOutline, path: '/' },
+    { id: 'enrolled', text: t('Enrolled'), Icon: Icon24BookmarkCheckOutline, path: '/enrollments' },
   ];
 
   const [currentTab, setCurrentTab] = useState(tabs[0].id);
@@ -25,10 +27,10 @@ export const Navbar = () => {
   };
 
   return (
-    <div>
-      <Tabbar>
+    <div >
+      <Tabbar >
         {tabs.map(({ id, text, Icon, path }) => (
-          <Tabbar.Item 
+          <Tabbar.Item  style={{paddingBottom:20}}
             key={id} 
             text={text} 
             selected={id === currentTab} 

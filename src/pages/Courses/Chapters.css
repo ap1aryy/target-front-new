@@ -12,7 +12,7 @@
     z-index: 1000; /* Поверх другого контента */
   }
   
-.popup-menu {
+.popup-menu2 {
   overflow-x: hidden;
   overflow-y: auto;
   background: var(--tg-theme-secondary-bg-color, white);
@@ -21,49 +21,13 @@
   max-width: 500px;
   width: 100%;
   /* Немного меньше ширины экрана */
-  height: 65%;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  position: relative;
-  transform: translateY(100vh);
-  /* Начальное положение */
-  animation-timing-function: ease-in-out;
+  height: 100%;
+  position: static;
 
-  /* Добавление свойств для переноса текста */
   word-wrap: break-word;
-  /* Это гарантирует, что длинные слова будут переноситься */
   word-break: break-word;
-  /* Это предотвратит выход текста за пределы контейнера */
 }
-  
-  /* Анимация появления модального окна */
-  @keyframes slideIn {
-    from {
-      transform: translateY(100vh);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-  
-  /* Анимация исчезновения */
-  @keyframes slideOut {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(100vh);
-    }
-  }
-  
-  .popup-slide-in {
-    animation-name: slideIn;
-  }
-  
-  .popup-slide-out {
-    animation-name: slideOut;
-  }
-  
+
 
     /* styles.css */
 li {
@@ -111,7 +75,7 @@ pre {
   width: 100%;
   word-wrap: break-word;
     /* Это гарантирует, что длинные слова будут переноситься */
-    word-break: break-word;
+  word-break: break-word;
 }
 
 code {

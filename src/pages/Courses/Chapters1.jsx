@@ -3,18 +3,34 @@ import { Title, List, Button, Text, Section, Cell } from '@telegram-apps/telegra
 import './Chapters.css';
 import { Icon16Cancel } from '@vkontakte/icons';
 import { useTranslation } from 'react-i18next';
-
+import { useNavigate, useParams } from 'react-router-dom';
 // Import lesson modules
 import * as LessonsEN from './lessonseng';
 import * as LessonsRU from './Lessons';
 
-export function Chapters({ onClose, index, language }) {
-  const [isClosing, setIsClosing] = useState(false);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+export function Chapters() {
+  const navigate = useNavigate();
+  const { index } = useParams();
+  const course = location.state?.course;
+  
   const startTouch = useRef(null);
   const lastLessonRef = useRef(null);
 
-  const { t } = useTranslation();
+  useEffect(() => {
+    fetchChapterData(index);
+  }, [index]);
+
+  const fetchChapterData = async (chapterIndex) => {
+    try {
+      const data = await fetch(`/api/chapters/${chapterIndex}`);
+      const result = await data.json();
+      setChapterData(result);
+    } catch (error) {
+      console.error('Error fetching chapter data:', error);
+    }
+  };
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     window.Telegram.WebApp.BackButton.show();
@@ -39,8 +55,6 @@ export function Chapters({ onClose, index, language }) {
     }
 
     return () => {
-      window.Telegram.WebApp.BackButton.hide();
-      window.Telegram.WebApp.BackButton.onClick(null);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
@@ -48,17 +62,21 @@ export function Chapters({ onClose, index, language }) {
   }, [index]);
 
   const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(onClose, 300);
-  };
+  navigate(-1);  // Вернуться на предыдущую страницу
+};
 
-  const handleFinishLesson = (lessonNumber) => {
-    localStorage.setItem(`chapter_${index}_finished`, lessonNumber);
+  const handleFinishLesson = () => {
+    const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || [];
     handleClose();
+
+    if (!completedChapters.includes(index + 1)) {
+      completedChapters.push(index + 1);
+      localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
+    }
   };
 
   const renderLessons = () => {
-    const lessons = language === 'ru' ? LessonsRU : LessonsEN;
+    const lessons = i18n.language === 'ru' ? LessonsRU : LessonsEN;
     const lessonList = {
       1: [lessons.Lesson1_1, lessons.Lesson1_2, lessons.Lesson1_3, lessons.Lesson1_4, lessons.Lesson1_5],
       2: [lessons.Lesson2_1, lessons.Lesson2_2, lessons.Lesson2_3, lessons.Lesson2_5, lessons.Lesson2_6],
@@ -81,7 +99,7 @@ export function Chapters({ onClose, index, language }) {
   return (
     <div className="popup-overlay" onClick={handleClose}>
       <div
-        className={`popup-menu ${isClosing ? 'popup-slide-out' : 'popup-slide-in'} ${isFullScreen ? 'popup-fullscreen' : ''}`}
+        className={`popup-menu2`}
         style={{ height: "100%" }}
         onClick={(e) => e.stopPropagation()}
       >

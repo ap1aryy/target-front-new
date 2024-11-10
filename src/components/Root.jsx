@@ -34,6 +34,8 @@ function ErrorBoundaryError({ error }) {
  * @returns {JSX.Element}
  */
 export function Inner() {
+  window.Telegram.WebApp.isSwipeBackEnabled = false;
+        window.Telegram.WebApp.isClosingConfirmationEnabled = true; 
   const debug = WebApp.initDataUnsafe.start_param === 'debug';
   const manifestUrl = useMemo(() => {
     return new URL('tonconnect-manifest.json', window.location.href).toString();

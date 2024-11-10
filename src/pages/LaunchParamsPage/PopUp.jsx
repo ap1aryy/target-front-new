@@ -4,12 +4,14 @@ import {
 } from '@telegram-apps/telegram-ui';
 import { UserContext } from '@/contexts/UserContext';
 import { options, mentors } from '@/Utils/Constants';
-import { Icon16StarAlt, Icon24PenOutline } from '@vkontakte/icons';
+import { Icon16StarAlt, Icon24PenOutline, Icon16Clear } from '@vkontakte/icons';
 import './PopUp.css';
 import { generateInvoice , getAllCourses} from '@/Utils/thinkificAPI';
 import { CoursesContext } from '@/contexts/CoursesContext';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 export function PopUp({ course_data, onClose }) {
+  const navigate = useNavigate()
    const { t, i18n  } = useTranslation();
   const {courses, setCourses} = useContext(CoursesContext)
   const { user } = useContext(UserContext);
@@ -51,14 +53,16 @@ export function PopUp({ course_data, onClose }) {
       invoiceGenerated,
       selectedPlan.type,
       async () => {
-          handleClose();
+          
           if (i18n.language === 'ru') {
           alert(`Курс ${course_data?.title} был добавлен в ваш аккаунт`);
         } else {
           alert(`Course ${course_data?.title} was added to your account`);
         }
-          const updatedCourses = await getAllCourses(user.id);
-          setCourses(updatedCourses);
+
+        navigate('/')
+        handleClose();
+        window.Telegram.WebApp.MainButton.hide();
         });
    
   } catch (error) {
@@ -66,7 +70,9 @@ export function PopUp({ course_data, onClose }) {
   }
 };
 
-
+ const star = <svg width="14" height="15" viewBox="0 0 14 15" fill="#24A1DE" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.63869 12.1902L3.50621 14.1092C3.18049 14.3087 2.75468 14.2064 2.55515 13.8807C2.45769 13.7216 2.42864 13.5299 2.47457 13.3491L2.95948 11.4405C3.13452 10.7515 3.60599 10.1756 4.24682 9.86791L7.6642 8.22716C7.82352 8.15067 7.89067 7.95951 7.81418 7.80019C7.75223 7.67116 7.61214 7.59896 7.47111 7.62338L3.66713 8.28194C2.89387 8.41581 2.1009 8.20228 1.49941 7.69823L0.297703 6.69116C0.00493565 6.44581 -0.0335059 6.00958 0.211842 5.71682C0.33117 5.57442 0.502766 5.48602 0.687982 5.47153L4.35956 5.18419C4.61895 5.16389 4.845 4.99974 4.94458 4.75937L6.36101 1.3402C6.5072 0.987302 6.91179 0.819734 7.26469 0.965925C7.43413 1.03612 7.56876 1.17075 7.63896 1.3402L9.05539 4.75937C9.15496 4.99974 9.38101 5.16389 9.6404 5.18419L13.3322 5.47311C13.713 5.50291 13.9975 5.83578 13.9677 6.2166C13.9534 6.39979 13.8667 6.56975 13.7269 6.68896L10.9114 9.08928C10.7131 9.25826 10.6267 9.52425 10.6876 9.77748L11.5532 13.3733C11.6426 13.7447 11.414 14.1182 11.0427 14.2076C10.8642 14.2506 10.676 14.2208 10.5195 14.1249L7.36128 12.1902C7.13956 12.0544 6.8604 12.0544 6.63869 12.1902Z" fill="000"></path>
+</svg>
   return (
     <div className="popup-overlay" onClick={handleClose}>
       <div
@@ -74,18 +80,17 @@ export function PopUp({ course_data, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <List>
-          <div className="centered">
+           <div className="header-pop">
             <Text weight="1">{stage === 1 ? "Get this course" : "Overview"}</Text>
+            <span className="" onClick={handleClose}><Icon16Clear/></span>
           </div>
-          
-          {/* Overview Section */}
-       {/* Overview Section */}
-<Section style={{ marginTop: 8 }}>
-  <Cell subhead={t('Course_name')} children={course_data?.title} />
+          <Section style={{ marginTop: 8 }}>
+  <Cell subhead={t('Course_name')}style={{ pointerEvents: 'none',border:'none' , marginBottom:5}} children={course_data?.title} />
   
   {/* Conditionally render the selectedPlan cell */}
   {stage > 1 && selectedPlan ? (
-    <Cell 
+              <Cell style={{borderColor:'hsl(0deg 0% 0% / 0%)'}}
+                className='custom-cell'
     multiline
       subhead={t('Plan')}
       children={t(selectedPlan.name)}
@@ -101,7 +106,8 @@ export function PopUp({ course_data, onClose }) {
       }
     />
   ) : null}
-  
+          </Section>
+          <Section>
   {/* Conditionally render the selectedMentor cell */}
   {stage === 3 ? (
     <Cell 
@@ -117,13 +123,12 @@ export function PopUp({ course_data, onClose }) {
           mode="bezeled"
           children={t("Change")} 
         />
-      }  
+      }
     />
   ) : null}
-</Section>
 
 
-          
+          </Section>
           {/* Stage 1: Select Plan */}
           {stage === 1 && (
   <div>
@@ -137,7 +142,7 @@ export function PopUp({ course_data, onClose }) {
           children={t(option.name)} // Переводим name через t()
           after={
             <Button style={{ marginTop: 8 }}
-              after={<Icon16StarAlt size={24} />}
+              after={star}
               size="s"
               mode="bezeled"
               onClick={() => handlePlanSelect(option)}
@@ -161,13 +166,14 @@ export function PopUp({ course_data, onClose }) {
                     key={index}
                     subhead={`${mentor.company}`}
                     hint={mentor.name}
+                    onClick={() => handleMentorSelect(mentor)}
                     after={
                       <Button
-                        children={mentor.price}
-                        after={<Icon16StarAlt />}
+                        children={'Get for ' + mentor.price}
+                        after={star}
                         mode="bezeled"
                         size="s"
-                        onClick={() => handleMentorSelect(mentor)}
+                        
                       />
                     }
                   />

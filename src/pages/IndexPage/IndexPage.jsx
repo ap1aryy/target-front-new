@@ -1,10 +1,10 @@
-import { Section, Cell, Title, Link, Card, Info, Placeholder, Avatar, Badge, Divider } from '@telegram-apps/telegram-ui';
+import { Section, Cell, Title, Link, Card, Info, Placeholder, Avatar, Badge, Divider, Button } from '@telegram-apps/telegram-ui';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './IndexPage.css';
 
 import { UserContext } from '@/contexts/UserContext';
-
+import WebApp from '@twa-dev/sdk';
 
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
@@ -41,26 +41,24 @@ export function IndexPage() {
   const handleGoToCourse = (course) => {
         navigate(`/courses/${course.id}`, { state: { course } });
   }
+ WebApp.BackButton.isVisible && WebApp.BackButton.hide();
 
-  if (!courses) {
-        return <Spinner/>;  // Показать текст загрузки, пока данные курса не загружены
-  }
 
 console.log(i18n.language); 
   return (
     <div>
-      <div style={{
-              padding:16, gap:8
+     <div style={{
+               padding:16, gap:8
             }}>
 <Title weight="2" style={{
               marginBottom:4
             }}
-        > {t('best_choice')}</Title>
+        > {t('Popular_courses')}</Title>
 <Card
             style={{
               width: "100%",
               textAlign: "left",
-              height: "250px",
+              height: "265px",
               marginTop:8
             }}
             onClick={() => handleGoToCourse(courses[0])}
@@ -76,12 +74,52 @@ console.log(i18n.language);
               }}
             />
             <Card.Cell readOnly
-              subtitle={<div>
+               subtitle={<div>
                 {t('Course')}
-                
+                <div className='card-items-inf'>
+                  <div>9 chapters</div>
+                  •
+                  <div>32 videos</div>
+                  •
+                   <div>15 hours</div>
+                 </div>
               </div>}
             >
             TON Blockchain & Telegram
+            </Card.Cell>
+        </Card>
+        <Card
+            style={{
+              width: "100%",
+              textAlign: "left",
+              height: "265px",
+              marginTop:8
+            }}
+            onClick={() => handleGoToCourse(courses[1])}
+          >
+            <img
+              alt="Course Image"
+              src="https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png"
+              style={{
+                display: 'block',
+                height: "170px", 
+                objectFit: 'cover',
+                width: "100%"
+              }}
+            />
+            <Card.Cell readOnly
+              subtitle={<div>
+                {t('Tools')}
+                <div className='card-items-inf'>
+                  <div>3 chapters</div>
+                  •
+                  <div>8 videos</div>
+                  •
+                   <div>3.5 hours</div>
+                 </div>
+              </div>}
+            >
+            ProProduct
             </Card.Cell>
           </Card>
           </div>
@@ -138,12 +176,12 @@ console.log(i18n.language);
 </div>
       </List> */}
 
-      <Section style={{ height: "100%", marginBottom:80}}>
+      <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}>
 
-        <Section
+        {/* <Section
           header={
             <Cell
-             
+              style={{ pointerEvents: 'none' }} 
               before={<Icon20FireAltOutline style={{marginRight:-10}}/>}
               description=""
               hint=""
@@ -169,13 +207,12 @@ console.log(i18n.language);
           >
             TON Blockchain & Telegram
           </Cell>
-{/* https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png */}
           <Cell
              after={<Icon20ChevronRightOutline />}
             before={<Avatar
               src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
               size={48} style={{borderRadius: "5px"}} />}
-            subtitle={`3 ${t("chapters")}`}
+            subtitle={`3 ${t("chapters2")}`}
             onClick={() => handleGoToCourse(courses[1])}
           >
             ProProduct
@@ -186,7 +223,7 @@ console.log(i18n.language);
         <Section
           header={
             <Cell
-              
+               style={{ pointerEvents: 'none' }} 
               before=""
               description=""
               hint=""
@@ -231,7 +268,7 @@ console.log(i18n.language);
         <Section
           header={
             <Cell
-              
+               style={{ pointerEvents: 'none' }} 
               before=""
               description=""
               hint=""
@@ -250,25 +287,44 @@ console.log(i18n.language);
             before={<Avatar
               src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
               size={48} style={{borderRadius: "5px"}} />}
-            subtitle={`3 ${t("chapters")}`}
+            subtitle={`3  ${t("chapters2")}`}
             onClick={() => handleGoToCourse(courses[1])}
           >
             ProProduct
           </Cell>
 
-        </Section>
-
-        <Section>
+        </Section> */}
+        
+        <Cell
+          style={{border:'none',alignItems:"flex-start"}}
+              hint=""
+              interactiveAnimation=""
+              subhead=""
+          titleBadge=""
+          children={t('more_courses')}
+          subtitle={t('more_courses_soon')}
+          description={<Button style={{borderRadius:40,margin:"8px 0",height:"5vh"}}>{t('follow_us')}</Button>}
+          after=''
+          before={
+                    <Avatar
+                      size={48}
+                      style={{ borderRadius: "5px", marginTop:"30%" }}
+                      src="https://i.ibb.co/CtPSccK/photo-2024-11-10-13-12-28.jpg" 
+                    />
+                  }
+           onClick={() => window.open("https://t.me/thetarget_learning", "_blank")}
+        >
+        </Cell>
+      </Section>
+        {!courses &&
         <Placeholder style={{paddingTop: 20, paddingBottom: 20}} description="Gotcha! That's the end!">
           <img
             width="75%"
             alt="Telegram sticker"
             src="https://s1.gifyu.com/images/Sy9DJ.gif"
           />
-        </Placeholder>  
-      </Section>
+        </Placeholder>  }
 
-      </Section>
     </div>
   );
 }

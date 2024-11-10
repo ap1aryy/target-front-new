@@ -5,17 +5,43 @@
     "course": "course",
      "courses": "courses",
   "Popular_courses": "Popular courses",
+  "Tools":"Tools",
   "chapters": "chapters",
    "Chapters": "Chapters",
     "Chapter": "Chapter",
-   
+   "chapters2": "chapters",
   "Coming_sson": "Coming soon",
   "Home": "Home",
-  "Enrolled": "Enrolled",
-  "Enrolled_courses": "Enrolled courses",
+  "Enrolled": "My courses",
+  "Enrolled_courses": "My courses",
   "You": "You",
   "Reasearcher": "Reasearcher",
   "Course_name1": "TON Blockchain & Telegram",
+    "Course_name2": "ProProducts",
+     "2925675": {
+    "Course_name": "TON Blockchain & Telegram",
+    "Description": "The course is intended for developers and IT specialists. It provides theoretical and practical knowledge of TON blockchain technologies and concepts, including FunC programming language, smart contracts and their testing, and creating mini-applications.",
+    "chapters": {
+      "1": "1. Introduction to TON Blockchain",
+      "2": "2. TVM, Transactions, Scalability, and Business Cases",
+      "3": "3. Smart Contract Development Lifecycle",
+      "4": "4. Mastering FunC Contract Writing",
+      "5": "5. Frontend Interaction with TON Blockchain",
+      "6": "6. Creating Telegram-Compatible Interfaces with TON Blockchain",
+      "7": "7. NFTs and Jettons",
+      "8": "8. Smart Contract Security",
+      "9": "9. Ecosystem Products, Future Plans, and Vision"
+    }
+  },
+  "2926478": {
+    "Course_name": "ProProducts",
+    "Description": "Learn essential skills in product management, from market research and product strategy to development and launch. This course covers key concepts, tools, and best practices to manage product life cycles, drive innovation, and meet customer needs.",
+    "chapters": {
+      "1": "1. Introduction to Product Management",
+      "2": "2. Market Research and Product Strategy",
+      "3": "3. Product Development and Launch"
+    }
+  },
   "Digital": "Digital",
   "TON": "TON",
   "Telegram": "Telegram",
@@ -38,7 +64,7 @@
   "option2_price": "1",
   "option2_stars": "1",
   "option2_benefits": ["Full access to course forever, community, online support"],
-  "option3_name": "Exclusive pack of additional materials",
+  "option3_name": "Exclusive pack",
   "option3_price": "1",
   "option3_stars": "1",
   "option3_benefits": ["Full access to course forever", "FunC Templates", "Repositories for learning", "List of chats and channels for mini apps"],
@@ -48,11 +74,12 @@
   "Change": "Change",
   "Confirm_and_pay": "Confirm and pay",
   "Not_selected":"Not selected",
-  
+  "more_courses": "50 more courses",
+  "more_courses_soon": "Coming soon this year",
   "subscribe_1_month": "Subscribe for 1 month",
   "buy_forever": "Buy forever",
-  "exclusive_pack": "Exclusive pack of additional materials",
-  
+  "exclusive_pack": "Exclusive pack",
+  "chapters3": "50+ Courses soon",
   "full_access": "Full access to course",
   "online_support": "Online support",
   "full_access_forever": "Full access to course forever",
@@ -60,9 +87,15 @@
   "func_templates": "FunC Templates",
   "repositories_for_learning": "Repositories for learning",
   "list_of_chats_and_channels": "List of chats and channels for mini apps",
-  
-  "Buy_for": "Buy for"
-
-
+  "Video_lan": "Video language",
+  "Video_dur":"Video duration",
+  "Video_val": " 7 hours and 5 minutes",
+  "Buy_for": "Buy for",
+"get_course_from":"Get course from 1 stars",
+"Less_len": "Lessons in chapter",
+"follow_us": "Follow us",
+"follow_our_channel": "Follow our channel",
+"follow_our_channel_desc": "And stay up to date with all new courses that coming to our platoform",
+"Video_count": "Video Lessons"
 }
 

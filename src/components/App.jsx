@@ -19,29 +19,6 @@ import * as amplitude from '@amplitude/analytics-browser';
 import { useContext } from 'react';
 amplitude.init('fd29d14d4b8f347fb378fe00c445fe7a', {"autocapture":true});
 
-function BackButtonManipulator() {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    function onClick() {
-      navigate(-1);
-    }
-    WebApp.BackButton.onClick(onClick);
-
-    return () => WebApp.BackButton.offClick(onClick);
-  }, [navigate]);
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      WebApp.BackButton.isVisible && WebApp.BackButton.hide();
-    } else {
-      !WebApp.BackButton.isVisible && WebApp.BackButton.show();
-    }
-  }, [location]);
-
-  return null;
-}
 
 /**
  * @return {JSX.Element}
@@ -51,10 +28,13 @@ export function App() {
   amplitude.track('Sign Up');
   const {setInitData, setUser }= useContext(UserContext);
   useEffect(() => {
-    window.Telegram.WebApp.isVerticalSwipesEnabled = false
+   
 
     const initializeTelegramWebApp = async () => {
       if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.isSwipeBackEnabled = false;
+        window.Telegram.WebApp.isClosingConfirmationEnabled = true; 
+
         const webAppData = window.Telegram.WebApp.initDataUnsafe;
         const user = webAppData.user;
         
@@ -79,14 +59,22 @@ export function App() {
     initializeTelegramWebApp();
   }, [setUser]);
   
-
+const platform = WebApp.platform;
+  const appearance = WebApp.colorScheme;
   return (
     <AppRoot
-      appearance={WebApp.colorScheme}
-      platform={['macos', 'ios'].includes(WebApp.platform) ? 'ios' : 'base'}
+      appearance={appearance}
+      platform={
+        platform === 'android'
+          ? 'android'
+          : platform === 'desktop'
+          ? 'desktop'
+          : ['macos', 'ios'].includes(platform)
+          ? 'ios'
+          : 'base'
+      }
     >
       <BrowserRouter>
-        <BackButtonManipulator/>
         <Routes>
           {routes.map((route) => <Route key={route.path} {...route} />)}
           <Route path='*' element={<Navigate to='/'/>}/>
@@ -94,6 +82,7 @@ export function App() {
         </Routes>
         <Navbar/>
       </BrowserRouter>
+      
     </AppRoot>
   );
 }
