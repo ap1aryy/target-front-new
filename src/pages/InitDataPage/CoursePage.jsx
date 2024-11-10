@@ -201,7 +201,7 @@ export function CoursePage() {
         )}
 
         {isPopUpOpen && <PopUp course_data={course} onClose={handleClosePopUp} />}
-        {isChaptersOpen && <Chapters onClose={handleCloseChapters} index={selectedChapterIndex} />}
+        {isChaptersOpen && <Chapters onClose={handleCloseChapters} index={selectedChapterIndex} language={i18n.language} />}
       </List>
     </div>
   );
