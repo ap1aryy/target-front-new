@@ -8,27 +8,36 @@ export const mentors = [
     { name: "David Kruel", status: "1", price: 1, company: "Kruel Live" }, // Add price for mentor selection
 ];
 
-export const course = [{
-    "description": "Курс предназначен для разработчиков и IT-специалистов. Он даёт теоретические и практические знания о технологиях и концепциях блокчейна TON, включая язык программирования FunC, смарт-контракты и их тестирование, а также создание мини-приложений.",
-    "students": 96,
-    "id": 2925675,
-    "title": "TON Blockchain & Telegram",
-    "avatar": "https://import.cdn.thinkific.com/999858/r676HFMETTqeDFcWXdP6_photo_2024-11-05_15-03-56.jpg",
-    "rate": 4.5,
-    "chapters": 9,
-    'slug':"my-course"
-},
-{
-    "description": "Learn essential skills in product management, from market research and product strategy to development and launch. This course covers key concepts, tools, and best practices to manage product life cycles, drive innovation, and meet customer needs.",
-    "students": 61,
-    "id": 2926478,
-    "title": "ProProduct",
-    "avatar": "https://import.cdn.thinkific.com/999858/hQK1qjTj6ytCgZKOjCng_0_diagram.png",
-    "rate": 4.5,
-    "chapters":3,
-    'slug':"new-course"
-}
-]
+export const course = [
+  {
+    id: 2925675,
+    title: "Курс по TON блокчейну и Телеграм",
+    description: "Курс предназначен для разработчиков и IT-специалистов. Он даёт теоретические и практические знания о технологиях и концепциях блокчейна TON, включая язык программирования FunC, смарт-контракты и их тестирование, а также создание мини-приложений.",
+    slug: "my-course",
+  },
+  {
+    id: 2930629,
+    title: "Product Analytics for Beginners",
+    description: "Получите фундаментальное понимание аналитики продукта и ее роли в бизнесе. К концу этой главы студенты узнают, что такое продуктовая аналитика, поймут, почему она имеет решающее значение для успеха продукта, и познакомятся с ключевыми показателями и терминами в этой области.",
+    slug: "ai-placeholder",
+  },
+  {
+    id: 2930630,
+    title: "Introduction to UX Research",
+    description: "В этой главе вы получите глубокое представление об UX-исследованиях, важности UX в дизайне и основных концепциях UX-исследований. После завершения этой главы вы поймете основную роль UX-исследований в разработке продукта, как они формируют пользовательский опыт, а также основные концепции, которые лежат в основе работы UX-исследователей.",
+  },
+  {
+    id: 2930631,
+    title: "Data Science for Beginners",
+    description: "Этот курс для начинающих знакомит с основными понятиями, инструментами и методами data science. Благодаря практическим занятиям учащиеся получат прочную основу для работы с данными, их анализа, визуализации и основ машинного обучения. К концу курса студенты будут обладать навыками анализа данных, раскрытия сути и построения простых прогностических моделей.",
+  },
+  {
+    id: 2930632,
+    title: "Telegram Mini Apps. First Steps.",
+    avatar: "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
+  },
+];
+
 
 export const groupedVideos = {
   "1": [

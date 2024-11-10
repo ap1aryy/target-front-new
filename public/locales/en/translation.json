@@ -18,30 +18,74 @@
   "Reasearcher": "Reasearcher",
   "Course_name1": "TON Blockchain & Telegram",
     "Course_name2": "ProProducts",
-     "2925675": {
-    "Course_name": "TON Blockchain & Telegram",
-    "Description": "The course is intended for developers and IT specialists. It provides theoretical and practical knowledge of TON blockchain technologies and concepts, including FunC programming language, smart contracts and their testing, and creating mini-applications.",
-    "chapters": {
-      "1": "1. Introduction to TON Blockchain",
-      "2": "2. TVM, Transactions, Scalability, and Business Cases",
-      "3": "3. Smart Contract Development Lifecycle",
-      "4": "4. Mastering FunC Contract Writing",
-      "5": "5. Frontend Interaction with TON Blockchain",
-      "6": "6. Creating Telegram-Compatible Interfaces with TON Blockchain",
-      "7": "7. NFTs and Jettons",
-      "8": "8. Smart Contract Security",
-      "9": "9. Ecosystem Products, Future Plans, and Vision"
-    }
-  },
-  "2926478": {
-    "Course_name": "ProProducts",
-    "Description": "Learn essential skills in product management, from market research and product strategy to development and launch. This course covers key concepts, tools, and best practices to manage product life cycles, drive innovation, and meet customer needs.",
-    "chapters": {
-      "1": "1. Introduction to Product Management",
-      "2": "2. Market Research and Product Strategy",
-      "3": "3. Product Development and Launch"
-    }
-  },
+      "2925675": {
+        "Course_name": "TON Blockchain & Telegram",
+        "Description": "The course is intended for developers and IT specialists. It provides theoretical and practical knowledge of TON blockchain technologies and concepts, including FunC programming language, smart contracts and their testing, and creating mini-applications.",
+        "chapters": {
+          "1": "1. Introduction to TON Blockchain",
+          "2": "2. TVM, Transactions, Scalability, and Business Cases",
+          "3": "3. Smart Contract Development Lifecycle",
+          "4": "4. Mastering FunC Contract Writing",
+          "5": "5. Frontend Interaction with TON Blockchain",
+          "6": "6. Creating Telegram-Compatible Interfaces with TON Blockchain",
+          "7": "7. NFTs and Jettons",
+          "8": "8. Smart Contract Security",
+          "9": "9. Ecosystem Products, Future Plans, and Vision"
+        }
+      },
+      "2926478": {
+        "Course_name": "ProProducts",
+        "Description": "Learn essential skills in product management, from market research and product strategy to development and launch. This course covers key concepts, tools, and best practices to manage product life cycles, drive innovation, and meet customer needs.",
+        "chapters": {
+          "1": "1. Introduction to Product Management",
+          "2": "2. Market Research and Product Strategy",
+          "3": "3. Product Development and Launch"
+        }
+      },
+      "2930629": {
+        "Course_name": "Product Analytics for Beginners",
+        "Description": "Unlock the power of data in product development. This course will guide beginners through essential concepts and tools in product analytics for better decision-making.",
+        "chapters": {
+          "1": "1. Introduction to Product Analytics",
+          "2": "2. Setting Up Analytics Frameworks",
+          "3": "3. User Behavior Analysis",
+          "4": "4. Experimentation and A/B Testing",
+          "5": "5. Making Data-Driven Decisions and Communicating Insights"
+        }
+      },
+      "2930630": {
+        "Course_name": "Introduction to UX Research",
+        "Description": "Unlock the secrets of user experience design with this beginner-friendly course. Learn essential UX research methods to create user-centered products that resonate!",
+        "chapters": {
+          "1": "1. Understanding the Foundations of UX Research",
+          "2": "2. User Research Methods",
+          "3": "3. Analyzing and Synthesizing Research Findings",
+          "4": "4. Communicating UX Research Findings",
+          "5": "5. Applying UX Research to Design Decisions"
+        }
+      },
+      "2930631": {
+        "Course_name": "Data Science for Beginners",
+        "Description": "Unlock the world of data science! This course offers essential concepts, tools, and techniques to start your data science journey confidently.",
+        "chapters": {
+          "1": "1. Introduction to Data Science",
+          "2": "2. Data Collection and Preparation",
+          "3": "3. Exploratory Data Analysis (EDA)",
+          "4": "4. Data Visualization",
+          "5": "5. Basic Machine Learning"
+        }
+      },
+      "2930632": {
+        "Course_name": "Telegram Mini Apps. First steps.",
+        "Description": "Unlock the potential of Telegram Mini Apps with this beginner's course! Learn to create engaging mini apps that enhance user interaction and boost productivity.",
+        "chapters": {
+          "1": "1. Introduction to Telegram Mini Apps",
+          "2": "2. Basics of Creating Mini Apps",
+          "3": "3. Designing for Mini Apps",
+          "4": "4. Designing Mini Apps Functionality and UX",
+          "5": "5. Deploying the App"
+        }
+      },    
   "Digital": "Digital",
   "TON": "TON",
   "Telegram": "Telegram",

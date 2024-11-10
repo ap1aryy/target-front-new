@@ -61,7 +61,7 @@ export function CoursePage() {
 
 const handleOpenChapters = (index) => {
     setSelectedChapterIndex(index); // Set the selected chapter index
-    navigate(`/courses/chapters/${index}`);  // Navigate to the chapter page
+    navigate(`/courses/chapters/${index}`, { state: { courseId: course.id } }); // Navigate to the chapter page
     window.Telegram.WebApp.MainButton.hide();
 };
 
@@ -109,11 +109,11 @@ const handleOpenChapters = (index) => {
         </Title>
         <Text weight="3">{t('Course')}</Text>
 
-        <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+        {/* <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
           <Chip mode="mono">Digital</Chip>
           <Chip mode="mono">TON</Chip>
           <Chip mode="mono">Telegram</Chip>
-        </div>
+        </div> */}
 
         {/* If the course belongs to the user, show validity date */}
         {course.my && course.type == 1 && (
@@ -201,7 +201,7 @@ const handleOpenChapters = (index) => {
 
         )}
 
-        <Text weight="1">{t('Menthors')}</Text>
+        {/* <Text weight="1">{t('Menthors')}</Text>
 
         {!course?.my ? (
           <Section style={{ marginTop: 8 }}>
@@ -230,7 +230,7 @@ const handleOpenChapters = (index) => {
               }
             />
           </Section>
-        )}
+        )} */}
 
         {isPopUpOpen && <PopUp course_data={course} onClose={handleClosePopUp} />}
        

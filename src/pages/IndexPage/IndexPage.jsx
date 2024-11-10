@@ -25,6 +25,48 @@ export function IndexPage() {
   const {courses, setCourses} = useContext(CoursesContext)
   const navigate = useNavigate()
   window.Telegram.WebApp.MainButton.hide(); 
+
+  const courseConfig  = {
+    "2925675": {
+      img: "https://import.cdn.thinkific.com/999858/r676HFMETTqeDFcWXdP6_photo_2024-11-05_15-03-56.jpg",
+      chapters: "9 chapters",
+      videos: "32 videos",
+      duration: "15 hours"
+    },
+    "2926478": {
+      img: "ProProduct",
+      chapters: "3 chapters",
+      videos: "0 videos",
+      duration: "3.5 hours"
+    },
+    "2930629": {
+      img: "https://import.cdn.thinkific.com/999858/1S51nlgTuqOqzfwOyBvy_image_2024-11-10_23-40-27.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    "2930630": {
+      img: "https://import.cdn.thinkific.com/999858/A8eR3MtBT7eVWGIzTOjR_image_2024-11-10_23-40-39.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    "2930631": {
+      img: "https://import.cdn.thinkific.com/999858/bNYERdoYSOa5r1mgZpPb_image_2024-11-10_23-40-51.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    "2930632": {
+      img: "https://import.cdn.thinkific.com/999858/AfSeEPtIQaO17HA4krxu_image_2024-11-10_23-41-01.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    // Добавьте данные для других курсов здесь
+  };
+  
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -42,6 +84,7 @@ export function IndexPage() {
         navigate(`/courses/${course.id}`, { state: { course } });
   }
  WebApp.BackButton.isVisible && WebApp.BackButton.hide();
+ const filteredCourses = courses?.filter(course => course.id !== 2926478);
 
 
 console.log(i18n.language); 
@@ -54,74 +97,45 @@ console.log(i18n.language);
               marginBottom:4
             }}
         > {t('Popular_courses')}</Title>
-<Card
+    {filteredCourses.map(course => (
+        <Card
+          key={course.id}
+          style={{
+            width: "100%",
+            textAlign: "left",
+            height: "265px",
+            marginTop: 8
+          }}
+          onClick={() => handleGoToCourse(course)}
+        >
+          <img
+            alt="Course Image"
+            src={courseConfig[course.id]?.image || "default_image_path_here"}
             style={{
-              width: "100%",
-              textAlign: "left",
-              height: "265px",
-              marginTop:8
+              display: 'block',
+              height: "170px",
+              objectFit: 'cover',
+              width: "100%"
             }}
-            onClick={() => handleGoToCourse(courses[0])}
-          >
-            <img
-              alt="Course Image"
-              src="https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png"
-              style={{
-                display: 'block',
-                height: "170px", 
-                objectFit: 'cover',
-                width: "100%"
-              }}
-            />
-            <Card.Cell readOnly
-               subtitle={<div>
+          />
+          <Card.Cell readOnly
+            subtitle={
+              <div>
                 {t('Course')}
                 <div className='card-items-inf'>
-                  <div>9 chapters</div>
+                  <div>{courseConfig[course.id]?.chapters || "N/A"} chapters</div>
                   •
-                  <div>32 videos</div>
+                  <div>{courseConfig[course.id]?.videos || "N/A"} videos</div>
                   •
-                   <div>15 hours</div>
-                 </div>
-              </div>}
-            >
-            TON Blockchain & Telegram
-            </Card.Cell>
-        </Card>
-        <Card
-            style={{
-              width: "100%",
-              textAlign: "left",
-              height: "265px",
-              marginTop:8
-            }}
-            onClick={() => handleGoToCourse(courses[1])}
+                  <div>{courseConfig[course.id]?.duration || "N/A"}</div>
+                </div>
+              </div>
+            }
           >
-            <img
-              alt="Course Image"
-              src="https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png"
-              style={{
-                display: 'block',
-                height: "170px", 
-                objectFit: 'cover',
-                width: "100%"
-              }}
-            />
-            <Card.Cell readOnly
-              subtitle={<div>
-                {t('Tools')}
-                <div className='card-items-inf'>
-                  <div>3 chapters</div>
-                  •
-                  <div>8 videos</div>
-                  •
-                   <div>3.5 hours</div>
-                 </div>
-              </div>}
-            >
-            ProProduct
-            </Card.Cell>
-          </Card>
+            {course.title}
+          </Card.Cell>
+        </Card>
+      ))}
           </div>
       {/* <List>
 

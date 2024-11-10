@@ -4,32 +4,13 @@ import './Chapters.css';
 import { Icon16Cancel } from '@vkontakte/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
-// Import lesson modules
-import * as LessonsEN from './lessonseng';
-import * as LessonsRU from './Lessons';
+import { courseMappings } from './CoursesMapping';
 
 export function Chapters() {
   const navigate = useNavigate();
   const { index } = useParams();
-  const course = location.state?.course;
-  
-  const startTouch = useRef(null);
-  const lastLessonRef = useRef(null);
-
-  useEffect(() => {
-    fetchChapterData(index);
-  }, [index]);
-
-  const fetchChapterData = async (chapterIndex) => {
-    try {
-      const data = await fetch(`/api/chapters/${chapterIndex}`);
-      const result = await data.json();
-      setChapterData(result);
-    } catch (error) {
-      console.error('Error fetching chapter data:', error);
-    }
-  };
-
+  const id = location.state?.courseId;
+ 
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -62,7 +43,7 @@ export function Chapters() {
   }, [index]);
 
   const handleClose = () => {
-  navigate(-1);  // Вернуться на предыдущую страницу
+  navigate(-1);
 };
 
  const handleFinishLesson = () => {
@@ -75,40 +56,34 @@ export function Chapters() {
   }
 };
 
+const renderLessons = () => {
+  const language = i18n.language;
+  const lessonsModule = courseMappings[language]?.[id];
 
-  const renderLessons = () => {
-    const lessons = i18n.language === 'ru' ? LessonsRU : LessonsEN;
-    const lessonList = {
-      1: [lessons.Lesson1_1, lessons.Lesson1_2, lessons.Lesson1_3, lessons.Lesson1_4, lessons.Lesson1_5],
-      2: [lessons.Lesson2_1, lessons.Lesson2_2, lessons.Lesson2_3, lessons.Lesson2_5, lessons.Lesson2_6],
-      3: [lessons.Lesson3_1, lessons.Lesson3_2, lessons.Lesson3_3, lessons.Lesson3_5],
-      4: [lessons.Lesson4_1, lessons.Lesson4_2, lessons.Lesson4_3, lessons.Lesson4_4, lessons.Lesson4_5, lessons.Lesson4_6],
-      5: [lessons.Lesson5_1, lessons.Lesson5_2, lessons.Lesson5_3, lessons.Lesson5_4, lessons.Lesson5_5],
-      6: [lessons.Lesson6_1, lessons.Lesson6_2, lessons.Lesson6_3, lessons.Lesson6_4],
-      7: [lessons.Lesson7_1, lessons.Lesson7_2, lessons.Lesson7_3, lessons.Lesson7_4, lessons.Lesson7_5],
-      8: [lessons.Lesson8_1, lessons.Lesson8_2, lessons.Lesson8_3, lessons.Lesson8_4],
-      9: [lessons.Lesson9],
-    };
+  if (!lessonsModule) {
+    console.error(`Course with id ${id} not found for language ${language}.`);
+    return null;
+  }
 
-    return (lessonList[index] || []).map((LessonComponent, i) => (
-      <div key={i} ref={i === lessonList[index].length - 1 ? lastLessonRef : null}>
-        <LessonComponent />
-      </div>
-    ));
-  };
+  // Определение уроков на основе главы
+  const lessonKey = `Lesson${index}`;
+  const lessons = Object.keys(lessonsModule)
+    .filter(key => key.startsWith(lessonKey))
+    .map(key => lessonsModule[key]);
+
+  return lessons.map((LessonComponent, i) => (
+    <div key={i} ref={i === lessons.length - 1 ? lastLessonRef : null}>
+      <LessonComponent />
+    </div>
+  ));
+};
+
 
   return (
     <div className="popup-overlay" onClick={handleClose}>
-      <div
-        className={`popup-menu2`}
-        style={{ height: "100%" }}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className={`popup-menu2`} style={{ height: "100%" }} onClick={(e) => e.stopPropagation()}>
         {renderLessons()}
-        <Button
-          style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
-          onClick={handleFinishLesson}
-        >
+        <Button style={{ width: "100%", marginTop: 16, marginBottom: 16 }} onClick={handleFinishLesson}>
           {t('chapters1_finish')}
         </Button>
       </div>
