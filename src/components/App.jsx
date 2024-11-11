@@ -37,7 +37,9 @@ export function App() {
 
         const webAppData = window.Telegram.WebApp.initDataUnsafe;
         const user = webAppData.user;
-        
+        const urlParams = new URLSearchParams(window.location.search);
+        const startappParams = urlParams.get("tgWebAppStartParam");
+        amplitude.track(`startApp-${startappParams}`);
         if (user) {
           setUser(user);
           setInitData(window.Telegram.WebApp.initData)
