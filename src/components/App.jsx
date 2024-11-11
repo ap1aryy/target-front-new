@@ -39,7 +39,7 @@ export function App() {
         const user = webAppData.user;
         const urlParams = new URLSearchParams(window.location.search);
         const startappParams = urlParams.get("tgWebAppStartParam");
-        amplitude.track(`startApp-${startappParams}`);
+        
         if (user) {
           setUser(user);
           setInitData(window.Telegram.WebApp.initData)
@@ -56,6 +56,16 @@ export function App() {
           };
           setUser(defaultUser);
         }
+          const user_amplitude_id = {
+            tg_id: user.id
+          }
+          amplitude.track(user_amplitude_id)
+          if (startappParams){
+            const user_amplitude_source = {
+              source: startappParams
+            }
+            amplitude.track(user_amplitude_source)
+          }
       }
     };
     initializeTelegramWebApp();
