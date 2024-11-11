@@ -25,10 +25,10 @@ export function IndexPage() {
   const {courses, setCourses} = useContext(CoursesContext)
   const navigate = useNavigate()
   window.Telegram.WebApp.MainButton.hide(); 
-
+window.Telegram.WebApp.MainButton.text = t("get_course_from");
   const courseConfig  = {
     "2925675": {
-      img: "https://import.cdn.thinkific.com/999858/r676HFMETTqeDFcWXdP6_photo_2024-11-05_15-03-56.jpg",
+      img: "https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png",
       chapters: "9 chapters",
       videos: "32 videos",
       duration: "15 hours"

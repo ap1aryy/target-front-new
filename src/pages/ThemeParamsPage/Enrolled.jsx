@@ -51,6 +51,46 @@ WebApp.BackButton.hide();
     setIsPopUpOpen(false);
   };
 
+const courseConfig  = {
+    "2925675": {
+      img: "https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png",
+      chapters: "9 chapters",
+      videos: "32 videos",
+      duration: "15 hours"
+    },
+    "2926478": {
+      img: "ProProduct",
+      chapters: "3 chapters",
+      videos: "0 videos",
+      duration: "3.5 hours"
+    },
+    "2930629": {
+      img: "https://import.cdn.thinkific.com/999858/1S51nlgTuqOqzfwOyBvy_image_2024-11-10_23-40-27.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    "2930630": {
+      img: "https://import.cdn.thinkific.com/999858/A8eR3MtBT7eVWGIzTOjR_image_2024-11-10_23-40-39.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    "2930631": {
+      img: "https://import.cdn.thinkific.com/999858/bNYERdoYSOa5r1mgZpPb_image_2024-11-10_23-40-51.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    "2930632": {
+      img: "https://import.cdn.thinkific.com/999858/AfSeEPtIQaO17HA4krxu_image_2024-11-10_23-41-01.png",
+      chapters: "5 chapters",
+      videos: "0 videos",
+      duration: "6 hours"
+    },
+    // Добавьте данные для других курсов здесь
+  };
+
   return (
     <div>
       <div style={{ padding: 16, gap: 8 }}>
@@ -107,30 +147,28 @@ WebApp.BackButton.hide();
             >
               {t("Enrolled_courses")}
             </Cell>
-   {Array.isArray(courses) && courses.length > 0 &&
-  courses.filter(course => course.my === true) // Only show courses where `my` is true
-          .map((course, index) => (
-            <div>
-       
-      <Cell
-        style={{border:'none',padding:"10px"}}
-        key={index}
-        after={<Icon20ChevronRightOutline />}
-        before={
-          <Avatar
-            size={48}
-            style={{ borderRadius: "5px" }}
-            src="https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png"
-          />
-        }
-        onClick={() => handleGoToCourse(course)}
-      >
-        {/* Используем t() с вложенными ключами, например, t(course.id.toString() + '.Course_name') */}
-        {t(course.id.toString() + '.Course_name')}
-      </Cell>
-              </div>
-    ))
-        }
+  {Array.isArray(courses) && courses.length > 0 &&
+  courses
+    .filter(course => course.my === true && course.id !== 2930632) // Only show courses where `my` is true and id is not 2930632
+    .map((course, index) => (
+      <div key={index}>
+        <Cell
+          style={{ border: 'none', padding: "10px" }}
+          after={<Icon20ChevronRightOutline />}
+          before={
+            <Avatar
+              size={48}
+              style={{ borderRadius: "5px" }}
+              src={courseConfig[course.id].img}
+            />
+          }
+          onClick={() => handleGoToCourse(course)}
+        >
+          {/* Use t() with nested keys, e.g., t(course.id.toString() + '.Course_name') */}
+          {t(course.id.toString() + '.Course_name')}
+        </Cell>
+      </div>
+    ))}
          </Section>
         <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}>
         <Cell

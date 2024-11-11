@@ -6,7 +6,7 @@ import { UserContext } from '@/contexts/UserContext';
 import { options } from '@/Utils/Constants';
 import { Icon16StarAlt, Icon24PenOutline, Icon16Clear } from '@vkontakte/icons';
 import './PopUp.css';
-import { generateInvoice } from '@/Utils/thinkificAPI';
+import { generateInvoice, getAllCourses } from '@/Utils/thinkificAPI';
 import { CoursesContext } from '@/contexts/CoursesContext';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -34,30 +34,51 @@ export function PopUp({ course_data, onClose }) {
   };
 
   const handleConfirmPurchase = async () => {
-    const price = selectedPlan.price;
+  const price = selectedPlan.price;
 
-    try {
-      const result = await generateInvoice(user.id,
-        course_data.id,
-        price,
-        invoiceGenerated,
-        selectedPlan.type,
-        async () => {
-          if (i18n.language === 'ru') {
-            alert(`Курс ${course_data?.title} был добавлен в ваш аккаунт`);
-          } else {
-            alert(`Course ${course_data?.title} was added to your account`);
+  try {
+    // Генерація інвойсу
+    const result = await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type, async () => {
+          if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.MainButton) {
+            window.Telegram.WebApp.MainButton.hide();
+             window.Telegram.WebApp.MainButton.text = "You have new course!";
           }
-          window.Telegram.WebApp.MainButton.hide();
-          navigate('/');
-          handleClose();
-          
-        });
-    } catch (error) {
-      console.error("Error during the purchase process:", error);
-    }
-  };
+      // Отримання списку курсів
+      try {
+        const courses = await getAllCourses(user.id);
 
+        // Знайти курс за ID з отриманого списку
+        const courseDetails = courses.find(course => course.id === course_data.id);
+        
+        if (!courseDetails) {
+          console.error("Course not found");
+          return;
+        }
+
+        // Повідомлення користувачу
+        if (i18n.language === 'ru') {
+          alert(`Курс ${course_data?.title} был добавлен в ваш аккаунт`);
+        } else {
+          alert(`Course ${course_data?.title} was added to your account`);
+        }
+
+        // Оновлення стану на тій самій сторінці
+       
+
+        // Оновлюємо стан, не змінюючи URL
+        navigate(`/courses/${course_data.id}`, { state: { course: courseDetails } });
+
+        // Закриваємо модальне вікно
+        handleClose();
+
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    });
+  } catch (error) {
+    console.error("Error during the purchase process:", error);
+  }
+};
   return (
     <div className="popup-overlay" onClick={handleClose}>
       <div

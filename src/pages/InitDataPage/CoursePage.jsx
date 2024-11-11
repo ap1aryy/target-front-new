@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { useParams, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import './p.css'
 import { UserContext } from '@/contexts/UserContext';
 import { getAllChapters } from '@/Utils/thinkificAPI';
@@ -35,7 +35,7 @@ export function CoursePage() {
   const [isWaitList, setIsWaitList] = useState(false);
   const [selectedChapterIndex, setSelectedChapterIndex] = useState(null);
  const { t, i18n  } = useTranslation();
-  const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp * 1000), "dd.MM.yyyy HH:mm") : null;
+  const waitlistRequestSent = useRef(false);
 
   useEffect(() => {
     if (!user) {
@@ -66,7 +66,7 @@ export function CoursePage() {
       window.Telegram.WebApp.MainButton.offClick(handleOpenPopUp);
     };
   }, [course.id, user, navigate]);
-
+const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp * 1000), "dd.MM.yyyy HH:mm") : null;
  const setupMainButtonForWaitlist = () => {
     if (course.my) {
       window.Telegram.WebApp.MainButton.text = "You in waitlist";
@@ -80,32 +80,46 @@ export function CoursePage() {
   };
 
   const setupMainButtonForRegularCourse = () => {
+    if(window.Telegram.WebApp.MainButton.text != "You have new course!"){
     window.Telegram.WebApp.MainButton.text = t("get_course_from");
     window.Telegram.WebApp.MainButton.show();
-    window.Telegram.WebApp.MainButton.onClick(handleOpenPopUp);
+    window.Telegram.WebApp.MainButton.onClick(handleOpenPopUp);}
   };
  const handleJoinWaitlist = async () => {
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/enroll`,
-        { user_id: user.id, app_id: course.id, count: 1 },
-        {
-          params: { type: 3 },
-          headers: { User: getInitData() },
-        }
-      );
-      console.log("Запрос на добавление в waitlist отправлен:", response.data);
-         if (i18n.language === 'ru') {
-            alert(`Курс ${course_data?.title} был добавлен в список ожиданий`);
-          } else {
-            alert(`Course ${course_data?.title} was added to your Waitlist`);
-          }
-          navigate('/');
-      
-    } catch (error) {
-      console.error("Ошибка при добавлении в waitlist:", error);
+  if (waitlistRequestSent.current) {
+    console.log("Запрос уже отправлен, повторное отправление не требуется");
+    return; // Якщо запит уже був відправлений, не відправляємо його ще раз
+  }
+
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/enroll`,
+      { user_id: user.id, app_id: course.id, count: 1 },
+      {
+        params: { type: 3 },
+        headers: { User: getInitData() },
+      }
+    );
+
+    console.log("Запрос на добавление в waitlist отправлен:", response.data);
+
+    // Установим флаг, что запрос был отправлен
+    waitlistRequestSent.current = true;
+
+    // Показуем пользователю сообщение о добавлении в waitlist
+    if (i18n.language === 'ru') {
+      alert(`Курс ${course_data?.title} был добавлен в список ожиданий`);
+    } else {
+      alert(`Course ${course_data?.title} was added to your Waitlist`);
     }
-  };
+
+    // Изменим текст кнопки
+    window.Telegram.WebApp.MainButton.text = "You in waitlist";
+
+  } catch (error) {
+    console.error("Ошибка при добавлении в waitlist:", error);
+  }
+};
 const handleOpenChapters = (index) => {
     setSelectedChapterIndex(index); // Set the selected chapter index
     navigate(`/courses/${course.id}/chapters/${index}`); // Navigate to the chapter page
@@ -141,7 +155,7 @@ const getTranslatedTags = (courseId) => {
 // </svg>
   useEffect(() => {
     function onClick() {
-      navigate(-1);
+      navigate('/');
     }
     !WebApp.BackButton.isVisible && WebApp.BackButton.show();
     WebApp.BackButton.onClick(onClick);
@@ -151,7 +165,7 @@ const getTranslatedTags = (courseId) => {
   
  const courseConfig  = {
     "2925675": {
-      img: "https://import.cdn.thinkific.com/999858/r676HFMETTqeDFcWXdP6_photo_2024-11-05_15-03-56.jpg",
+       img: "https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png",
       chapters: "9 chapters",
       videos: "32 videos",
       duration: "15 hours"
@@ -190,7 +204,7 @@ const getTranslatedTags = (courseId) => {
 
   return (
     <div>
-      <div style={{ width: "100%", maxWidth: "500px", overflow: "hidden", margin: "0 auto" }}>
+      <div style={{ width: "100%", maxWidth: "500px", overflow: "hidden", margin: "-2vh 0 auto" }}>
         <img
          src={courseConfig[course.id]?.img || "default_image_path_here"}
           width="100%"
