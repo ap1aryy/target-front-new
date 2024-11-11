@@ -15,6 +15,7 @@ import { groupedVideos } from '@/Utils/Constants';
 import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import * as amplitude from '@amplitude/analytics-browser';
 /**
  * @returns {JSX.Element}
  */
@@ -42,9 +43,11 @@ export function CoursePage() {
       navigate("/");
       return;
     }
+    amplitude.track('load_my_course');
     if (course.my) {
       window.Telegram.WebApp.MainButton.hide();
     } else if (course.id === 2930632) {
+      amplitude.track('load_waitlist');
       setIsWaitList(true)
       setupMainButtonForWaitlist();
     } else {
@@ -72,6 +75,8 @@ const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp *
       window.Telegram.WebApp.MainButton.text = "You in waitlist";
       window.Telegram.WebApp.MainButton.show();
       window.Telegram.WebApp.MainButton.onClick(null);
+      
+
     } else {
       window.Telegram.WebApp.MainButton.text = "Join to waitlist";
       window.Telegram.WebApp.MainButton.show();
@@ -106,7 +111,7 @@ const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp *
     );
 
     console.log("Запрос на добавление в waitlist отправлен:", response.data);
-
+    amplitude.track('add_course_to_waitlist');
     // Установим флаг, что запрос был отправлен
     waitlistRequestSent.current = true;
 
@@ -142,12 +147,14 @@ if (i18n.language === 'ru') {
 
 
 const handleOpenChapters = (index) => {
+  amplitude.track('open_chapters');
     setSelectedChapterIndex(index); // Set the selected chapter index
     navigate(`/courses/${course.id}/chapters/${index}`); // Navigate to the chapter page
     window.Telegram.WebApp.MainButton.hide();
 };
 
 const handleOpenPopUp = () => {
+  amplitude.track('open_buy_choise_menu');
   navigate('/buy', { state: { course: course } });
 };
   const handleClosePopUp = () => {
@@ -157,6 +164,7 @@ const handleOpenPopUp = () => {
 
   // Function to check if a chapter is completed
   const isChapterCompleted = (courseId, index) => {
+    
   console.log(courseId + " " + index)
   const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || {};
   return completedChapters[parseInt(courseId, 10)]?.includes(parseInt(index, 10)) || false;
@@ -182,7 +190,7 @@ const getTranslatedTags = (courseId) => {
     }
     !WebApp.BackButton.isVisible && WebApp.BackButton.show();
     WebApp.BackButton.onClick(onClick);
-
+    amplitude.track('back_to_home');
     return () => WebApp.BackButton.offClick(onClick);
   }, [navigate]);
   

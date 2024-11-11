@@ -5,6 +5,7 @@ import { Tabbar } from '@telegram-apps/telegram-ui';
 import { useLocation } from 'react-router-dom';
 import './NavBar.css'
 import { useTranslation } from 'react-i18next';
+import * as amplitude from '@amplitude/analytics-browser';
 export const Navbar = () => {
   const { i18n, t } = useTranslation();
   const tabs = [
@@ -23,6 +24,8 @@ export const Navbar = () => {
   
 
   const handleNavigation = (selected) => {
+    amplitude.track(`navigate-${selected.id}`);
+
     setCurrentTab(selected.id); // Update the active tab using selected.id
     navigate(selected.path); // Navigate to the selected path
   };

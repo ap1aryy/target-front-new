@@ -11,13 +11,14 @@ import { useContext, useState, useEffect } from 'react';
 
 import { EnrolledPopUp } from './EnrolledPopUp';
 import { CoursesContext } from '@/contexts/CoursesContext';
-
+import * as amplitude from '@amplitude/analytics-browser';
 import { useTranslation } from 'react-i18next';
 
 /**
  * @returns {JSX.Element}
  */
 export function EnrollmentsPage() {
+  amplitude.track('open_my_courses');
   const { user } = useContext(UserContext);
   const { courses, setCourses } = useContext(CoursesContext);
   const { i18n, t } = useTranslation();
@@ -39,6 +40,7 @@ WebApp.BackButton.hide();
   window.Telegram.WebApp.MainButton.hide();
 
   const handleGoToCourse = (course) => {
+    amplitude.track('open_my_course');
     navigate(`/courses/${course.id}`, { state: { course } });
   };
 

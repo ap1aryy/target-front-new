@@ -5,7 +5,7 @@ import './IndexPage.css';
 
 import { UserContext } from '@/contexts/UserContext';
 import WebApp from '@twa-dev/sdk';
-
+import * as amplitude from '@amplitude/analytics-browser';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 
@@ -20,7 +20,7 @@ import { CoursesContext } from '@/contexts/CoursesContext';
  */
 export function IndexPage() {
  const { t, i18n  } = useTranslation();
-
+  
   const {user, setUser} = useContext(UserContext)
   const {courses, setCourses} = useContext(CoursesContext)
   const navigate = useNavigate()
@@ -70,6 +70,7 @@ window.Telegram.WebApp.MainButton.text = t("get_course_from");
   useEffect(() => {
     const fetchCourses = async () => {
       try {
+        amplitude.track('load_courses_home_page');
         const courseList = await getAllCourses(user.id);
         setCourses(courseList);
       } catch (error) {
@@ -81,6 +82,7 @@ window.Telegram.WebApp.MainButton.text = t("get_course_from");
   }, [user]);
   
   const handleGoToCourse = (course) => {
+    amplitude.track('open_best_choise');
         navigate(`/courses/${course.id}`, { state: { course } });
   }
  WebApp.BackButton.isVisible && WebApp.BackButton.hide();
@@ -106,6 +108,7 @@ console.log(i18n.language);
             height: "265px",
             marginTop: 8
           }}
+          
           onClick={() => handleGoToCourse(course)}
         >
           <img

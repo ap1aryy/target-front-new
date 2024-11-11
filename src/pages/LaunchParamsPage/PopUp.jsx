@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import * as amplitude from '@amplitude/analytics-browser';
 export function PopUp() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,17 +43,19 @@ export function PopUp() {
   }, []);
 
   const handleClose = () => {
+    amplitude.track('close_buy_course');
     navigate(`/courses/${course_data.id}`, { state: { course: course_data } });
   };
 
   const handlePlanSelect = (option) => {
+    amplitude.track('select_plan');
     setSelectedPlan(option);
     setStage(3); // Skip directly to the payment confirmation stage
   };
 
   const handleConfirmPurchase = async () => {
   const price = selectedPlan.price;
-
+  amplitude.track('click_buy');
   try {
     // Генерація інвойсу
     const result = await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type, async () => {
@@ -82,7 +85,7 @@ export function PopUp() {
 
         // Оновлення стану на тій самій сторінці
        
-
+        amplitude.track('succusses_buy');
         // Оновлюємо стан, не змінюючи URL
         navigate(`/courses/${course_data.id}`, { state: { course: courseDetails } });
 

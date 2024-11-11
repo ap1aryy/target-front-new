@@ -5,11 +5,11 @@ import { Icon16Cancel } from '@vkontakte/icons';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 import { courseMappings } from './CoursesMapping';
-
+import * as amplitude from '@amplitude/analytics-browser';
 export function Chapters() {
   const navigate = useNavigate();
    const { courseId, index } = useParams();
- 
+   amplitude.track('load_chapter');
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -40,10 +40,12 @@ export function Chapters() {
   }, [index]);
 
   const handleClose = () => {
+    amplitude.track('close_chapter');
   navigate(-1);
 };
 
  const handleFinishLesson = () => {
+  amplitude.track('finish_chapter');
   const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || {};
   
   // Ensure there is an entry for this courseId

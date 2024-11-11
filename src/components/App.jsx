@@ -10,14 +10,14 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
+import { TwaAnalyticsProvider } from '@tonsolutions/telemetree-react';
 
 import { routes } from '@/navigation/routes.jsx';
 import { UserContext } from '@/contexts/UserContext';
 import { Navbar } from './NavBar';
 import * as amplitude from '@amplitude/analytics-browser';
 import { useContext } from 'react';
-amplitude.init('fd29d14d4b8f347fb378fe00c445fe7a', {"autocapture":true});
+amplitude.init('f926c299b1144dfdd6fa169502f4ac25', {"autocapture":true});
 
 
 /**
@@ -25,7 +25,7 @@ amplitude.init('fd29d14d4b8f347fb378fe00c445fe7a', {"autocapture":true});
  */
 export function App() {
   const { i18n } = useTranslation();
-  amplitude.track('Sign Up');
+  amplitude.track('open_mini_app');
   const {setInitData, setUser }= useContext(UserContext);
   useEffect(() => {
    
@@ -62,6 +62,11 @@ export function App() {
 const platform = WebApp.platform;
   const appearance = WebApp.colorScheme;
   return (
+    <TwaAnalyticsProvider
+    projectId='1969396f-f993-424a-8722-cc7c113ba344'
+    apiKey='fa02b287-e0b3-48aa-b7b5-cce24d05d72f'
+    appName='tmtr'
+>
     <AppRoot
       appearance={appearance}
       platform={
@@ -84,5 +89,6 @@ const platform = WebApp.platform;
       </BrowserRouter>
       
     </AppRoot>
+    </TwaAnalyticsProvider>
   );
 }
