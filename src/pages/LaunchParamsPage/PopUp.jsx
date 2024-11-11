@@ -56,11 +56,13 @@ export function PopUp({ course_data, onClose }) {
         }
 
         // Повідомлення користувачу
-        if (i18n.language === 'ru') {
-          alert(`Курс ${course_data?.title} был добавлен в ваш аккаунт`);
-        } else {
-          alert(`Course ${course_data?.title} was added to your account`);
-        }
+        // Повідомлення користувачу
+      if (i18n.language === 'ru') {
+        alert(`${t(course_data.id.toString() + '.Course_name')} был добавлен в ваш аккаунт`);
+      } else {
+        alert(`${t(course_data.id.toString() + '.Course_name')} was added to your account`);
+      }
+
 
         // Оновлення стану на тій самій сторінці
        
