@@ -17,9 +17,10 @@ export const Navbar = () => {
   const location = useLocation(); // Get current location
 
   // Check if the current location starts with '/courses'
-  if (location.pathname.startsWith('/courses')) {
+  if (location.pathname.startsWith('/courses') || location.pathname.startsWith('/buy')) {
     return <></>; // Return empty fragment if the condition is met
   }
+  
 
   const handleNavigation = (selected) => {
     setCurrentTab(selected.id); // Update the active tab using selected.id
