@@ -19,16 +19,30 @@ export function PopUp() {
   const { t, i18n } = useTranslation();
   const { courses, setCourses } = useContext(CoursesContext);
   const { user } = useContext(UserContext);
-  const [isClosing, setIsClosing] = useState(false);
   const [stage, setStage] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const invoiceGenerated = useRef(false);
 
   window.Telegram.WebApp.MainButton.hide();
 
+  useEffect(() => {
+    // Добавляем обработчик на BackButton при монтировании компонента
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.BackButton) {
+      window.Telegram.WebApp.BackButton.onClick(handleClose);
+      window.Telegram.WebApp.BackButton.show(); // Показываем кнопку назад, если она скрыта
+    }
+
+    // Очищаем обработчик при размонтировании компонента
+    return () => {
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.BackButton) {
+        window.Telegram.WebApp.BackButton.offClick(handleClose);
+        window.Telegram.WebApp.BackButton.hide(); // Скрываем кнопку назад при закрытии компонента
+      }
+    };
+  }, []);
+
   const handleClose = () => {
-    setIsClosing(true);
-    navigate(-1)
+    navigate(`/courses/${course_data.id}`, { state: { course: course_data } });
   };
 
   const handlePlanSelect = (option) => {
@@ -72,8 +86,6 @@ export function PopUp() {
         // Оновлюємо стан, не змінюючи URL
         navigate(`/courses/${course_data.id}`, { state: { course: courseDetails } });
 
-        // Закриваємо модальне вікно
-        handleClose();
 
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -89,10 +101,7 @@ export function PopUp() {
         onClick={(e) => e.stopPropagation()}
       >
         <List>
-          <div className="header-pop">
-            <Text weight="1">{stage === 1 ? "Get this course" : "Overview"}</Text>
-            <span className="" onClick={handleClose}><Icon16Clear /></span>
-          </div>
+         
           <Section style={{ marginTop: 8 }}>
             <Cell subhead={t('Course_name')} style={{ pointerEvents: 'none', border: 'none', marginBottom: 5 }} children={course_data?.title} />
 
