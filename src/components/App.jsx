@@ -38,7 +38,7 @@ export function App() {
         const webAppData = window.Telegram.WebApp.initDataUnsafe;
         const user = webAppData.user;
         const urlParams = new URLSearchParams(window.location.search);
-        const startappParams = urlParams.get("tgWebAppStartParam");
+       // const startappParams = urlParams.get("tgWebAppStartParam");
         
         if (user) {
           setUser(user);
@@ -56,16 +56,16 @@ export function App() {
           };
           setUser(defaultUser);
         }
-          const user_amplitude_id = {
-            tg_id: user.id
-          }
-          amplitude.track(user_amplitude_id)
-          if (startappParams){
-            const user_amplitude_source = {
-              source: startappParams
-            }
-            amplitude.track(user_amplitude_source)
-          }
+          // const user_amplitude_id = {
+          //   tg_id: user.id
+          // }
+          // amplitude.track(user_amplitude_id)
+          // if (startappParams){
+          //   const user_amplitude_source = {
+          //     source: startappParams
+          //   }
+          //   amplitude.track(user_amplitude_source)
+          // }
       }
     };
     initializeTelegramWebApp();
