@@ -85,9 +85,7 @@ const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp *
 `;
   const setupMainButtonForRegularCourse = () => {
     if(window.Telegram.WebApp.MainButton.text != "You have new course!"){
-    const buttonText = t("get_course_from", { icon: '', interpolation: { escapeValue: false } });
-    const textWithIcon = `${buttonText} ${starIconSvg})`;
-    window.Telegram.WebApp.MainButton.text = textWithIcon;
+    window.Telegram.WebApp.MainButton.text = t("get_course_from");
     window.Telegram.WebApp.MainButton.show();
     window.Telegram.WebApp.MainButton.onClick(handleOpenPopUp);}
   };
