@@ -17,6 +17,9 @@ import { UserContext } from '@/contexts/UserContext';
 import { Navbar } from './NavBar';
 import * as amplitude from '@amplitude/analytics-browser';
 import { useContext } from 'react';
+
+import { saveSource } from '@/Utils/thinkificAPI';
+
 amplitude.init('f926c299b1144dfdd6fa169502f4ac25', {"autocapture":true});
 
 
@@ -42,6 +45,7 @@ export function App() {
         
         if (user) {
           setUser(user);
+          console.log(user)
           setInitData(window.Telegram.WebApp.initData)
 
           const userLanguage = user.language_code || 'en';
@@ -55,6 +59,10 @@ export function App() {
             is_premium: true,
           };
           setUser(defaultUser);
+        }
+        if (startappParams) {
+          console.log(startappParams)
+          await saveSource(user.id,startappParams)
         }
        const open_mini_app = {
           user_id: user.id,

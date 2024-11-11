@@ -66,15 +66,27 @@ window.Telegram.WebApp.MainButton.text = t("get_course_from");
     // Добавьте данные для других курсов здесь
   };
   
+const MAX_RETRY_ATTEMPTS = 3;
+  const RETRY_INTERVAL = 2000;
+  
+ useEffect(() => {
+    if (!user?.id) return; // Пропустить попытку, если user.id нет
 
-  useEffect(() => {
+    let attempts = 0; // Счётчик попыток
     const fetchCourses = async () => {
       try {
         amplitude.track('load_courses_home_page');
         const courseList = await getAllCourses(user.id);
         setCourses(courseList);
       } catch (error) {
-        console.error('Не удалось загрузить курсы:', error);
+        attempts++;
+        console.error(`Не удалось загрузить курсы, попытка ${attempts}:`, error);
+
+        if (attempts < MAX_RETRY_ATTEMPTS) {
+          setTimeout(fetchCourses, RETRY_INTERVAL); // Повторить попытку через интервал
+        } else {
+          console.error('Достигнуто максимальное количество попыток загрузки курсов.');
+        }
       }
     };
 

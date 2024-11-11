@@ -21,6 +21,19 @@ export const getAllCourses = async (userId) => {
   }
 };
 
+export const saveSource = async (userId, source) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/source`, null, {
+      params: { user_id: userId, source: source },
+      headers: { User: getInitData() },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Ошибка при получении списка курсов:", error);
+    throw error;
+  }
+};
+
 export const getCourseDetails = async (userId, courseId) => {
   try {
     const response = await axios.post(
