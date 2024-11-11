@@ -103,7 +103,7 @@ export function PopUp() {
         <List>
          
           <Section style={{ marginTop: 8 }}>
-            <Cell subhead={t('Course_name')} style={{ pointerEvents: 'none', border: 'none', marginBottom: 5 }} children={course_data?.title} />
+            <Cell subhead={t('Course_name')} style={{ pointerEvents: 'none', border: 'none', marginBottom: 5 }} children={`${t(course_data.id.toString() + '.Course_name')}`} />
 
             {/* Conditionally render the selectedPlan cell */}
             {stage > 1 && selectedPlan ? (
