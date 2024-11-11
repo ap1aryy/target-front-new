@@ -1,7 +1,6 @@
 export const options = [
-    { id: 1, name: "subscribe_1_month", price: 1, stars: "1 ", benefits: ["full_access", "online_support"], type: 1 },
-    { id: 2, name: "buy_forever", price: 1, stars: "1 ", benefits: ["full_access_forever", "community", "online_support"], type: 2 },
-    { id: 3, name: "exclusive_pack", price: 1, stars: "1 ", benefits: ["full_access_forever", "func_templates", "repositories_for_learning", "list_of_chats_and_channels"], type: 3 },
+    { id: 1, name: "subscribe_1_month", price: 249, stars: "249 ", benefits: ["full_access", "online_support"], type: 1 },
+    { id: 2, name: "buy_forever", price: 499, stars: "499 ", benefits: ["full_access_forever", "community", "online_support"], type: 2 },
 ];
 
 export const mentors = [

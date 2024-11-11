@@ -51,9 +51,9 @@ WebApp.BackButton.hide();
     setIsPopUpOpen(false);
   };
 
-const courseConfig  = {
+  const courseConfig  = {
     "2925675": {
-      img: "https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png",
+      img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
       chapters: "9 chapters",
       videos: "32 videos",
       duration: "15 hours"
@@ -65,25 +65,25 @@ const courseConfig  = {
       duration: "3.5 hours"
     },
     "2930629": {
-      img: "https://import.cdn.thinkific.com/999858/1S51nlgTuqOqzfwOyBvy_image_2024-11-10_23-40-27.png",
+      img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
       chapters: "5 chapters",
       videos: "0 videos",
       duration: "6 hours"
     },
     "2930630": {
-      img: "https://import.cdn.thinkific.com/999858/A8eR3MtBT7eVWGIzTOjR_image_2024-11-10_23-40-39.png",
+      img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
       chapters: "5 chapters",
       videos: "0 videos",
       duration: "6 hours"
     },
     "2930631": {
-      img: "https://import.cdn.thinkific.com/999858/bNYERdoYSOa5r1mgZpPb_image_2024-11-10_23-40-51.png",
+      img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
       chapters: "5 chapters",
       videos: "0 videos",
       duration: "6 hours"
     },
     "2930632": {
-      img: "https://import.cdn.thinkific.com/999858/AfSeEPtIQaO17HA4krxu_image_2024-11-10_23-41-01.png",
+      img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
       chapters: "5 chapters",
       videos: "0 videos",
       duration: "6 hours"

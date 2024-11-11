@@ -10,9 +10,12 @@ import { generateInvoice, getAllCourses } from '@/Utils/thinkificAPI';
 import { CoursesContext } from '@/contexts/CoursesContext';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-export function PopUp({ course_data, onClose }) {
+export function PopUp() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const course_data = location.state?.course;
   const { t, i18n } = useTranslation();
   const { courses, setCourses } = useContext(CoursesContext);
   const { user } = useContext(UserContext);
@@ -25,7 +28,7 @@ export function PopUp({ course_data, onClose }) {
 
   const handleClose = () => {
     setIsClosing(true);
-    setTimeout(onClose, 300);
+    navigate(-1)
   };
 
   const handlePlanSelect = (option) => {
@@ -56,7 +59,6 @@ export function PopUp({ course_data, onClose }) {
         }
 
         // Повідомлення користувачу
-        // Повідомлення користувачу
       if (i18n.language === 'ru') {
         alert(`${t(course_data.id.toString() + '.Course_name')} был добавлен в ваш аккаунт`);
       } else {
@@ -82,9 +84,8 @@ export function PopUp({ course_data, onClose }) {
   }
 };
   return (
-    <div className="popup-overlay" onClick={handleClose}>
       <div
-        className={`popup-menu ${isClosing ? 'popup-slide-out' : 'popup-slide-in'}`}
+        className={`popup-menu`}
         onClick={(e) => e.stopPropagation()}
       >
         <List>
@@ -165,6 +166,5 @@ export function PopUp({ course_data, onClose }) {
           )}
         </List>
       </div>
-    </div>
   );
 }
