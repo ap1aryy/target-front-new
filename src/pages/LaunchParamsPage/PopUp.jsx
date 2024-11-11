@@ -11,7 +11,7 @@ import { CoursesContext } from '@/contexts/CoursesContext';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
+import { useEffect } from 'react';
 export function PopUp() {
   const navigate = useNavigate();
   const location = useLocation();
