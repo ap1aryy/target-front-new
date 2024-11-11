@@ -25,7 +25,7 @@ amplitude.init('f926c299b1144dfdd6fa169502f4ac25', {"autocapture":true});
  */
 export function App() {
   const { i18n } = useTranslation();
-  amplitude.track('open_mini_app');
+
   const {setInitData, setUser }= useContext(UserContext);
   useEffect(() => {
    
@@ -56,16 +56,13 @@ export function App() {
           };
           setUser(defaultUser);
         }
-           const user_amplitude_id = {
-             tg_id: user.id
-           }
-           amplitude.track(user_amplitude_id)
-           if (startappParams){
-             const user_amplitude_source = {
-               source: startappParams
-             }
-             amplitude.track(user_amplitude_source)
-           }
+       const open_mini_app = {
+          user_id: user.id,
+          source: startappParams || null // Если startappParams отсутствует или undefined, будет null
+        };
+
+        amplitude.track(open_mini_app);
+
       }
     };
     initializeTelegramWebApp();

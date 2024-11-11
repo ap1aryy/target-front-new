@@ -29,39 +29,39 @@ window.Telegram.WebApp.MainButton.text = t("get_course_from");
   const courseConfig  = {
     "2925675": {
       img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
-      chapters: "9 chapters",
-      videos: "32 videos",
-      duration: "15 hours"
+      chapters: "9 ",
+      videos: "32 ",
+      duration: "15 "
     },
     "2926478": {
       img: "ProProduct",
-      chapters: "3 chapters",
-      videos: "0 videos",
-      duration: "3.5 hours"
+      chapters: "3 ",
+      videos: "0 ",
+      duration: "3.5 "
     },
     "2930629": {
       img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
+      chapters: "5 ",
+      videos: "0 ",
+      duration: "6 "
     },
     "2930630": {
       img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
+      chapters: "5 ",
+      videos: "0 ",
+      duration: "6 "
     },
     "2930631": {
       img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
+      chapters: "5 ",
+      videos: "0 ",
+      duration: "6 "
     },
     "2930632": {
       img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
+      chapters: "5 ",
+      videos: "0 ",
+      duration: "6 "
     },
     // Добавьте данные для других курсов здесь
   };
@@ -136,16 +136,23 @@ console.log(i18n.language);
               <div>
   {t('Course')}
   <div className='card-items-inf'>
-    <div>{courseConfig[course.id]?.chapters || "N/A"}</div>
-    •
-    {courseConfig[course.id]?.videos !== "0 videos" && (
-      <>
-        <div>{courseConfig[course.id].videos}</div>
-        •
-      </>
-    )}
-    <div>{courseConfig[course.id]?.duration || "N/A"}</div>
+  <div>
+    {courseConfig[course.id]?.chapters} {t('chapters')}
   </div>
+  •
+  {courseConfig[course.id]?.videos !== "0 " && (
+    <>
+      <div>
+        {courseConfig[course.id].videos} {t('videos')}
+      </div>
+      •
+    </>
+  )}
+  <div>
+    {courseConfig[course.id]?.duration} {t('duration')}
+  </div>
+</div>
+
 </div>
 
             }
