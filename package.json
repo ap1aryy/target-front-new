@@ -23,6 +23,7 @@
     "@telegram-apps/sdk-react": "^2.0.9",
     "@telegram-apps/telegram-ui": "^2.1.4",
     "@tonconnect/ui-react": "^2.0.5",
+    "@tonsolutions/telemetree-react": "^1.1.10",
     "@twa-dev/sdk": "^7.0.0",
     "@twa-dev/types": "^7.0.0",
     "@types/react": "^18.2.0",
