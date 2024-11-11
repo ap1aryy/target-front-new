@@ -964,7 +964,7 @@ export const Lesson5_3 = () => {
           <code>
             y_pred = model.predict(X_test)<br />
             mse = mean_squared_error(y_test, y_pred)<br /><br />
-            print(f"Mean Squared Error: {mse}")
+            print(f"Mean Squared Error: mse")
           </code>
         </pre>
   

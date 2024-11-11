@@ -1,6 +1,6 @@
 import React from 'react';
 import './Chapters.css';
-const Chapter1 = () => {
+const Lesson1_1 = () => {
   return (
     <div>
       <h1>Глава 1: Введение в аналитику продуктов</h1>

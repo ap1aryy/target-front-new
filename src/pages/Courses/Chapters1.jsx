@@ -8,8 +8,7 @@ import { courseMappings } from './CoursesMapping';
 
 export function Chapters() {
   const navigate = useNavigate();
-  const { index } = useParams();
-  const id = location.state?.courseId;
+   const { courseId, index } = useParams();
  
   const { t, i18n } = useTranslation();
 
@@ -31,9 +30,7 @@ export function Chapters() {
     window.addEventListener('touchend', handleTouchEnd);
 
     const lastCompletedLesson = localStorage.getItem(`chapter_${index}_lastLesson`);
-    if (lastLessonRef.current && lastCompletedLesson) {
-      lastLessonRef.current.scrollIntoView();
-    }
+  
 
     return () => {
       window.removeEventListener('touchstart', handleTouchStart);
@@ -47,21 +44,27 @@ export function Chapters() {
 };
 
  const handleFinishLesson = () => {
-  const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || [];
-  handleClose();
+  const completedChapters = JSON.parse(localStorage.getItem('completedChapters')) || {};
+  
+  // Ensure there is an entry for this courseId
+  if (!completedChapters[courseId]) {
+    completedChapters[courseId] = [];
+  }
 
-  if (!completedChapters.includes(index)) {
-    completedChapters.push(parseInt(index, 10));  // Преобразование в целое число с основанием 10
+  if (!completedChapters[courseId].includes(parseInt(index, 10))) {
+    completedChapters[courseId].push(parseInt(index, 10));
     localStorage.setItem('completedChapters', JSON.stringify(completedChapters));
   }
+
+  handleClose();
 };
 
 const renderLessons = () => {
   const language = i18n.language;
-  const lessonsModule = courseMappings[language]?.[id];
+  const lessonsModule = courseMappings[language]?.[courseId];
 
   if (!lessonsModule) {
-    console.error(`Course with id ${id} not found for language ${language}.`);
+    console.error(`Course with courseId ${courseId} not found for language ${language}.`);
     return null;
   }
 
@@ -72,7 +75,7 @@ const renderLessons = () => {
     .map(key => lessonsModule[key]);
 
   return lessons.map((LessonComponent, i) => (
-    <div key={i} ref={i === lessons.length - 1 ? lastLessonRef : null}>
+    <div key={i} >
       <LessonComponent />
     </div>
   ));

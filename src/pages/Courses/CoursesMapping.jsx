@@ -5,7 +5,7 @@ import * as LessonDataScienceRU from "./Data Science for beginners/Ru";
 import * as LessonDataScienceEN from "./Data Science for beginners/En";
 import * as LessonUXResearchRU from "./Introduction to UX Research/Ru";
 import * as LessonUXResearchEN from "./Introduction to UX Research/En";
-import * as LessonProductAnalyticsRU from "./Product Analytics for beginners/Ru";
+import * as LessonProductAnalyticsRU from "./Product Analytics for beginners/Rus";
 import * as LessonProductAnalyticsEN from "./Product Analytics for beginners/En";
 
 // Маппинг курсов по языкам

@@ -1,5 +1,5 @@
 import './Chapters.css';
-export const Chapter1 = () => {
+export const Lesson1_1 = () => {
 	return (
 		<div>
 			<h1>Chapter 1: Introduction to Product Analytics</h1>

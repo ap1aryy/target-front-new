@@ -139,7 +139,20 @@
   "follow_us": "Следите за нами",
 "follow_our_channel": "Подпишитесь на наш канал",
 "follow_our_channel_desc": "И оставайтесь в курсе всех новых курсов, которые появляются на нашей платформе",
-"Video_count": "Видео уроков"
+"Video_count": "Видео уроков",
+"YouWaitlist":"В вашем списке ожидания",
+"course_tags": {
+      "Digital": "Цифровой",
+      "TON": "TON",
+      "Telegram": "Телеграм",
+      "Managment": "Менеджмент",
+      "Product": "Продукт",
+      "Analytic": "Аналитика",
+      "Beginners": "Для начинающих",
+      "UX": "UX",
+      "Data": "Данные",
+      "TMA": "TMA"
+    }
 }
 
 

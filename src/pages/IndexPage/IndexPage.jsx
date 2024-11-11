@@ -97,7 +97,7 @@ console.log(i18n.language);
               marginBottom:4
             }}
         > {t('Popular_courses')}</Title>
-    {filteredCourses.map(course => (
+    {filteredCourses?.map(course => (
         <Card
           key={course.id}
           style={{
@@ -110,7 +110,7 @@ console.log(i18n.language);
         >
           <img
             alt="Course Image"
-            src={courseConfig[course.id]?.image || "default_image_path_here"}
+            src={courseConfig[course.id]?.img || "default_image_path_here"}
             style={{
               display: 'block',
               height: "170px",
@@ -120,19 +120,34 @@ console.log(i18n.language);
           />
           <Card.Cell readOnly
             subtitle={
+              // <div>
+              //   {t('Course')}
+              //   <div className='card-items-inf'>
+              //     <div>{courseConfig[course.id]?.chapters || "N/A"}</div>
+              //     •
+              //     <div>{courseConfig[course.id]?.videos || "N/A"}</div>
+              //     •
+              //     <div>{courseConfig[course.id]?.duration || "N/A"}</div>
+              //   </div>
+              // </div>
               <div>
-                {t('Course')}
-                <div className='card-items-inf'>
-                  <div>{courseConfig[course.id]?.chapters || "N/A"} chapters</div>
-                  •
-                  <div>{courseConfig[course.id]?.videos || "N/A"} videos</div>
-                  •
-                  <div>{courseConfig[course.id]?.duration || "N/A"}</div>
-                </div>
-              </div>
+  {t('Course')}
+  <div className='card-items-inf'>
+    <div>{courseConfig[course.id]?.chapters || "N/A"}</div>
+    •
+    {courseConfig[course.id]?.videos !== "0 videos" && (
+      <>
+        <div>{courseConfig[course.id].videos}</div>
+        •
+      </>
+    )}
+    <div>{courseConfig[course.id]?.duration || "N/A"}</div>
+  </div>
+</div>
+
             }
           >
-            {course.title}
+          {t(course.id.toString() + '.Course_name')}
           </Card.Cell>
         </Card>
       ))}
@@ -326,7 +341,8 @@ console.log(i18n.language);
                       src="https://i.ibb.co/CtPSccK/photo-2024-11-10-13-12-28.jpg" 
                     />
                   }
-           onClick={() => window.open("https://t.me/thetarget_learning", "_blank")}
+        onClick={() => window.open(i18n.language === 'ru' ? "https://t.me/thetarget_courses_ru" : "https://t.me/thetarget_courses", "_blank")}
+
         >
         </Cell>
       </Section>

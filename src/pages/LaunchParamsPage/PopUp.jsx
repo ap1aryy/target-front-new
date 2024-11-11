@@ -48,9 +48,10 @@ export function PopUp({ course_data, onClose }) {
           } else {
             alert(`Course ${course_data?.title} was added to your account`);
           }
+          window.Telegram.WebApp.MainButton.hide();
           navigate('/');
           handleClose();
-          window.Telegram.WebApp.MainButton.hide();
+          
         });
     } catch (error) {
       console.error("Error during the purchase process:", error);

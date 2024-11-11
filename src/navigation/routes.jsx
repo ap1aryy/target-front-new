@@ -17,5 +17,5 @@ export const routes = [
   { path: '/', Component: IndexPage },
   { path: "/courses/:courseId", Component: CoursePage, title: 'Course' },
   { path: "/enrollments", Component: EnrollmentsPage, title: 'Enroll' },
-    { path: "/courses/chapters/:index", Component: Chapters, title: 'Chapters' },
+  { path: "/courses/:courseId/chapters/:index", Component: Chapters, title: 'Chapters' },
 ];

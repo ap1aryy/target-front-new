@@ -95,12 +95,8 @@ WebApp.BackButton.hide();
 
       <Section
         style={{ height: "100%", margin:" 0 16px 10px 16px"}}
-        >
-   {Array.isArray(courses) && courses.length > 0 &&
-  courses.filter(course => course.my === true) // Only show courses where `my` is true
-          .map((course, index) => (
-            <div>
-        <Cell
+      >
+         <Cell
               description=""
               hint=""
               interactiveAnimation=""
@@ -111,6 +107,11 @@ WebApp.BackButton.hide();
             >
               {t("Enrolled_courses")}
             </Cell>
+   {Array.isArray(courses) && courses.length > 0 &&
+  courses.filter(course => course.my === true) // Only show courses where `my` is true
+          .map((course, index) => (
+            <div>
+       
       <Cell
         style={{border:'none',padding:"10px"}}
         key={index}
@@ -151,7 +152,8 @@ WebApp.BackButton.hide();
           description={<Button style={{borderRadius:40,margin:"8px 0",height:"5vh"}}>{t('follow_us')}</Button>}
           after=''
           
-           onClick={() => window.open("https://t.me/thetarget_learning", "_blank")}
+           onClick={() => window.open(i18n.language === 'ru' ? "https://t.me/thetarget_courses_ru" : "https://t.me/thetarget_courses", "_blank")}
+
         >
           
             </Cell>
