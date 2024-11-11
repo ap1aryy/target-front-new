@@ -88,7 +88,7 @@ const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp *
  const handleJoinWaitlist = async () => {
   if (waitlistRequestSent.current) {
     console.log("Запрос уже отправлен, повторное отправление не требуется");
-    return; // Якщо запит уже був відправлений, не відправляємо його ще раз
+    return; // Якщо запит вже був відправлений, не відправляємо його ще раз
   }
 
   try {
@@ -118,8 +118,25 @@ const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp *
 
   } catch (error) {
     console.error("Ошибка при добавлении в waitlist:", error);
+     window.Telegram.WebApp.MainButton.text = "You in waitlist";
+    // Выводим сообщение об ошибке или другие действия при ошибке
+    if (i18n.language === 'ru') {
+     alert(`Курс ${course_data?.title} был добавлен в список ожиданий`);
+    } else {
+       alert(`Course ${course_data?.title} was added to your Waitlist`);
+    }
+  } finally {
+    // В любом случае вызываем handleOpenPopUp, даже если произошла ошибка
+         window.Telegram.WebApp.MainButton.text = "You in waitlist";
+if (i18n.language === 'ru') {
+     alert(`Курс ${course_data?.title} был добавлен в список ожиданий`);
+    } else {
+       alert(`Course ${course_data?.title} was added to your Waitlist`);
+    }
   }
 };
+
+
 const handleOpenChapters = (index) => {
     setSelectedChapterIndex(index); // Set the selected chapter index
     navigate(`/courses/${course.id}/chapters/${index}`); // Navigate to the chapter page
