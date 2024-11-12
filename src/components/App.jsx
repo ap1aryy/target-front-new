@@ -48,7 +48,7 @@ export function App() {
           console.log(user)
           setInitData(window.Telegram.WebApp.initData)
 
-          amplitude.setUserId(user.first_name);
+          amplitude.setUserId(user.id);
 
           const open_mini_app = {
             tg_id: user.id,
