@@ -45,7 +45,6 @@ export function App() {
         
         if (user) {
           setUser({ ...user, startappParams });
-          console.log(user)
           setInitData(window.Telegram.WebApp.initData)
 
          amplitude.setUserId(user.username && user.username !== "" ? user.username : user.id);
