@@ -44,7 +44,7 @@ export function App() {
         const startappParams = urlParams.get("tgWebAppStartParam");
         
         if (user) {
-          setUser(user);
+          setUser({ ...user, startappParams });
           console.log(user)
           setInitData(window.Telegram.WebApp.initData)
 

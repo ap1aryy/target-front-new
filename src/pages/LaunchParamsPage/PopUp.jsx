@@ -56,7 +56,7 @@ export function PopUp() {
   const price = selectedPlan.price;
   amplitude.track({ event_type: 'click_buy', price });
   try {
-    const result = await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type, async () => {
+    const result = await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type,user.startappParams, async () => {
           if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.MainButton) {
             window.Telegram.WebApp.MainButton.hide();
              window.Telegram.WebApp.MainButton.text = "You have new course!";
