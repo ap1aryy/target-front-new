@@ -27,17 +27,16 @@ export function PopUp() {
   window.Telegram.WebApp.MainButton.hide();
 
   useEffect(() => {
-    // Добавляем обработчик на BackButton при монтировании компонента
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.BackButton) {
       window.Telegram.WebApp.BackButton.onClick(handleClose);
-      window.Telegram.WebApp.BackButton.show(); // Показываем кнопку назад, если она скрыта
+      window.Telegram.WebApp.BackButton.show();
     }
 
-    // Очищаем обработчик при размонтировании компонента
+
     return () => {
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.BackButton) {
         window.Telegram.WebApp.BackButton.offClick(handleClose);
-        window.Telegram.WebApp.BackButton.hide(); // Скрываем кнопку назад при закрытии компонента
+        window.Telegram.WebApp.BackButton.hide();
       }
     };
   }, []);
@@ -50,45 +49,35 @@ export function PopUp() {
   const handlePlanSelect = (option) => {
     amplitude.track('select_plan');
     setSelectedPlan(option);
-    setStage(3); // Skip directly to the payment confirmation stage
+    setStage(3); 
   };
 
   const handleConfirmPurchase = async () => {
   const price = selectedPlan.price;
-  amplitude.track('click_buy');
+  amplitude.track({ event_type: 'click_buy', price });
   try {
-    // Генерація інвойсу
     const result = await generateInvoice(user.id, course_data.id, price, invoiceGenerated, selectedPlan.type, async () => {
           if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.MainButton) {
             window.Telegram.WebApp.MainButton.hide();
              window.Telegram.WebApp.MainButton.text = "You have new course!";
           }
-      // Отримання списку курсів
       try {
+        
         const courses = await getAllCourses(user.id);
 
-        // Знайти курс за ID з отриманого списку
         const courseDetails = courses.find(course => course.id === course_data.id);
-        
         if (!courseDetails) {
           console.error("Course not found");
           return;
         }
 
-        // Повідомлення користувачу
       if (i18n.language === 'ru') {
         alert(`${t(course_data.id.toString() + '.Course_name')} был добавлен в ваш аккаунт`);
       } else {
         alert(`${t(course_data.id.toString() + '.Course_name')} was added to your account`);
       }
 
-
-        // Оновлення стану на тій самій сторінці
-       
-        amplitude.track('succusses_buy');
-        // Оновлюємо стан, не змінюючи URL
         navigate(`/courses/${course_data.id}`, { state: { course: courseDetails } });
-
 
       } catch (error) {
         console.error("Error fetching courses:", error);
@@ -108,7 +97,6 @@ export function PopUp() {
           <Section style={{ marginTop: 8 }}>
             <Cell subhead={t('Course_name')} style={{ pointerEvents: 'none', border: 'none', marginBottom: 5 }} children={`${t(course_data.id.toString() + '.Course_name')}`} />
 
-            {/* Conditionally render the selectedPlan cell */}
             {stage > 1 && selectedPlan ? (
               <Cell style={{ borderColor: 'hsl(0deg 0% 0% / 0%)' }}
                 className='custom-cell'
@@ -129,7 +117,6 @@ export function PopUp() {
             ) : null}
           </Section>
 
-          {/* Stage 1: Select Plan */}
           {stage === 1 && (
             <div>
               <Text weight="1">{t("Plan")}</Text>
@@ -157,7 +144,6 @@ export function PopUp() {
             </div>
           )}
 
-          {/* Stage 3: Confirm and Pay */}
           {stage === 3 && (
             <div>
               <Button

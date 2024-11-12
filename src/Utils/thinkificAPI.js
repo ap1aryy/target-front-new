@@ -78,9 +78,17 @@ export const generateInvoice = async (
 
     const invoiceLink = response.data;
 
-    // Открытие инвойса в Telegram
     window.Telegram.WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === "paid") {
+        const purchaseDetails = {
+          event_type: "purchase",
+          user_id: userId,
+          cost: count,
+          course_id: appId,
+          type: type,
+        };
+
+        amplitude.track(purchaseDetails);
         if (onSuccess) {
           onSuccess();
         }

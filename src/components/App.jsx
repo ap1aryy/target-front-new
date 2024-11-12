@@ -48,6 +48,15 @@ export function App() {
           console.log(user)
           setInitData(window.Telegram.WebApp.initData)
 
+          amplitude.setUserId(user.first_name);
+
+          const open_mini_app = {
+            tg_id: user.id,
+            utm_source: startappParams || null,
+            username: user.first_name
+          };
+          amplitude.track("open_mini_app", open_mini_app);
+
           const userLanguage = user.language_code || 'en';
           i18n.changeLanguage(userLanguage);
         } else {
@@ -64,12 +73,6 @@ export function App() {
           console.log(startappParams)
           await saveSource(user.id,startappParams)
         }
-       const open_mini_app = {
-          user_id: user.id,
-          source: startappParams || null // Если startappParams отсутствует или undefined, будет null
-        };
-
-        amplitude.track(open_mini_app);
 
       }
     };
