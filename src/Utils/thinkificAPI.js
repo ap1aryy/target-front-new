@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as amplitude from "@amplitude/analytics-browser";
 const BASE_URL = "https://mini-app-back.friendsdao.com/dev";
 const courses_data = [
   {
@@ -110,24 +111,23 @@ export const generateInvoice = async (
     );
 
     const invoiceLink = response.data;
-    const courseData = courses_data.find((item) => item.id === appId);
-    const eventOptions = {
-      time: Date.now(),
-    };
-    const purchaseDetails = {
-      event_type: "purchase",
-      user_id: userId,
-      price: count,
-      course: {
-        course_id: appId,
-        type: type,
-        name: courseData.title,
-      },
-    };
 
-    amplitude.track("purchase", purchaseDetails, eventOptions);
     window.Telegram.WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === "paid") {
+        const courseData = courses_data.find((item) => item.id === appId);
+        const eventOptions = {
+          time: Date.now(),
+        };
+        const purchaseDetails = {
+          event_type: "purchase",
+          userId: userId,
+          price: count,
+          productId: appId,
+          productTitle: courseData.title,
+          type: type,
+        };
+
+        amplitude.track("purchase", purchaseDetails, eventOptions);
         if (onSuccess) {
           onSuccess();
         }
