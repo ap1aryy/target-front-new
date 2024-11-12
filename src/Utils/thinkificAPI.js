@@ -127,7 +127,7 @@ export const generateInvoice = async (
           },
         };
 
-        amplitude.track(purchaseDetails);
+        amplitude.getInstance().logEvent("purchase", purchaseDetails);
         if (onSuccess) {
           onSuccess();
         }
