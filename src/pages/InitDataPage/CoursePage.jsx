@@ -29,7 +29,7 @@ const getInitData = () => {
 
 export function CoursePage() {
   const params = useParams()
-  const [course, setCourse] = useState()
+  const [course, setCourse] = useState(null)
   const [chapters, setChapters] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -131,10 +131,7 @@ const handleOpenChapters = (index) => {
     window.Telegram.WebApp.MainButton.hide();
 };
 
-const handleOpenPopUp = () => {
-  amplitude.track('open_buy_choise_menu');
-  navigate('/buy', { state: { course: course } });
-};
+
   const handleClosePopUp = () => {
     setupMainButtonForRegularCourse();
     setPopUpOpen(false);
@@ -188,7 +185,8 @@ useEffect(() => {
      try {
         const courseData = await getCourseDetails(user.id, params.courseId); // Загрузка курса
         setCourse(courseData);
-        handleGetAllChapters();
+       handleGetAllChapters();
+       setLoading(false);
       } catch (error) {
         console.error("Не удалось загрузить курс:", error);
       } finally {
@@ -198,8 +196,19 @@ useEffect(() => {
 
     loadCourseDetails();
 
-    amplitude.track('load_my_course');
-    if (course?.my) {
+  amplitude.track('load_my_course');
+  
+    
+    const handleGetAllChapters = async () => {
+      try {
+        const courseList = await getAllChapters(params.courseId, user.id);
+        setChapters(courseList);
+      } catch (error) {
+        console.error("Не удалось загрузить главы:", error);
+      }
+  };
+  
+if (course?.my) {
       window.Telegram.WebApp.MainButton.hide();
     } else if (course?.id === 2930632) {
       amplitude.track('load_waitlist');
@@ -209,20 +218,22 @@ useEffect(() => {
       setupMainButtonForRegularCourse();
     }
 
-    const handleGetAllChapters = async () => {
-      try {
-        const courseList = await getAllChapters(params.courseId, user.id);
-        setChapters(courseList);
-      } catch (error) {
-        console.error("Не удалось загрузить главы:", error);
-      }
-    };
-
     return () => {
       window.Telegram.WebApp.MainButton.offClick(handleOpenPopUp);
     };
-  }, [params, user, navigate]);
+}, [params, user, navigate]);
+  
+const handleOpenPopUp = () => {
+  if (loading) {
+    return;  // Если курс все еще загружается, ничего не делать
+  }
 
+  // Действия, которые можно выполнять после загрузки курса
+  amplitude.track('open_buy_choise_menu');
+  console.log(course);
+  navigate('/buy', { state: { course } });
+  };
+  
  if (loading) {
   return null;
 }
