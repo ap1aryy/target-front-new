@@ -281,9 +281,16 @@ const handleOpenPopUp = () => {
         <Card>
           <Cell multiline subhead={t('Description')} children={t(course?.id.toString() + '.Description')}  />
           <Divider />
-          {course?.id ==2925675 &&<><Cell multiline subhead={t('Video_lan')} children="English" />
+          {course?.id == 2925675 && <><Cell multiline subhead={t('Video_lan')} children="English" />
+         
            <Divider/>
             <Cell multiline subhead={t('Video_dur')} children={t('Video_val')} />
+          </>
+          }
+          {course?.id == 2926478 && <><Cell multiline subhead={t('Video_lan')} children="Russian" />
+         
+           <Divider/>
+            <Cell multiline subhead={t('Video_dur')} children={t('Video_val2')} />
           </>
           }
         </Card>
