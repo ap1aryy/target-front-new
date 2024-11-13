@@ -8,7 +8,7 @@ import { UserContext } from '@/contexts/UserContext';
 
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
-
+import { courseConfig } from '@/Utils/Constants';
 import { EnrolledPopUp } from './EnrolledPopUp';
 import { CoursesContext } from '@/contexts/CoursesContext';
 import * as amplitude from '@amplitude/analytics-browser';
@@ -53,45 +53,6 @@ WebApp.BackButton.hide();
     setIsPopUpOpen(false);
   };
 
-  const courseConfig  = {
-    "2925675": {
-      img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
-      chapters: "9 chapters",
-      videos: "32 videos",
-      duration: "15 hours"
-    },
-    "2926478": {
-      img: "ProProduct",
-      chapters: "3 chapters",
-      videos: "0 videos",
-      duration: "3.5 hours"
-    },
-    "2930629": {
-      img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    "2930630": {
-      img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    "2930631": {
-      img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    "2930632": {
-      img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    // Добавьте данные для других курсов здесь
-  };
 
   return (
     <div>

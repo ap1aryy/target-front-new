@@ -36,13 +36,20 @@
         }
       },
       "2926478": {
-        "Course_name": "ProProducts",
-        "Description": "Learn essential skills in product management, from market research and product strategy to development and launch. This course covers key concepts, tools, and best practices to manage product life cycles, drive innovation, and meet customer needs.",
-        "chapters": {
-          "1": "1. Introduction to Product Management",
-          "2": "2. Market Research and Product Strategy",
-          "3": "3. Product Development and Launch"
-        }
+          "Course_name": "Transform Your Body in 21 Days",
+          "Description": "An online training and nutrition program by a professional trainer and nutritionist. Improve your physical fitness.",
+          "chapters": {
+              "1": "1. Full-Body Workout with Resistance Bands",
+              "2": "2. Roller Workout",
+              "3": "3. Dumbbell Circuit Training",
+              "4": "4. Functional Training",
+              "5": "5. Dumbbell Intensive",
+              "6": "6. Core Workout",
+              "7": "7. Strength Training",
+              "8": "8. Coordination Training",
+              "9": "9. 20-Minute Dumbbell Circuit"
+          }
+
       },
       "2930629": {
         "Course_name": "Product Analytics for Beginners",
@@ -154,7 +161,9 @@
       "Beginners": "Beginners",
       "UX": "UX",
       "Data": "Data",
-      "TMA": "TMA"
+      "TMA": "TMA",
+      "Fitness": "Fitness",
+      "Training": "Training"
     }
 }
 

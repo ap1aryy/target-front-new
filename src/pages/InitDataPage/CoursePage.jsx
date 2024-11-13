@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect, useRef } from 'react';
 import './p.css'
 import { UserContext } from '@/contexts/UserContext';
-import { getAllChapters } from '@/Utils/thinkificAPI';
+import { getAllChapters, getCourseDetails } from '@/Utils/thinkificAPI';
 import { PopUp } from '../LaunchParamsPage/PopUp';
 import { Chapters } from '../Courses/Chapters1';
 import { Icon24Clock, Icon20PlayCircle, Icon16StarAlt , Icon24Message,Icon16CheckCircleLarge} from '@vkontakte/icons';
@@ -16,6 +16,7 @@ import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import * as amplitude from '@amplitude/analytics-browser';
+import { courseConfig } from '@/Utils/Constants';
 /**
  * @returns {JSX.Element}
  */
@@ -27,51 +28,20 @@ const getInitData = () => {
 };
 
 export function CoursePage() {
-  const location = useLocation();
-  const course = location.state?.course;
+  const params = useParams()
+  const [course, setCourse] = useState()
   const [chapters, setChapters] = useState([]);
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const [isWaitList, setIsWaitList] = useState(false);
   const [selectedChapterIndex, setSelectedChapterIndex] = useState(null);
  const { t, i18n  } = useTranslation();
   const waitlistRequestSent = useRef(false);
+const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/");
-      return;
-    }
-    amplitude.track('load_my_course');
-    if (course.my) {
-      window.Telegram.WebApp.MainButton.hide();
-    } else if (course.id === 2930632) {
-      amplitude.track('load_waitlist');
-      setIsWaitList(true)
-      setupMainButtonForWaitlist();
-    } else {
-      setupMainButtonForRegularCourse();
-    }
-    const handleGetAllChapters = async () => {
-      try {
-        const courseList = await getAllChapters(course.id, user.id);
-        setChapters(courseList);
-      } catch (error) {
-        console.error("Не удалось загрузить главы:", error);
-      }
-    };
-
-   
-    handleGetAllChapters();
-
-    return () => {
-      window.Telegram.WebApp.MainButton.offClick(handleOpenPopUp);
-    };
-  }, [course.id, user, navigate]);
-const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp * 1000), "dd.MM.yyyy HH:mm") : null;
- const setupMainButtonForWaitlist = () => {
-    if (course.my) {
+  const setupMainButtonForWaitlist = () => {
+    if (course?.my) {
       window.Telegram.WebApp.MainButton.text = "You in waitlist";
       window.Telegram.WebApp.MainButton.show();
       window.Telegram.WebApp.MainButton.onClick(null);
@@ -83,17 +53,25 @@ const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp *
       window.Telegram.WebApp.MainButton.onClick(handleJoinWaitlist);
     }
   };
-  const starIconSvg = `
-<svg width="14" height="15" viewBox="0 0 14 15" fill="#24A1DE" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.63869 12.1902L3.50621 14.1092C3.18049 14.3087 2.75468 14.2064 2.55515 13.8807C2.45769 13.7216 2.42864 13.5299 2.47457 13.3491L2.95948 11.4405C3.13452 10.7515 3.60599 10.1756 4.24682 9.86791L7.6642 8.22716C7.82352 8.15067 7.89067 7.95951 7.81418 7.80019C7.75223 7.67116 7.61214 7.59896 7.47111 7.62338L3.66713 8.28194C2.89387 8.41581 2.1009 8.20228 1.49941 7.69823L0.297703 6.69116C0.00493565 6.44581 -0.0335059 6.00958 0.211842 5.71682C0.33117 5.57442 0.502766 5.48602 0.687982 5.47153L4.35956 5.18419C4.61895 5.16389 4.845 4.99974 4.94458 4.75937L6.36101 1.3402C6.5072 0.987302 6.91179 0.819734 7.26469 0.965925C7.43413 1.03612 7.56876 1.17075 7.63896 1.3402L9.05539 4.75937C9.15496 4.99974 9.38101 5.16389 9.6404 5.18419L13.3322 5.47311C13.713 5.50291 13.9975 5.83578 13.9677 6.2166C13.9534 6.39979 13.8667 6.56975 13.7269 6.68896L10.9114 9.08928C10.7131 9.25826 10.6267 9.52425 10.6876 9.77748L11.5532 13.3733C11.6426 13.7447 11.414 14.1182 11.0427 14.2076C10.8642 14.2506 10.676 14.2208 10.5195 14.1249L7.36128 12.1902C7.13956 12.0544 6.8604 12.0544 6.63869 12.1902Z" fill="000"></path>
-</svg>
-`;
+  
   const setupMainButtonForRegularCourse = () => {
     if(window.Telegram.WebApp.MainButton.text != "You have new course!"){
     window.Telegram.WebApp.MainButton.text = t("get_course_from");
     window.Telegram.WebApp.MainButton.show();
     window.Telegram.WebApp.MainButton.onClick(handleOpenPopUp);}
   };
+  
+  
+
+
+
+const formattedTimestamp = course?.timestamp ? format(new Date(course?.timestamp * 1000), "dd.MM.yyyy HH:mm") : null;
+  const starIconSvg = `
+<svg width="14" height="15" viewBox="0 0 14 15" fill="#24A1DE" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.63869 12.1902L3.50621 14.1092C3.18049 14.3087 2.75468 14.2064 2.55515 13.8807C2.45769 13.7216 2.42864 13.5299 2.47457 13.3491L2.95948 11.4405C3.13452 10.7515 3.60599 10.1756 4.24682 9.86791L7.6642 8.22716C7.82352 8.15067 7.89067 7.95951 7.81418 7.80019C7.75223 7.67116 7.61214 7.59896 7.47111 7.62338L3.66713 8.28194C2.89387 8.41581 2.1009 8.20228 1.49941 7.69823L0.297703 6.69116C0.00493565 6.44581 -0.0335059 6.00958 0.211842 5.71682C0.33117 5.57442 0.502766 5.48602 0.687982 5.47153L4.35956 5.18419C4.61895 5.16389 4.845 4.99974 4.94458 4.75937L6.36101 1.3402C6.5072 0.987302 6.91179 0.819734 7.26469 0.965925C7.43413 1.03612 7.56876 1.17075 7.63896 1.3402L9.05539 4.75937C9.15496 4.99974 9.38101 5.16389 9.6404 5.18419L13.3322 5.47311C13.713 5.50291 13.9975 5.83578 13.9677 6.2166C13.9534 6.39979 13.8667 6.56975 13.7269 6.68896L10.9114 9.08928C10.7131 9.25826 10.6267 9.52425 10.6876 9.77748L11.5532 13.3733C11.6426 13.7447 11.414 14.1182 11.0427 14.2076C10.8642 14.2506 10.676 14.2208 10.5195 14.1249L7.36128 12.1902C7.13956 12.0544 6.8604 12.0544 6.63869 12.1902Z" fill="000"></path>
+</svg>
+`;
+  
  const handleJoinWaitlist = async () => {
   if (waitlistRequestSent.current) {
     console.log("Запрос уже отправлен, повторное отправление не требуется");
@@ -103,7 +81,7 @@ const formattedTimestamp = course.timestamp ? format(new Date(course.timestamp *
   try {
     const response = await axios.post(
       `${BASE_URL}/enroll`,
-      { user_id: user.id, app_id: course.id, count: 1 },
+      { user_id: user.id, app_id: course?.id, count: 1 },
       {
         params: { type: 3 },
         headers: { User: getInitData() },
@@ -149,7 +127,7 @@ if (i18n.language === 'ru') {
 const handleOpenChapters = (index) => {
   amplitude.track('open_chapters');
     setSelectedChapterIndex(index); // Set the selected chapter index
-    navigate(`/courses/${course.id}/chapters/${index}`); // Navigate to the chapter page
+    navigate(`/courses/${course?.id}/chapters/${index}`); // Navigate to the chapter page
     window.Telegram.WebApp.MainButton.hide();
 };
 
@@ -171,7 +149,7 @@ const handleOpenPopUp = () => {
 };
  const courseTagsConfig = {
   "2925675": ["Digital", "TON", "Telegram"],
-  "2926478": ["Managment", "Product"],
+  "2926478": ["Fitness", "Training"],
   "2930629": ["Analytic", "Beginners"],
   "2930630": ["Digital", "UX"],
   "2930631": ["Digital", "Beginners", "Data"],
@@ -194,50 +172,66 @@ const getTranslatedTags = (courseId) => {
     return () => WebApp.BackButton.offClick(onClick);
   }, [navigate]);
   
-  const courseConfig  = {
-    "2925675": {
-      img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
-      chapters: "9 chapters",
-      videos: "32 videos",
-      duration: "15 hours"
-    },
-    "2926478": {
-      img: "ProProduct",
-      chapters: "3 chapters",
-      videos: "0 videos",
-      duration: "3.5 hours"
-    },
-    "2930629": {
-      img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    "2930630": {
-      img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    "2930631": {
-      img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    "2930632": {
-      img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
-      chapters: "5 chapters",
-      videos: "0 videos",
-      duration: "6 hours"
-    },
-    // Добавьте данные для других курсов здесь
-  };
+useEffect(() => {
+    if (!user) {
+      navigate("/");
+      return;
+    }
+   if (user.courseIdLink) {
+      setUser({
+        ...user,  // Preserve other user properties
+        courseIdLink: null,  // Set courseIdLink to null
+      });
+    }
+    // Функція для завантаження курсу
+    const loadCourseDetails = async () => {
+     try {
+        const courseData = await getCourseDetails(user.id, params.courseId); // Загрузка курса
+        setCourse(courseData);
+        handleGetAllChapters();
+      } catch (error) {
+        console.error("Не удалось загрузить курс:", error);
+      } finally {
+        setLoading(false); // Снимаем состояние загрузки
+      }
+    };
+
+    loadCourseDetails();
+
+    amplitude.track('load_my_course');
+    if (course?.my) {
+      window.Telegram.WebApp.MainButton.hide();
+    } else if (course?.id === 2930632) {
+      amplitude.track('load_waitlist');
+      setIsWaitList(true);
+      setupMainButtonForWaitlist();
+    } else {
+      setupMainButtonForRegularCourse();
+    }
+
+    const handleGetAllChapters = async () => {
+      try {
+        const courseList = await getAllChapters(params.courseId, user.id);
+        setChapters(courseList);
+      } catch (error) {
+        console.error("Не удалось загрузить главы:", error);
+      }
+    };
+
+    return () => {
+      window.Telegram.WebApp.MainButton.offClick(handleOpenPopUp);
+    };
+  }, [params, user, navigate]);
+
+ if (loading) {
+  return null;
+}
+
   return (
     <div>
       <div style={{ width: "100%", maxWidth: "500px", overflow: "hidden", margin: "-2vh 0 auto" }}>
         <img
-         src={courseConfig[course.id]?.img || "default_image_path_here"}
+         src={courseConfig[course?.id]?.img || "default_image_path_here"}
           width="100%"
           height="150px"
           style={{ objectFit: "cover", display: "block" }}
@@ -246,18 +240,18 @@ const getTranslatedTags = (courseId) => {
 
       <List style={{padding: "10px 10px"}}>
         <Title level="1" weight="2">
-          {t(course.id.toString() + '.Course_name')}
+          {t(course?.id.toString() + '.Course_name')}
         </Title>
         <Text weight="3">{t('Course')}</Text>
 
        <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-  {getTranslatedTags(course.id).map((translatedTag, index) => (
+  {getTranslatedTags(course?.id).map((translatedTag, index) => (
           <Chip key={index} mode="mono">{translatedTag}</Chip>
         ))}
 </div>
 
         {/* If the course belongs to the user, show validity date */}
-        {course.my && course.type == 1 && (
+        {course?.my && course?.type == 1 && (
           <Section style={{ marginTop: 8 }}>
             <Cell
                              style={{ pointerEvents: 'none' }} 
@@ -270,9 +264,9 @@ const getTranslatedTags = (courseId) => {
         )}
 
         <Card>
-          <Cell multiline subhead={t('Description')} children={t(course.id.toString() + '.Description')}  />
+          <Cell multiline subhead={t('Description')} children={t(course?.id.toString() + '.Description')}  />
           <Divider />
-          {course.id ==2925675 &&<><Cell multiline subhead={t('Video_lan')} children="English" />
+          {course?.id ==2925675 &&<><Cell multiline subhead={t('Video_lan')} children="English" />
            <Divider/>
             <Cell multiline subhead={t('Video_dur')} children={t('Video_val')} />
           </>
@@ -281,7 +275,7 @@ const getTranslatedTags = (courseId) => {
 
         <Text weight="1">{t('Chapters')}</Text>
 
-        {course?.my && course.id != 2930632 ? (
+        {course?.my && course?.id != 2930632 ? (
           <div>
             <Section style={{ marginTop: 8 }}>
              {chapters.map((chapter, index) => (
@@ -299,7 +293,7 @@ const getTranslatedTags = (courseId) => {
       >
         {t('Open')} {/* Кнопка открытия */}
       </Button>
-       {isChapterCompleted(course.id,index + 1) && (
+       {isChapterCompleted(course?.id,index + 1) && (
         <>
           <Icon16StarAlt style={{ marginLeft: '8px' ,marginTop: 8 }} />
           <Text style={{ marginLeft: '8px', fontSize: '14px' ,marginTop: 8 }}>{t('Completed')}</Text>
@@ -308,7 +302,7 @@ const getTranslatedTags = (courseId) => {
       </div>
     }
   >
-    {t(course.id.toString() + "." + "chapters." + chapter.id)} {/* Замените на нужный ключ перевода */}
+    {t(course?.id.toString() + "." + "chapters." + chapter.id)} {/* Замените на нужный ключ перевода */}
   </Cell>
 ))}
             </Section>
@@ -323,14 +317,14 @@ const getTranslatedTags = (courseId) => {
       return (
         <div key={index}>
           <Cell
-           style={{ pointerEvents: course.id === 2930632 ? "none" : "auto" }}
+           style={{ pointerEvents: course?.id === 2930632 ? "none" : "auto" }}
 
             subhead={`${t('Chapter')} ${index + 1}`}
-            children={t(course.id.toString() + "." + "chapters." + chapter.id)} 
+            children={t(course?.id.toString() + "." + "chapters." + chapter.id)} 
             subtitle={<div>
                 <div className='card-items-inf'>
                   <div>{`${t('Less_len')} ${chapter.chapter_item_id}`}</div>
-                 {course.id === 2925675 && (
+                 {course?.id === 2925675 && (
   <>
     •<div>{`${t('Video_count')} ${videoCount}`}</div>
   </>
@@ -382,7 +376,7 @@ const getTranslatedTags = (courseId) => {
         )} */}
 
     
-       {course.id === 2930632 && course.my &&  <FixedLayout style={{
+       {course?.id === 2930632 && course?.my &&  <FixedLayout style={{
       padding: 16
     }}>
         <Button size="l" stretched>

@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
-
+import { courseConfig } from '@/Utils/Constants';
 import { getAllCourses } from '@/Utils/thinkificAPI';
 
 import {Icon20ChevronRightOutline, Icon20FireAltOutline, Icon24Clock } from '@vkontakte/icons';
@@ -26,49 +26,17 @@ export function IndexPage() {
   const navigate = useNavigate()
   window.Telegram.WebApp.MainButton.hide(); 
 window.Telegram.WebApp.MainButton.text = t("get_course_from");
-  const courseConfig  = {
-    "2925675": {
-      img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
-      chapters: "9 ",
-      videos: "32 ",
-      duration: "15 "
-    },
-    "2926478": {
-      img: "ProProduct",
-      chapters: "3 ",
-      videos: "0 ",
-      duration: "3.5 "
-    },
-    "2930629": {
-      img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
-      chapters: "5 ",
-      videos: "0 ",
-      duration: "6 "
-    },
-    "2930630": {
-      img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
-      chapters: "5 ",
-      videos: "0 ",
-      duration: "6 "
-    },
-    "2930631": {
-      img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
-      chapters: "5 ",
-      videos: "0 ",
-      duration: "6 "
-    },
-    "2930632": {
-      img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
-      chapters: "5 ",
-      videos: "0 ",
-      duration: "6 "
-    },
-    // Добавьте данные для других курсов здесь
-  };
   
 const MAX_RETRY_ATTEMPTS = 3;
   const RETRY_INTERVAL = 2000;
-  
+    
+  useEffect(() => {
+    console.log(user.courseIdLink)
+    if (courseConfig[user.courseIdLink]) {
+        navigate(`/courses/${user.courseIdLink}`);
+      }
+  }, [user]);
+
  useEffect(() => {
     if (!user?.id) return; // Пропустить попытку, если user.id нет
 
@@ -95,10 +63,10 @@ const MAX_RETRY_ATTEMPTS = 3;
   
   const handleGoToCourse = (course) => {
     amplitude.track('open_best_choise');
-        navigate(`/courses/${course.id}`, { state: { course } });
+        navigate(`/courses/${course.id}`);
   }
  WebApp.BackButton.isVisible && WebApp.BackButton.hide();
- const filteredCourses = courses?.filter(course => course.id !== 2926478);
+ const filteredCourses = courses?.filter(course => course.id !== 0);
 
 
 console.log(i18n.language); 

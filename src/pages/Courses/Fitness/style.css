@@ -1,0 +1,94 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000;
+    /* Поверх другого контента */
+}
+
+.popup-menu2 {
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: var(--tg-theme-secondary-bg-color, white);
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    /* Немного меньше ширины экрана */
+    height: 100%;
+    position: static;
+
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+
+/* styles.css */
+li {
+    font-family: var(--tgui--font-family);
+    margin-top: 16px;
+}
+
+h1 {
+    font-family: var(--tgui--font-family);
+    margin-top: 16px;
+
+}
+
+h2 {
+    font-family: var(--tgui--font-family);
+    margin-top: 16px;
+
+}
+
+h3 {
+    font-family: var(--tgui--font-family);
+    margin-top: 16px;
+}
+
+h4 {
+    font-family: var(--tgui--font-family);
+    margin-top: 16px;
+}
+
+h5 {
+    font-family: var(--tgui--font-family);
+    margin-top: 16px;
+}
+
+h6 {
+    font-family: var(--tgui--font-family);
+    margin-top: 16px;
+}
+
+p {
+    font-family: var(--tgui--font-family);
+    margin-top: 8px;
+}
+
+pre {
+    overflow-x: auto !important;
+    width: 100%;
+    word-wrap: break-word;
+    /* Это гарантирует, что длинные слова будут переноситься */
+    word-break: break-word;
+}
+
+code {
+    overflow-x: auto !important;
+    width: 100%;
+    word-wrap: break-word;
+    /* Это гарантирует, что длинные слова будут переноситься */
+    word-break: break-word;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}

@@ -28,8 +28,7 @@ amplitude.init('f926c299b1144dfdd6fa169502f4ac25', {"autocapture":true});
  */
 export function App() {
   const { i18n } = useTranslation();
-
-  const {setInitData, setUser }= useContext(UserContext);
+  const {setInitData, setUser, user }= useContext(UserContext);
   useEffect(() => {
    
 
@@ -39,24 +38,30 @@ export function App() {
         window.Telegram.WebApp.isClosingConfirmationEnabled = true; 
 
         const webAppData = window.Telegram.WebApp.initDataUnsafe;
-        const user = webAppData.user;
+        const tg_user = webAppData.user;
         const urlParams = new URLSearchParams(window.location.search);
         const startappParams = urlParams.get("tgWebAppStartParam");
-        
-        if (user) {
-          setUser({ ...user, startappParams });
+        const parsedParams = parseStartAppParams(startappParams || null);
+       if (tg_user) {
+          setUser({
+            ...tg_user,  // Preserve other user properties
+            startappParams: parsedParams?.source,  
+            courseIdLink: parsedParams?.course ,  // Set courseIdLink to null
+          });
+          }
+          console.log(user)
           setInitData(window.Telegram.WebApp.initData)
 
-         amplitude.setUserId(user.username && user.username !== "" ? user.username : user.id);
+         amplitude.setUserId(tg_user.username && tg_user.username !== "" ? tg_user.username : tg_user.id);
 
           const open_mini_app = {
-            tg_id: user.id,
-            utm_source: startappParams || null,
-            username: user.first_name
+            tg_id: tg_user.id,
+            utm_source: parsedParams?.source || null,
+            username: tg_user.first_name
           };
           amplitude.track("open_mini_app", open_mini_app);
 
-          const userLanguage = user.language_code || 'en';
+          const userLanguage = tg_user.language_code || 'en';
           i18n.changeLanguage(userLanguage);
         } else {
           const defaultUser = {
@@ -68,16 +73,33 @@ export function App() {
           };
           setUser(defaultUser);
         }
-        if (startappParams) {
+        if (parsedParams?.source) {
           console.log(startappParams)
-          await saveSource(user.id,startappParams)
+          await saveSource(tg_user.id,parsedParams?.source)
         }
-
-      }
+       
     };
     initializeTelegramWebApp();
   }, [setUser]);
   
+  function parseStartAppParams(startappParams) {
+    if (!startappParams){
+      return null
+    }
+    const params = startappParams.split('_');  // Split by underscore to separate course and source
+    const result = {};
+
+    params.forEach(param => {
+      const [key, value] = param.split('-');
+      if (key && value) {
+        result[key] = value;
+      }
+    });
+
+    return result;
+  }
+
+
 const platform = WebApp.platform;
   const appearance = WebApp.colorScheme;
   return (
