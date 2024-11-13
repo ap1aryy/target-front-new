@@ -95,9 +95,9 @@ export const courseConfig  = {
     },
     "2926478": {
       img: "https://i.postimg.cc/yN5FN1Rx/photo-2024-11-13-21-10-14.jpg",
-      chapters: "3 ",
-      videos: "0 ",
-      duration: "3.5 "
+      chapters: "9 ",
+      videos: "9 ",
+      duration: "4.5"
     },
     "2930629": {
       img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
