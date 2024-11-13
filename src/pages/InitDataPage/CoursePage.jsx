@@ -208,7 +208,11 @@ useEffect(() => {
       }
   };
   
-if (course?.my) {
+  
+}, [params, user, navigate]);
+  
+  useEffect(() => {
+   if (course?.my) {
       window.Telegram.WebApp.MainButton.hide();
     } else if (course?.id === 2930632) {
       amplitude.track('load_waitlist');
@@ -221,7 +225,7 @@ if (course?.my) {
     return () => {
       window.Telegram.WebApp.MainButton.offClick(handleOpenPopUp);
     };
-}, [params, user, navigate]);
+}, [course]);
   
 const handleOpenPopUp = () => {
   if (loading) {
