@@ -6,35 +6,92 @@ export const options = [
 export const mentors = [
     { name: "David Kruel", status: "1", price: 1, company: "Kruel Live" }, // Add price for mentor selection
 ];
-
-export const course = [
+export const CoursesData = [
   {
     id: 2925675,
     title: "Курс по TON блокчейну и Телеграм",
     description: "Курс предназначен для разработчиков и IT-специалистов. Он даёт теоретические и практические знания о технологиях и концепциях блокчейна TON, включая язык программирования FunC, смарт-контракты и их тестирование, а также создание мини-приложений.",
     slug: "my-course",
+    chapters: [
+      "1. Introduction to TON Blockchain",
+      "2. TVM, Transactions, Scalability, and Business Cases",
+      "3. Smart Contract Development Lifecycle",
+      "4. Mastering FunC Contract Writing",
+      "5. Frontend Interaction with TON Blockchain",
+      "6. Creating Telegram-Compatible Interfaces with TON Blockchain",
+      "7. NFTs and Jettons",
+      "8. Smart Contract Security",
+      "9. Ecosystem Products, Future Plans, and Vision"
+    ]
   },
   {
     id: 2930629,
     title: "Product Analytics for Beginners",
     description: "Получите фундаментальное понимание аналитики продукта и ее роли в бизнесе. К концу этой главы студенты узнают, что такое продуктовая аналитика, поймут, почему она имеет решающее значение для успеха продукта, и познакомятся с ключевыми показателями и терминами в этой области.",
     slug: "ai-placeholder",
+    chapters: [
+      "1. Introduction to Product Analytics",
+      "2. Setting Up Analytics Frameworks",
+      "3. User Behavior Analysis",
+      "4. Experimentation and A/B Testing",
+      "5. Making Data-Driven Decisions and Communicating Insights"
+    ]
   },
   {
     id: 2930630,
     title: "Introduction to UX Research",
     description: "В этой главе вы получите глубокое представление об UX-исследованиях, важности UX в дизайне и основных концепциях UX-исследований. После завершения этой главы вы поймете основную роль UX-исследований в разработке продукта, как они формируют пользовательский опыт, а также основные концепции, которые лежат в основе работы UX-исследователей.",
+    chapters: [
+      "1. Understanding the Foundations of UX Research",
+      "2. User Research Methods",
+      "3. Analyzing and Synthesizing Research Findings",
+      "4. Communicating UX Research Findings",
+      "5. Applying UX Research to Design Decisions"
+    ]
   },
   {
     id: 2930631,
     title: "Data Science for Beginners",
     description: "Этот курс для начинающих знакомит с основными понятиями, инструментами и методами data science. Благодаря практическим занятиям учащиеся получат прочную основу для работы с данными, их анализа, визуализации и основ машинного обучения. К концу курса студенты будут обладать навыками анализа данных, раскрытия сути и построения простых прогностических моделей.",
+    chapters: [
+      "1. Introduction to Data Science",
+      "2. Data Collection and Preparation",
+      "3. Exploratory Data Analysis (EDA)",
+      "4. Data Visualization",
+      "5. Basic Machine Learning"
+    ]
   },
   {
     id: 2930632,
     title: "Telegram Mini Apps. First Steps.",
     avatar: "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
+    description: "Unlock the potential of Telegram Mini Apps with this beginner's course! Learn to create engaging mini apps that enhance user interaction and boost productivity.",
+    chapters: [
+      "1. Introduction to Telegram Mini Apps",
+      "2. Basics of Creating Mini Apps",
+      "3. Designing for Mini Apps",
+      "4. Designing Mini Apps Functionality and UX",
+      "5. Deploying the App"
+    ]
   },
+  {
+    id: 2926478,
+    title: "Прокачай свое тело за 21 день.",
+    avatar: "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
+    description: "Програма онлайн тренеровок и питания от професионального тренера и нутрициолога. Улучши свою физическую форму.",
+    chapters: [
+              "1. Full-Body Workout with Resistance Bands",
+              "2. Roller Workout",
+              "3. Dumbbell Circuit Training",
+              "4. Functional Training",
+              "5. Dumbbell Intensive",
+              "6. Core Workout",
+              "7. Strength Training",
+              "8. Coordination Training",
+              "9. 20-Minute Dumbbell Circuit"
+            ]
+          
+  }
 ];
 
 

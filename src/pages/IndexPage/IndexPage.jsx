@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { courseConfig } from '@/Utils/Constants';
 import { getAllCourses } from '@/Utils/thinkificAPI';
 
-import {Icon20ChevronRightOutline, Icon20FireAltOutline, Icon24Clock } from '@vkontakte/icons';
+import { CoursesData } from '@/Utils/Constants'
 import { CoursesContext } from '@/contexts/CoursesContext';
 /**
  * @returns {JSX.Element}
@@ -44,7 +44,7 @@ const MAX_RETRY_ATTEMPTS = 3;
     const fetchCourses = async () => {
       try {
         amplitude.track('load_courses_home_page');
-        const courseList = await getAllCourses(user.id);
+        const courseList = CoursesData;
         setCourses(courseList);
       } catch (error) {
         attempts++;
