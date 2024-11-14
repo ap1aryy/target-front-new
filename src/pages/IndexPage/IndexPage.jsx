@@ -51,7 +51,7 @@ const MAX_RETRY_ATTEMPTS = 3;
         console.error(`Не удалось загрузить курсы, попытка ${attempts}:`, error);
 
         if (attempts < MAX_RETRY_ATTEMPTS) {
-          setTimeout(fetchCourses, RETRY_INTERVAL); // Повторить попытку через интервал
+          setTimeout(fetchCourses, RETRY_INTERVAL); 
         } else {
           console.error('Достигнуто максимальное количество попыток загрузки курсов.');
         }
