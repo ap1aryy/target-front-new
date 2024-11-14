@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { courseConfig } from '@/Utils/Constants';
 import { EnrolledPopUp } from './EnrolledPopUp';
-import { CoursesContext } from '@/contexts/CoursesContext';
+import { getAllCourses } from '@/Utils/thinkificAPI';
 import * as amplitude from '@amplitude/analytics-browser';
 import { useTranslation } from 'react-i18next';
 
@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 export function EnrollmentsPage() {
   amplitude.track('open_my_courses');
   const { user } = useContext(UserContext);
-  const { courses, setCourses } = useContext(CoursesContext);
+  const [ courses, setCourses] = useState(null);
   const { i18n, t } = useTranslation();
   const navigate = useNavigate()
   const changeLanguage = (language) => {
@@ -29,10 +29,28 @@ export function EnrollmentsPage() {
 
  
   useEffect(() => {
-    if (!courses || courses.length === 0) {
-      navigate('/');
-    }
-  }, [courses, navigate]);
+    if (!user?.id) return; // Пропустить попытку, если user.id нет
+
+    let attempts = 0; // Счётчик попыток
+    const fetchCourses = async () => {
+      try {
+        amplitude.track('load_courses_home_page');
+        const courseList = await getAllCourses(user.id);
+        setCourses(courseList);
+      } catch (error) {
+        attempts++;
+        console.error(`Не удалось загрузить курсы, попытка ${attempts}:`, error);
+
+        if (attempts < MAX_RETRY_ATTEMPTS) {
+          setTimeout(fetchCourses, RETRY_INTERVAL); // Повторить попытку через интервал
+        } else {
+          console.error('Достигнуто максимальное количество попыток загрузки курсов.');
+        }
+      }
+    };
+
+    fetchCourses();
+  }, [user]);
 WebApp.BackButton.hide();
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [popUpUrl, setPopUpUrl] = useState('');
