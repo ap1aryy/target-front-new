@@ -195,7 +195,7 @@ console.log(i18n.language);
 </div>
       </List> */}
 
-      <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}>
+      {/* <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}> */}
 
         {/* <Section
           header={
@@ -314,7 +314,7 @@ console.log(i18n.language);
 
         </Section> */}
         
-        <Cell
+        {/* <Cell
           style={{border:'none',alignItems:"flex-start"}}
               hint=""
               interactiveAnimation=""
@@ -335,7 +335,7 @@ console.log(i18n.language);
 
         >
         </Cell>
-      </Section>
+      </Section> */}
         {!courses &&
         <Placeholder style={{paddingTop: 20, paddingBottom: 20}} description="Gotcha! That's the end!">
           <img

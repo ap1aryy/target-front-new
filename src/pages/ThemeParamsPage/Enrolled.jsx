@@ -133,7 +133,7 @@ WebApp.BackButton.hide();
       </div>
     ))}
          </Section>
-        <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}>
+        {/* <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}>
         <Cell
           style={{border:'none',alignItems:"flex-start"}}
           multiline
@@ -158,7 +158,7 @@ WebApp.BackButton.hide();
         >
           
             </Cell>
-</Section>
+</Section> */}
  {Array.isArray(courses) && !courses.some(course => course?.my === true) ? (
   <Placeholder style={{ paddingTop: 20, paddingBottom: 20 }} description="Gotcha! That's the end!">
     <img
