@@ -73,7 +73,7 @@ console.log(i18n.language);
   return (
     <div>
      <div style={{
-               padding:16, gap:8
+               padding:16, gap:8, marginBottom:80
             }}>
 <Title weight="2" style={{
               marginBottom:4
