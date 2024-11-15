@@ -109,7 +109,7 @@ export function IndexPage() {
         }}
       >
         {isVisibleStoriesCard && (
-          <Card style={{ margin: "20px 0" }}>
+          <Card>
             <Cell
               subhead={
                 <div
