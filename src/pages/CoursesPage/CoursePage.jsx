@@ -23,13 +23,13 @@ import { useContext, useState, useEffect, useRef } from "react";
 import "./p.css";
 import { UserContext } from "@/contexts/UserContext";
 import { getAllChapters, getCourseDetails } from "@/Utils/thinkificAPI";
-import { PopUp } from "../LaunchParamsPage/PopUp";
+import { PopUp } from "../PurchasePage/PopUp";
 import { Chapters } from "../Courses/Chapters1";
 import {
   Icon24Clock,
   Icon20PlayCircle,
   Icon16StarAlt,
-  Icon24Message,
+  Icon16Clear,
   Icon16CheckCircleLarge,
 } from "@vkontakte/icons";
 import { groupedVideos } from "@/Utils/Constants";
@@ -60,7 +60,8 @@ export function CoursePage() {
   const { t, i18n } = useTranslation();
   const waitlistRequestSent = useRef(false);
   const [loading, setLoading] = useState(true);
-
+  const [isVisibleStoriesCard, setIsVisibleStoriesCard] = useState(true);
+  const [isVisibleGetIt, setisVisibleGetIt] = useState(false);
   const setupMainButtonForWaitlist = () => {
     if (course?.my) {
       window.Telegram.WebApp.MainButton.text = "You in waitlist";
@@ -147,9 +148,9 @@ export function CoursePage() {
     window.Telegram.WebApp.MainButton.hide();
   };
 
-  const handleClosePopUp = () => {
-    setupMainButtonForRegularCourse();
-    setPopUpOpen(false);
+  const handleCloseHint = () => {
+    localStorage.setItem("closeOnBoarding", "true");
+    setIsVisibleStoriesCard(false);
   };
 
   // Function to check if a chapter is completed
@@ -229,6 +230,10 @@ export function CoursePage() {
     };
   }, [params, user, navigate]);
 
+  const handleGoToStories = () => {
+    navigate("/courses/stories");
+  };
+
   useEffect(() => {
     if (course?.my) {
       window.Telegram.WebApp.MainButton.hide();
@@ -238,6 +243,14 @@ export function CoursePage() {
       setupMainButtonForWaitlist();
     } else {
       setupMainButtonForRegularCourse();
+    }
+
+    if (localStorage.getItem("closeOnBoarding")) {
+      setIsVisibleStoriesCard(false);
+    }
+
+    if (localStorage.getItem("hasSeenAllStories")) {
+      setisVisibleGetIt(true);
     }
 
     return () => {
@@ -291,7 +304,42 @@ export function CoursePage() {
             </Chip>
           ))}
         </div>
-
+        {isVisibleStoriesCard && (
+          <Card>
+            <Cell
+              subhead={
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {t("whatIsTarget")}
+                  <Icon16Clear onClick={handleCloseHint} />
+                </div>
+              }
+              children={t("Check_out_a")}
+              multiline
+              subtitle={
+                <Button
+                  size="s"
+                  onClick={handleGoToStories}
+                  style={{ marginTop: "20px" }}
+                >
+                  {t("Get_it_forFree")}
+                </Button>
+              }
+            />
+            {/* <Button
+            onClick={handleGoToStories}
+            style={{ width: "100vw", margin: "20px 0" }}
+          >
+            {t("whatIsTarget")}
+          </Button> */}
+          </Card>
+        )}
         {/* If the course belongs to the user, show validity date */}
         {course?.my && course?.type == 1 && (
           <Section style={{ marginTop: 8 }}>
@@ -390,13 +438,12 @@ export function CoursePage() {
             <Section style={{ marginTop: 8 }}>
               {/* Первая глава */}
               {course?.id === 2930632 ? (
+                // Если курс с id 2930632, первая глава всегда неактивна
                 <Cell
                   key={chapters[0]?.id}
-                  style={{ pointerEvents: "none" }} // Первая глава неактивна для курса 2930632
+                  style={{ pointerEvents: "none" }} // Первая глава неактивна
                   subhead={`${t("Chapter")} 1`}
-                  children={t(
-                    course?.id.toString() + "." + "chapters." + chapters[0]?.id
-                  )}
+                  children={t(`${course?.id}.${"chapters"}.${chapters[0]?.id}`)}
                   subtitle={
                     <div>
                       <div className="card-items-inf">
@@ -407,30 +454,50 @@ export function CoursePage() {
                     </div>
                   }
                 />
-              ) : (
+              ) : isVisibleGetIt ? (
+                // Если isVisibleGetIt = true, показываем кнопку "Get it for Free"
                 <Cell
                   key={chapters[0]?.id}
-                  subhead={`${t("Chapter")} 1`} // Заголовок "Chapter 1"
+                  subhead={`${t("Chapter")} 1`}
                   multiline={true}
                   onClick={() => handleOpenChapters(chapters[0]?.id)} // Открыть главу
                   subtitle={
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <Button
-                        style={{ marginTop: 8 }}
-                        before={<Icon20PlayCircle />}
-                        size="s"
-                        mode="bezeled"
-                      >
-                        {t("Open")}
+                      <Button style={{ marginTop: 8, width: "100vw" }} size="m">
+                        {t("Get_it_forFree")}
                       </Button>
                     </div>
                   }
                 >
-                  {t(
-                    course?.id.toString() + "." + "chapters." + chapters[0]?.id
-                  )}{" "}
-                  {/* Перевод первой главы */}
+                  {t(`${course?.id}.${"chapters"}.${chapters[0]?.id}`)}
                 </Cell>
+              ) : (
+                // Если isVisibleGetIt = false, также показываем кнопку "Get it for Free"
+                <Cell
+                  style={{
+                    pointerEvents: course?.id === 2930632 ? "none" : "auto",
+                  }} // Главы блокируются для курса 2930632
+                  subhead={`${t("Chapter")} ${1}`} // Номер главы
+                  children={t(
+                    course?.id.toString() + "." + "chapters." + chapters[0]?.id
+                  )}
+                  subtitle={
+                    <div>
+                      <div className="card-items-inf">
+                        <div>{`${t("Less_len")} ${
+                          chapters[0]?.chapter_item_id
+                        }`}</div>
+                        {course?.id === 2925675 && (
+                          <>
+                            •<div>{`${t("Video_count")} ${videoCount}`}</div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  }
+                  onClick={!isWaitList ? handleOpenPopUp : null} // Открыть попап покупки для заблокированных глав
+                  multiline={true}
+                />
               )}
 
               {/* Остальные главы */}

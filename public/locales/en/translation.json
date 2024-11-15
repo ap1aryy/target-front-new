@@ -122,8 +122,11 @@
   "option3_stars": "1",
   "option3_benefits": ["Full access to course forever", "FunC Templates", "Repositories for learning", "List of chats and channels for mini apps"],
   "Buy_for_op": "Buy for",
+  "Get_it_forFree": "Get it for free",
   "Choose_a_menthor": "Choose a menthor",
   "Skip_this_step": "Skip this step",
+  "Completed": "Completed",
+  "Check_out_a": "Check out a short onboarding from the project team and get one chapter for free!",
   "Change": "Change",
   "Confirm_and_pay": "Confirm and pay",
   "Not_selected":"Not selected",
@@ -165,6 +168,9 @@
       "TMA": "TMA",
       "Fitness": "Fitness",
       "Training": "Training"
-    }
+    },
+"whatIsTarget": "What is Target?",
+  "next": "Next",
+  "close": "Close"
 }
 

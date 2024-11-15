@@ -1,9 +1,9 @@
 import { IndexPage } from "@/pages/IndexPage/IndexPage";
-import { CoursePage } from "@/pages/InitDataPage/CoursePage";
-import { EnrollmentsPage } from "@/pages/ThemeParamsPage/Enrolled";
+import { CoursePage } from "@/pages/CoursesPage/CoursePage";
+import { EnrollmentsPage } from "@/pages/EnrolledPage/Enrolled";
 import { Chapters } from "@/pages/Courses/Chapters1";
-import { PopUp } from "@/pages/LaunchParamsPage/PopUp";
-import { StoriesPage } from "@/pages/TONConnectPage/Stories";
+import { PopUp } from "@/pages/PurchasePage/PopUp";
+import { StoriesPage } from "@/pages/StoriesPage/Stories";
 /**
  * @typedef {object} Route
  * @property {string} path
@@ -25,5 +25,5 @@ export const routes = [
     title: "Chapters",
   },
   { path: "/buy", Component: PopUp, title: "PopUp" },
-  { path: "/storis", Component: StoriesPage, title: "StoriesPage" },
+  { path: "/courses/stories", Component: StoriesPage, title: "StoriesPage" },
 ];

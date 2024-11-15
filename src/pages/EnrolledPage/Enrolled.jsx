@@ -83,7 +83,7 @@ export function EnrollmentsPage() {
   };
 
   return (
-    <div>
+    <div style={{ overflowY: "auto" }}>
       <div style={{ padding: 16, gap: 8 }}>
         <div className="head">
           <Text weight="1">{t("You")}</Text>
