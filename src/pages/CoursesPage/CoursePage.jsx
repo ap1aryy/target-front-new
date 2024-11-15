@@ -489,7 +489,7 @@ export function CoursePage() {
                         }`}</div>
                         {course?.id === 2925675 && (
                           <>
-                            •<div>{`${t("Video_count")} ${videoCount}`}</div>
+                            •<div>{`${t("Video_count")} 2`}</div>
                           </>
                         )}
                       </div>
