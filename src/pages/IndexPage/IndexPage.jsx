@@ -20,7 +20,7 @@ import WebApp from "@twa-dev/sdk";
 import * as amplitude from "@amplitude/analytics-browser";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
-
+import { Icon16Clear } from "@vkontakte/icons";
 import { useTranslation } from "react-i18next";
 import { courseConfig } from "@/Utils/Constants";
 import { getAllCourses } from "@/Utils/thinkificAPI";
@@ -35,6 +35,7 @@ export function IndexPage() {
 
   const { user, setUser } = useContext(UserContext);
   const { courses, setCourses } = useContext(CoursesContext);
+  const [isVisibleStoriesCard, setIsVisibleStoriesCard] = useState(true);
   const navigate = useNavigate();
   window.Telegram.WebApp.MainButton.hide();
   window.Telegram.WebApp.MainButton.text = t("get_course_from");
@@ -50,6 +51,10 @@ export function IndexPage() {
 
   useEffect(() => {
     if (!user?.id) return; // Пропустить попытку, если user.id нет
+
+    if (localStorage.getItem("closeOnBoarding")) {
+      setIsVisibleStoriesCard(false);
+    }
 
     let attempts = 0; // Счётчик попыток
     const fetchCourses = async () => {
@@ -84,6 +89,15 @@ export function IndexPage() {
   WebApp.BackButton.isVisible && WebApp.BackButton.hide();
   const filteredCourses = courses?.filter((course) => course.id !== 0);
 
+  const handleGoToStories = () => {
+    navigate("/courses/stories");
+  };
+
+  const handleCloseHint = () => {
+    localStorage.setItem("closeOnBoarding", "true");
+    setIsVisibleStoriesCard(false);
+  };
+
   console.log(i18n.language);
   return (
     <div>
@@ -103,6 +117,42 @@ export function IndexPage() {
           {" "}
           {t("Popular_courses")}
         </Title>
+        {isVisibleStoriesCard && (
+          <Card style={{ margin: "20px 0" }}>
+            <Cell
+              subhead={
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {t("whatIsTarget")}
+                  <Icon16Clear onClick={handleCloseHint} />
+                </div>
+              }
+              children={t("Check_out_a")}
+              multiline
+              subtitle={
+                <Button
+                  size="s"
+                  onClick={handleGoToStories}
+                  style={{ marginTop: "20px" }}
+                >
+                  {t("Get_it_forFree")}
+                </Button>
+              }
+            />
+            {/* <Button
+            onClick={handleGoToStories}
+            style={{ width: "100vw", margin: "20px 0" }}
+          >
+            {t("whatIsTarget")}
+          </Button> */}
+          </Card>
+        )}
         {filteredCourses?.map((course) => (
           <Card
             key={course.id}
