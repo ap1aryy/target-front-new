@@ -142,6 +142,10 @@ export function CoursePage() {
   };
 
   const handleOpenChapters = (index) => {
+    if (!course.my && index === 1) {
+      amplitude.track("free_chapter_open");
+    }
+
     amplitude.track("open_chapters");
     setSelectedChapterIndex(index); // Set the selected chapter index
     navigate(`/courses/${course?.id}/chapters/${index}`); // Navigate to the chapter page
@@ -149,6 +153,7 @@ export function CoursePage() {
   };
 
   const handleCloseHint = () => {
+    amplitude.track("Hide What Traget is");
     localStorage.setItem("closeOnBoarding", "true");
     setIsVisibleStoriesCard(false);
   };
@@ -231,6 +236,7 @@ export function CoursePage() {
   }, [params, user, navigate]);
 
   const handleGoToStories = () => {
+    amplitude.track("Open Stories from Course Page");
     navigate("/courses/stories");
   };
 
@@ -328,7 +334,7 @@ export function CoursePage() {
                   onClick={handleGoToStories}
                   style={{ marginTop: "20px" }}
                 >
-                  {t("Get_it_forFree")}
+                  {t("ReadMore")}
                 </Button>
               }
             />

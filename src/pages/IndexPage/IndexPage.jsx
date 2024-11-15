@@ -90,10 +90,12 @@ export function IndexPage() {
   const filteredCourses = courses?.filter((course) => course.id !== 0);
 
   const handleGoToStories = () => {
+    amplitude.track("Open Stories from Home Page");
     navigate("/courses/stories");
   };
 
   const handleCloseHint = () => {
+    amplitude.track("Hide What Traget is");
     localStorage.setItem("closeOnBoarding", "true");
     setIsVisibleStoriesCard(false);
   };
@@ -132,7 +134,7 @@ export function IndexPage() {
                   onClick={handleGoToStories}
                   style={{ marginTop: "20px" }}
                 >
-                  {t("Get_it_forFree")}
+                  {t("ReadMore")}
                 </Button>
               }
             />

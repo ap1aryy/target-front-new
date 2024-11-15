@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "@/contexts/UserContext";
 import { useTranslation } from "react-i18next";
-
+import * as amplitude from "@amplitude/analytics-browser";
 /**
  * @returns {JSX.Element}
  */
@@ -34,6 +34,7 @@ export function StoriesPage() {
     BackButton.show();
     BackButton.text = "Skip";
     BackButton.onClick(handleSkip);
+    trackStoryView(0);
 
     window.Telegram.WebApp.MainButton.hide();
     // Очистка при размонтировании компонента
@@ -51,6 +52,7 @@ export function StoriesPage() {
       navigate(-1); // Выход за пределы рамок — возвращаемся назад
     } else {
       setCurrentIndex(nextIndex); // Устанавливаем новый индекс
+      trackStoryView(nextIndex);
     }
   };
 
@@ -71,6 +73,27 @@ export function StoriesPage() {
     } else {
       handleNext(); // Если не последняя, продолжаем к следующей
     }
+  };
+
+  const trackStoryView = (index) => {
+    amplitude.track("Story Viewed", {
+      storyIndex: index + 1, // Индекс сториса (начинается с 1)
+      totalStories: images.length, // Общее количество сторис
+    });
+
+    // Если это последний сторис, трекаем что просмотрены все
+    if (index === images.length - 1) {
+      amplitude.track("All Stories Viewed", {
+        totalStories: images.length,
+      });
+    }
+  };
+
+  const trackClickEvent = (event, storyIndex) => {
+    amplitude.track(event, {
+      storyIndex: storyIndex,
+      totalStories: images.length,
+    });
   };
 
   return (
@@ -125,8 +148,10 @@ export function StoriesPage() {
           const width = currentTarget.offsetWidth;
 
           if (clientX > width / 2) {
+            trackClickEvent("Next Story Clicked", currentIndex + 1);
             handleNavigate(1);
           } else {
+            trackClickEvent("Previous Story Clicked", currentIndex + 1);
             handleNavigate(-1);
           }
         }}
