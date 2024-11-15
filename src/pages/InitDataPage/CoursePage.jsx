@@ -331,38 +331,78 @@ const handleOpenPopUp = () => {
           </div>
         ) : (
           <>
-  <Section style={{ marginTop: 8 }}>
-    {chapters.map((chapter, index) => {
-      const videosInChapter = groupedVideos[chapter.id]; // Получаем видео для этого раздела
-      const videoCount = videosInChapter ? videosInChapter.length : 0; // Подсчитываем количество видео
-
-      return (
-        <div key={index}>
-          <Cell
-           style={{ pointerEvents: course?.id === 2930632 ? "none" : "auto" }}
-
-            subhead={`${t('Chapter')} ${index + 1}`}
-            children={t(course?.id.toString() + "." + "chapters." + chapter.id)} 
-            subtitle={<div>
-                <div className='card-items-inf'>
-                  <div>{`${t('Less_len')} ${chapter.chapter_item_id}`}</div>
-                 {course?.id === 2925675 && (
-  <>
-    •<div>{`${t('Video_count')} ${videoCount}`}</div>
-  </>
-)}
-
-                 </div>
-            </div>}
-            onClick={!isWaitList ? handleOpenPopUp : null}
-            multiline={true}
-          />
-          {index < chapters.length - 1 && <Divider />}
-        </div>
-      );
-    })}
-  </Section>
-</>
+          <Section style={{ marginTop: 8 }}>
+            {/* Первая глава */}
+            {course?.id === 2930632 ? (
+              <Cell
+                key={chapters[0]?.id}
+                style={{ pointerEvents: "none" }} // Первая глава неактивна для курса 2930632
+                subhead={`${t('Chapter')} 1`}
+                children={t(course?.id.toString() + "." + "chapters." + chapters[0]?.id)}
+                subtitle={
+                  <div>
+                    <div className="card-items-inf">
+                      <div>{`${t('Less_len')} ${chapters[0]?.chapter_item_id}`}</div>
+                    </div>
+                  </div>
+                }
+              />
+            ) : (
+              <Cell
+                key={chapters[0]?.id}
+                subhead={`${t('Chapter')} 1`} // Заголовок "Chapter 1"
+                multiline={true}
+                onClick={() => handleOpenChapters(chapters[0]?.id)} // Открыть главу
+                subtitle={
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Button
+                      style={{ marginTop: 8 }}
+                      before={<Icon20PlayCircle />}
+                      size="s"
+                      mode="bezeled"
+                    >
+                      {t('Open')}
+                    </Button>
+                  </div>
+                }
+              >
+                {t(course?.id.toString() + "." + "chapters." + chapters[0]?.id)} {/* Перевод первой главы */}
+              </Cell>
+            )}
+        
+            {/* Остальные главы */}
+            {chapters.slice(1).map((chapter, index) => {
+              const videosInChapter = groupedVideos[chapter.id]; // Получаем видео для этого раздела
+              const videoCount = videosInChapter ? videosInChapter.length : 0; // Подсчитываем количество видео
+        
+              return (
+                <div key={chapter.id}>
+                  <Cell
+                    style={{ pointerEvents: course?.id === 2930632 ? "none" : "auto" }} // Главы блокируются для курса 2930632
+                    subhead={`${t('Chapter')} ${index + 2}`} // Номер главы
+                    children={t(course?.id.toString() + "." + "chapters." + chapter.id)}
+                    subtitle={
+                      <div>
+                        <div className="card-items-inf">
+                          <div>{`${t('Less_len')} ${chapter.chapter_item_id}`}</div>
+                          {course?.id === 2925675 && (
+                            <>
+                              •<div>{`${t('Video_count')} ${videoCount}`}</div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    }
+                    onClick={!isWaitList ? handleOpenPopUp : null} // Открыть попап покупки для заблокированных глав
+                    multiline={true}
+                  />
+                  {index < chapters.length - 1 && <Divider />} {/* Разделитель между главами */}
+                </div>
+              );
+            })}
+          </Section>
+        </>
+        
 
         )}
 

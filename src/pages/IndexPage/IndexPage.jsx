@@ -123,7 +123,7 @@ console.log(i18n.language);
   {courseConfig[course.id]?.videos !== "0 " && (
     <>
       <div>
-        {courseConfig[course.id].videos} {t('videos')}
+        {courseConfig[course.id]?.videos} {t('videos')}
       </div>
       •
     </>
