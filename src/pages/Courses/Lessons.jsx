@@ -2518,7 +2518,7 @@ export const Lesson6_3 = () => {
 
 				<div className="Card">
 					<b>Counter Value</b>
-					<div>{counter_value ?? "Loading..."}</div>
+					<div>{"counter_value" ?? "Loading..."}</div>
 				</div>
 
 				<a onClick={showAlert}>Show Alert</a>
