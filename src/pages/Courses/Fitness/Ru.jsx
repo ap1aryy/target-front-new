@@ -22,15 +22,10 @@ export const Lesson1_1 = () => {
           <strong>Оборудование:</strong> коврик, тканевая резинка Медиум,
           латексная резинка Лайт
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/qfG_0W9Fx8I"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Тренировка с резинками"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/1.%20%D0%9A%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%D0%BD%D0%B0%D1%8F%20%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%80%D0%B5%D0%B7%D0%B8%D0%BD%D0%BA%D0%B0%D0%BC%D0%B8.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -49,15 +44,10 @@ export const Lesson2_1 = () => {
         <p>
           <strong>Оборудование:</strong> коврик, пенный валик (ролл) 90 см
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/Y5_XLQ6JjJM"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Тренировка с валиком"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/2.%20%D0%A2%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D1%81%20%D0%B2%D0%B0%D0%BB%D0%B8%D0%BA%D0%BE%D0%BC.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -76,15 +66,10 @@ export const Lesson3_1 = () => {
           <strong>Оборудование:</strong> коврик, гантели весом 1-3 кг
           (оптимально 2 кг)
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/VKEG5_LeIOE"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Круговая тренировка с гантелями"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/3.%20%D0%9A%D1%80%D1%83%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D1%81%20%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D1%8F%D0%BC%D0%B8.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -102,15 +87,10 @@ export const Lesson4_1 = () => {
         <p>
           <strong>Оборудование:</strong> коврик, латексная резинка Лайт
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/PUkKLApBzJA"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Функциональная тренировка"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/4.%20%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -126,15 +106,10 @@ export const Lesson5_1 = () => {
           <strong>Оборудование:</strong> коврик, гантели весом 1-3 кг
           (оптимально 2 кг)
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/ZlfsPDqD3sE"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Интенсив с гантелями"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/5.%20%D0%98%D0%BD%D1%82%D0%B5%D0%BD%D1%81%D0%B8%D0%B2%20%D1%81%20%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D1%8F%D0%BC%D0%B8.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -152,15 +127,10 @@ export const Lesson6_1 = () => {
         <p>
           <strong>Оборудование:</strong> коврик
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/yk8AxYGJ71E"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Тренировка на кор"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/6.%20%D0%A2%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%BD%D0%B0%20%D0%BC%D1%8B%D1%88%D1%86%D1%8B%20%D0%BA%D0%BE%D1%80%D0%B0.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -179,15 +149,10 @@ export const Lesson7_1 = () => {
           <strong>Оборудование:</strong> коврик, гантели весом 1-3 кг
           (оптимально 2 кг), длинная латексная резинка
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/W_qKrH7kmIg"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Силовая тренировка"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/7.%20%D0%A1%D0%B8%D0%BB%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%82%D1%80%D0%B5%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -206,15 +171,10 @@ export const Lesson8_1 = () => {
           <strong>Оборудование:</strong> коврик, гантели весом 1-3 кг
           (оптимально 2 кг), теннисный мячик
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/iTOzDqkqH0M"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Сложнокоординационная тренировка"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/8.%20%D0%A1%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D0%BA%D0%BE%D0%BE%D1%80%D0%B4%D0%B8%D0%BD%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
@@ -234,15 +194,10 @@ export const Lesson9_1 = () => {
           <strong>Оборудование:</strong> коврик, гантели весом 1-3 кг
           (оптимально 2 кг)
         </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/Vu-Wzf8BMzI"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="20-минутный комплекс с гантелями"
-        ></iframe>
+        <video controls playsInline>
+          <source src="https://mini-app-back.friendsdao.com/wap-static/media/courses/Fitness/Media/9.%2020-%D0%BC%D0%B8%D0%BD%D1%83%D1%82%D0%BD%D1%8B%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%20%D1%81%20%D0%B3%D0%B0%D0%BD%D1%82%D0%B5%D0%BB%D1%8F%D0%BC%D0%B8.mp4" />
+          Your browser does not support the video tag.
+        </video>
       </section>
     </div>
   );
