@@ -1,14 +1,14 @@
 // CoursesMapping.js
-import * as LessonsEN from './lessonseng';
-import * as LessonsRU from './Lessons';
+import * as LessonsEN from "./lessonseng";
+import * as LessonsRU from "./Lessons";
 import * as LessonDataScienceRU from "./Data Science for beginners/Ru";
 import * as LessonDataScienceEN from "./Data Science for beginners/En";
 import * as LessonUXResearchRU from "./Introduction to UX Research/Ru";
 import * as LessonUXResearchEN from "./Introduction to UX Research/En";
 import * as LessonProductAnalyticsRU from "./Product Analytics for beginners/Rus";
 import * as LessonProductAnalyticsEN from "./Product Analytics for beginners/En";
-import * as LessonFitnessRu from "./Fitness/Ru"
-import * as LessonFitnessEn from "./Fitness/En"
+import * as LessonFitnessRu from "./Fitness/Ru";
+import * as LessonFitnessEn from "./Fitness/En";
 // Маппинг курсов по языкам
 export const courseMappings = {
   ru: {
@@ -24,5 +24,5 @@ export const courseMappings = {
     2930630: LessonUXResearchEN, // Introduction to UX Research - английская версия
     2930631: LessonDataScienceEN, // Data Science for Beginners - английская версия
     2926478: LessonFitnessEn, // Data Science for Beginners - русская версия
-  }
+  },
 };

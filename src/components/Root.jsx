@@ -1,14 +1,14 @@
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { useEffect, useMemo } from 'react';
-import WebApp from '@twa-dev/sdk';
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import { useEffect, useMemo } from "react";
+import WebApp from "@twa-dev/sdk";
 
-import { App } from '@/components/App.jsx';
-import { ErrorBoundary } from '@/components/ErrorBoundary.jsx';
+import { App } from "@/components/App.jsx";
+import { ErrorBoundary } from "@/components/ErrorBoundary.jsx";
 
-import '../../i18n';
+import "../../i18n";
 
-import { UserProvider } from '@/contexts/UserContext';
-import { CoursesProvider } from '@/contexts/CoursesContext';
+import { UserProvider } from "@/contexts/UserContext";
+import { CoursesProvider } from "@/contexts/CoursesContext";
 /**
  * @param {unknown} error
  * @returns {JSX.Element}
@@ -21,9 +21,9 @@ function ErrorBoundaryError({ error }) {
         <code>
           {error instanceof Error
             ? error.message
-            : typeof error === 'string'
-              ? error
-              : JSON.stringify(error)}
+            : typeof error === "string"
+            ? error
+            : JSON.stringify(error)}
         </code>
       </blockquote>
     </div>
@@ -35,26 +35,26 @@ function ErrorBoundaryError({ error }) {
  */
 export function Inner() {
   window.Telegram.WebApp.isSwipeBackEnabled = false;
-        window.Telegram.WebApp.isClosingConfirmationEnabled = true; 
-  const debug = WebApp.initDataUnsafe.start_param === 'debug';
+  window.Telegram.WebApp.isClosingConfirmationEnabled = true;
+  const debug = WebApp.initDataUnsafe.start_param === "debug";
   const manifestUrl = useMemo(() => {
-    return new URL('tonconnect-manifest.json', window.location.href).toString();
+    return new URL("tonconnect-manifest.json", window.location.href).toString();
   }, []);
 
   // Enable debug mode to see all the methods sent and events received.
   useEffect(() => {
     if (debug) {
-      import('eruda').then((lib) => lib.default.init());
+      import("eruda").then((lib) => lib.default.init());
     }
   }, [debug]);
 
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
       <CoursesProvider>
-      <UserProvider>
-          <App/>
+        <UserProvider>
+          <App />
         </UserProvider>
-        </CoursesProvider>
+      </CoursesProvider>
     </TonConnectUIProvider>
   );
 }
@@ -65,7 +65,7 @@ export function Inner() {
 export function Root() {
   return (
     <ErrorBoundary fallback={ErrorBoundaryError}>
-      <Inner/>
+      <Inner />
     </ErrorBoundary>
   );
 }

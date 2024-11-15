@@ -1,147 +1,169 @@
-import { Section, Cell, Title, Link, Card, Info, Placeholder, Avatar, Badge, Divider, Button } from '@telegram-apps/telegram-ui';
+import {
+  Section,
+  Cell,
+  Title,
+  Link,
+  Card,
+  Info,
+  Placeholder,
+  Avatar,
+  Badge,
+  Divider,
+  Button,
+} from "@telegram-apps/telegram-ui";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import './IndexPage.css';
+import "./IndexPage.css";
 
-import { UserContext } from '@/contexts/UserContext';
-import WebApp from '@twa-dev/sdk';
-import * as amplitude from '@amplitude/analytics-browser';
-import { useNavigate } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
+import { UserContext } from "@/contexts/UserContext";
+import WebApp from "@twa-dev/sdk";
+import * as amplitude from "@amplitude/analytics-browser";
+import { useNavigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
 
-import { useTranslation } from 'react-i18next';
-import { courseConfig } from '@/Utils/Constants';
-import { getAllCourses } from '@/Utils/thinkificAPI';
+import { useTranslation } from "react-i18next";
+import { courseConfig } from "@/Utils/Constants";
+import { getAllCourses } from "@/Utils/thinkificAPI";
 
-import { CoursesData } from '@/Utils/Constants'
-import { CoursesContext } from '@/contexts/CoursesContext';
+import { CoursesData } from "@/Utils/Constants";
+import { CoursesContext } from "@/contexts/CoursesContext";
 /**
  * @returns {JSX.Element}
  */
 export function IndexPage() {
- const { t, i18n  } = useTranslation();
-  
-  const {user, setUser} = useContext(UserContext)
-  const {courses, setCourses} = useContext(CoursesContext)
-  const navigate = useNavigate()
-  window.Telegram.WebApp.MainButton.hide(); 
-window.Telegram.WebApp.MainButton.text = t("get_course_from");
-  
-const MAX_RETRY_ATTEMPTS = 3;
+  const { t, i18n } = useTranslation();
+
+  const { user, setUser } = useContext(UserContext);
+  const { courses, setCourses } = useContext(CoursesContext);
+  const navigate = useNavigate();
+  window.Telegram.WebApp.MainButton.hide();
+  window.Telegram.WebApp.MainButton.text = t("get_course_from");
+
+  const MAX_RETRY_ATTEMPTS = 3;
   const RETRY_INTERVAL = 2000;
-    
+
   useEffect(() => {
-    console.log(user.courseIdLink)
     if (courseConfig[user.courseIdLink]) {
-        navigate(`/courses/${user.courseIdLink}`);
-      }
+      navigate(`/courses/${user.courseIdLink}`);
+    }
   }, [user]);
 
- useEffect(() => {
+  useEffect(() => {
     if (!user?.id) return; // Пропустить попытку, если user.id нет
 
     let attempts = 0; // Счётчик попыток
     const fetchCourses = async () => {
       try {
-        amplitude.track('load_courses_home_page');
+        amplitude.track("load_courses_home_page");
         const courseList = CoursesData;
         setCourses(courseList);
       } catch (error) {
         attempts++;
-        console.error(`Не удалось загрузить курсы, попытка ${attempts}:`, error);
+        console.error(
+          `Не удалось загрузить курсы, попытка ${attempts}:`,
+          error
+        );
 
         if (attempts < MAX_RETRY_ATTEMPTS) {
-          setTimeout(fetchCourses, RETRY_INTERVAL); 
+          setTimeout(fetchCourses, RETRY_INTERVAL);
         } else {
-          console.error('Достигнуто максимальное количество попыток загрузки курсов.');
+          console.error(
+            "Достигнуто максимальное количество попыток загрузки курсов."
+          );
         }
       }
     };
 
     fetchCourses();
   }, [user]);
-  
+
   const handleGoToCourse = (course) => {
-    amplitude.track('open_best_choise');
-        navigate(`/courses/${course.id}`);
-  }
- WebApp.BackButton.isVisible && WebApp.BackButton.hide();
- const filteredCourses = courses?.filter(course => course.id !== 0);
+    amplitude.track("open_best_choise");
+    navigate(`/courses/${course.id}`);
+  };
+  WebApp.BackButton.isVisible && WebApp.BackButton.hide();
+  const filteredCourses = courses?.filter((course) => course.id !== 0);
 
-
-console.log(i18n.language); 
+  console.log(i18n.language);
   return (
     <div>
-     <div style={{
-               padding:16, gap:8, marginBottom:80
-            }}>
-<Title weight="2" style={{
-              marginBottom:4
-            }}
-        > {t('Popular_courses')}</Title>
-    {filteredCourses?.map(course => (
-        <Card
-          key={course.id}
+      <div
+        style={{
+          padding: 16,
+          gap: 8,
+          marginBottom: 80,
+        }}
+      >
+        <Title
+          weight="2"
           style={{
-            width: "100%",
-            textAlign: "left",
-            height: "265px",
-            marginTop: 8
+            marginBottom: 4,
           }}
-          
-          onClick={() => handleGoToCourse(course)}
         >
-          <img
-            alt="Course Image"
-            src={courseConfig[course.id]?.img || "default_image_path_here"}
+          {" "}
+          {t("Popular_courses")}
+        </Title>
+        {filteredCourses?.map((course) => (
+          <Card
+            key={course.id}
             style={{
-              display: 'block',
-              height: "170px",
-              objectFit: 'cover',
-              width: "100%"
+              width: "100%",
+              textAlign: "left",
+              height: "265px",
+              marginTop: 8,
             }}
-          />
-          <Card.Cell readOnly
-            subtitle={
-              // <div>
-              //   {t('Course')}
-              //   <div className='card-items-inf'>
-              //     <div>{courseConfig[course.id]?.chapters || "N/A"}</div>
-              //     •
-              //     <div>{courseConfig[course.id]?.videos || "N/A"}</div>
-              //     •
-              //     <div>{courseConfig[course.id]?.duration || "N/A"}</div>
-              //   </div>
-              // </div>
-              <div>
-  {t('Course')}
-  <div className='card-items-inf'>
-  <div>
-    {courseConfig[course.id]?.chapters} {t('chapters')}
-  </div>
-  •
-  {courseConfig[course.id]?.videos !== "0 " && (
-    <>
-      <div>
-        {courseConfig[course.id]?.videos} {t('videos')}
-      </div>
-      •
-    </>
-  )}
-  <div>
-    {courseConfig[course.id]?.duration} {t('duration')}
-  </div>
-</div>
-
-</div>
-
-            }
+            onClick={() => handleGoToCourse(course)}
           >
-          {t(course.id.toString() + '.Course_name')}
-          </Card.Cell>
-        </Card>
-      ))}
-          </div>
+            <img
+              alt="Course Image"
+              src={courseConfig[course.id]?.img || "default_image_path_here"}
+              style={{
+                display: "block",
+                height: "170px",
+                objectFit: "cover",
+                width: "100%",
+              }}
+            />
+            <Card.Cell
+              readOnly
+              subtitle={
+                // <div>
+                //   {t('Course')}
+                //   <div className='card-items-inf'>
+                //     <div>{courseConfig[course.id]?.chapters || "N/A"}</div>
+                //     •
+                //     <div>{courseConfig[course.id]?.videos || "N/A"}</div>
+                //     •
+                //     <div>{courseConfig[course.id]?.duration || "N/A"}</div>
+                //   </div>
+                // </div>
+                <div>
+                  {t("Course")}
+                  <div className="card-items-inf">
+                    <div>
+                      {courseConfig[course.id]?.chapters} {t("chapters")}
+                    </div>
+                    •
+                    {courseConfig[course.id]?.videos !== "0 " && (
+                      <>
+                        <div>
+                          {courseConfig[course.id]?.videos} {t("videos")}
+                        </div>
+                        •
+                      </>
+                    )}
+                    <div>
+                      {courseConfig[course.id]?.duration} {t("duration")}
+                    </div>
+                  </div>
+                </div>
+              }
+            >
+              {t(course.id.toString() + ".Course_name")}
+            </Card.Cell>
+          </Card>
+        ))}
+      </div>
       {/* <List>
 
         <Section
@@ -197,7 +219,7 @@ console.log(i18n.language);
 
       {/* <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}> */}
 
-        {/* <Section
+      {/* <Section
           header={
             <Cell
               style={{ pointerEvents: 'none' }} 
@@ -313,8 +335,8 @@ console.log(i18n.language);
           </Cell>
 
         </Section> */}
-        
-        {/* <Cell
+
+      {/* <Cell
           style={{border:'none',alignItems:"flex-start"}}
               hint=""
               interactiveAnimation=""
@@ -336,15 +358,18 @@ console.log(i18n.language);
         >
         </Cell>
       </Section> */}
-        {!courses &&
-        <Placeholder style={{paddingTop: 20, paddingBottom: 20}} description="Gotcha! That's the end!">
+      {!courses && (
+        <Placeholder
+          style={{ paddingTop: 20, paddingBottom: 20 }}
+          description="Gotcha! That's the end!"
+        >
           <img
             width="75%"
             alt="Telegram sticker"
             src="https://s1.gifyu.com/images/Sy9DJ.gif"
           />
-        </Placeholder>  }
-
+        </Placeholder>
+      )}
     </div>
   );
 }

@@ -1,8 +1,9 @@
-import { IndexPage } from '@/pages/IndexPage/IndexPage';
-import { CoursePage } from '@/pages/InitDataPage/CoursePage';
-import { EnrollmentsPage } from '@/pages/ThemeParamsPage/Enrolled';
-import { Chapters } from '@/pages/Courses/Chapters1';
-import { PopUp } from '@/pages/LaunchParamsPage/PopUp';
+import { IndexPage } from "@/pages/IndexPage/IndexPage";
+import { CoursePage } from "@/pages/InitDataPage/CoursePage";
+import { EnrollmentsPage } from "@/pages/ThemeParamsPage/Enrolled";
+import { Chapters } from "@/pages/Courses/Chapters1";
+import { PopUp } from "@/pages/LaunchParamsPage/PopUp";
+import { StoriesPage } from "@/pages/TONConnectPage/Stories";
 /**
  * @typedef {object} Route
  * @property {string} path
@@ -15,9 +16,14 @@ import { PopUp } from '@/pages/LaunchParamsPage/PopUp';
  * @type {Route[]}
  */
 export const routes = [
-  { path: '/', Component: IndexPage },
-  { path: "/courses/:courseId", Component: CoursePage, title: 'Course' },
-  { path: "/enrollments", Component: EnrollmentsPage, title: 'Enroll' },
-  { path: "/courses/:courseId/chapters/:index", Component: Chapters, title: 'Chapters' },
-  { path: "/buy", Component: PopUp, title: 'PopUp'}
+  { path: "/", Component: IndexPage },
+  { path: "/courses/:courseId", Component: CoursePage, title: "Course" },
+  { path: "/enrollments", Component: EnrollmentsPage, title: "Enroll" },
+  {
+    path: "/courses/:courseId/chapters/:index",
+    Component: Chapters,
+    title: "Chapters",
+  },
+  { path: "/buy", Component: PopUp, title: "PopUp" },
+  { path: "/storis", Component: StoriesPage, title: "StoriesPage" },
 ];
