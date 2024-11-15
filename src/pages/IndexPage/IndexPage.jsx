@@ -108,15 +108,6 @@ export function IndexPage() {
           marginBottom: 80,
         }}
       >
-        <Title
-          weight="2"
-          style={{
-            marginBottom: 4,
-          }}
-        >
-          {" "}
-          {t("Popular_courses")}
-        </Title>
         {isVisibleStoriesCard && (
           <Card style={{ margin: "20px 0" }}>
             <Cell
@@ -153,6 +144,16 @@ export function IndexPage() {
           </Button> */}
           </Card>
         )}
+        <Title
+          weight="2"
+          style={{
+            marginBottom: 4,
+          }}
+        >
+          {" "}
+          {t("Popular_courses")}
+        </Title>
+
         {filteredCourses?.map((course) => (
           <Card
             key={course.id}
