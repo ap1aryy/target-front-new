@@ -219,6 +219,46 @@ export function TargetCategory() {
           </Section>
         </>
       )}
+      {limitedCourses.length != 0 && (
+        <Section style={{ marginTop: 16 }}>
+          <Cell
+            style={{
+              border: "none",
+              alignItems: "flex-start",
+              marginBottom: 100,
+            }}
+            hint=""
+            interactiveAnimation=""
+            subhead=""
+            titleBadge=""
+            children={t("more_courses")}
+            subtitle={t("more_courses_soon")}
+            description={
+              <Button
+                style={{ borderRadius: 40, margin: "8px 0", height: "5vh" }}
+              >
+                {t("follow_us")}
+              </Button>
+            }
+            after=""
+            before={
+              <Avatar
+                size={48}
+                style={{ borderRadius: "5px", marginTop: "30%" }}
+                src="https://i.ibb.co/CtPSccK/photo-2024-11-10-13-12-28.jpg"
+              />
+            }
+            onClick={() =>
+              window.open(
+                i18n.language === "ru"
+                  ? "https://t.me/thetarget_courses_ru"
+                  : "https://t.me/thetarget_courses",
+                "_blank"
+              )
+            }
+          />
+        </Section>
+      )}
     </>
   );
 }
