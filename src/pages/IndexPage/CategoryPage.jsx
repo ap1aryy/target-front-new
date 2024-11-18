@@ -25,6 +25,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CoursesData } from "@/Utils/Constants";
 import { useTranslation } from "react-i18next";
 import { courseConfig } from "@/Utils/Constants";
+import * as amplitude from "@amplitude/analytics-browser";
 /**
  * @returns {JSX.Element}
  */
@@ -36,6 +37,11 @@ export function TargetCategory() {
   const CourseButton = () => {
     return <Button children="Start" size="s" mode="bezeled" />;
   };
+  useEffect(() => {
+    amplitude.track("view_category_courses", {
+      category_name: categoryName, // передаем название категории
+    });
+  }, [categoryName]);
   useEffect(() => {
     function onClick() {
       navigate("/");
@@ -65,7 +71,7 @@ export function TargetCategory() {
   });
 
   const handleGoToCourse = (course) => {
-    amplitude.track("open_best_choise");
+    amplitude.track("open_course_from_category_page");
     navigate(`/courses/${course.id}`);
   };
 

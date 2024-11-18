@@ -5,7 +5,7 @@ import "./IndexPage.css";
 import { useTranslation } from "react-i18next";
 import { CoursesData } from "@/Utils/Constants";
 import { useNavigate } from "react-router-dom";
-
+import * as amplitude from "@amplitude/analytics-browser";
 export default function CategoryBubbles(props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -28,6 +28,9 @@ export default function CategoryBubbles(props) {
 
   const handleCategoryClick = (category) => {
     navigate(`/category/${category}`);
+    amplitude.track("opened_category_via_bubble", {
+      category_name: category,
+    });
   };
 
   // Группировка курсов по категориям
