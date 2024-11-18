@@ -172,6 +172,22 @@
     },
 "whatIsTarget": "What Target is",
   "next": "Next",
-  "close": "Close"
+  "close": "Close",
+  "course_categories": {
+    "Testing": "Testing",
+    "MachineLearning": "Machine Learning",
+    "SMM": "SMM",
+    "Accounting": "Accounting",
+    "Lawyers": "Lawyers",
+    "1C": "1C",
+    "Manicure": "Manicure",
+    "UX/UI": "UX/UI",
+    "Psychology": "Psychology",
+    "DigitalMarketing": "Digital Marketing",
+    "SQL": "SQL",
+    "StockMarket": "Stock Market",
+    "Finance": "Finance",
+    "Crypto": "Crypto"
+  }
 }
 

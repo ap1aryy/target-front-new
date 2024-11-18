@@ -27,6 +27,7 @@ export const CoursesData = [
     description:
       "Курс предназначен для разработчиков и IT-специалистов. Он даёт теоретические и практические знания о технологиях и концепциях блокчейна TON, включая язык программирования FunC, смарт-контракты и их тестирование, а также создание мини-приложений.",
     slug: "my-course",
+    category: "Crypto",
     chapters: [
       "1. Introduction to TON Blockchain",
       "2. TVM, Transactions, Scalability, and Business Cases",
@@ -45,6 +46,7 @@ export const CoursesData = [
     description:
       "Получите фундаментальное понимание аналитики продукта и ее роли в бизнесе. К концу этой главы студенты узнают, что такое продуктовая аналитика, поймут, почему она имеет решающее значение для успеха продукта, и познакомятся с ключевыми показателями и терминами в этой области.",
     slug: "ai-placeholder",
+    category: "Digital marketing",
     chapters: [
       "1. Introduction to Product Analytics",
       "2. Setting Up Analytics Frameworks",
@@ -58,6 +60,7 @@ export const CoursesData = [
     title: "Introduction to UX Research",
     description:
       "В этой главе вы получите глубокое представление об UX-исследованиях, важности UX в дизайне и основных концепциях UX-исследований. После завершения этой главы вы поймете основную роль UX-исследований в разработке продукта, как они формируют пользовательский опыт, а также основные концепции, которые лежат в основе работы UX-исследователей.",
+    category: "Дизайн UX/UI",
     chapters: [
       "1. Understanding the Foundations of UX Research",
       "2. User Research Methods",
@@ -71,6 +74,7 @@ export const CoursesData = [
     title: "Data Science for Beginners",
     description:
       "Этот курс для начинающих знакомит с основными понятиями, инструментами и методами data science. Благодаря практическим занятиям учащиеся получат прочную основу для работы с данными, их анализа, визуализации и основ машинного обучения. К концу курса студенты будут обладать навыками анализа данных, раскрытия сути и построения простых прогностических моделей.",
+    category: "Machine learning",
     chapters: [
       "1. Introduction to Data Science",
       "2. Data Collection and Preparation",
@@ -86,6 +90,7 @@ export const CoursesData = [
       "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
     description:
       "Unlock the potential of Telegram Mini Apps with this beginner's course! Learn to create engaging mini apps that enhance user interaction and boost productivity.",
+    category: "Тестировщик/тестирование",
     chapters: [
       "1. Introduction to Telegram Mini Apps",
       "2. Basics of Creating Mini Apps",
@@ -101,6 +106,7 @@ export const CoursesData = [
       "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
     description:
       "Програма онлайн тренеровок и питания от професионального тренера и нутрициолога. Улучши свою физическую форму.",
+    category: "Психология",
     chapters: [
       "1. Full-Body Workout with Resistance Bands",
       "2. Roller Workout",
@@ -112,6 +118,40 @@ export const CoursesData = [
       "8. Coordination Training",
       "9. 20-Minute Dumbbell Circuit",
     ],
+  },
+];
+
+export const CategoriesData = [
+  {
+    name: "Тестировщик/тестирование",
+    description: "скоро тут появятся 10+ курсов",
+  },
+  { name: "Машинное обучение", description: "скоро тут появятся 10+ курсов" },
+  { name: "СММ", description: "скоро тут появятся 10+ курсов" },
+  { name: "Бухгалтерия/юристы", description: "скоро тут появятся 10+ курсов" },
+  { name: "1С", description: "скоро тут появятся 10+ курсов" },
+  { name: "Маникюр", description: "скоро тут появятся 10+ курсов" },
+  { name: "Дизайн UX/UI", description: "Courses related to UX/UI design" },
+  {
+    name: "Психология",
+    description: "Courses related to psychology and self-improvement",
+  },
+  {
+    name: "Digital marketing",
+    description: "Courses on digital marketing and analytics",
+  },
+  {
+    name: "Machine learning",
+    description: "Courses introducing the basics of machine learning and AI",
+  },
+  { name: "SQL", description: "скоро тут появятся 10+ курсов" },
+  {
+    name: "Stock market (finance)",
+    description: "скоро тут появятся 10+ курсов",
+  },
+  {
+    name: "Crypto",
+    description: "Courses related to blockchain and cryptocurrency",
   },
 ];
 
