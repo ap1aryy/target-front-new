@@ -1,14 +1,14 @@
 import {
   Section,
   Cell,
-  Title,
+  Image,
   Link,
   Card,
   Info,
   Placeholder,
   Avatar,
-  Badge,
-  Divider,
+  Input,
+  Tappable,
   Button,
 } from "@telegram-apps/telegram-ui";
 
@@ -20,12 +20,18 @@ import WebApp from "@twa-dev/sdk";
 import * as amplitude from "@amplitude/analytics-browser";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
-import { Icon16Clear } from "@vkontakte/icons";
+import {
+  Icon16Clear,
+  Icon20ChevronRightOutline,
+  Icon24Search,
+  Icon24Dismiss,
+  Icon24Info,
+} from "@vkontakte/icons";
 import { useTranslation } from "react-i18next";
 import { courseConfig } from "@/Utils/Constants";
 import { getAllCourses } from "@/Utils/thinkificAPI";
-
-import { CoursesData } from "@/Utils/Constants";
+import CategoryBubbles from "./Booble";
+import { CoursesData, CategoriesData } from "@/Utils/Constants";
 import { CoursesContext } from "@/contexts/CoursesContext";
 /**
  * @returns {JSX.Element}
@@ -87,8 +93,6 @@ export function IndexPage() {
     navigate(`/courses/${course.id}`);
   };
   WebApp.BackButton.isVisible && WebApp.BackButton.hide();
-  const filteredCourses = courses?.filter((course) => course.id !== 0);
-
   const handleGoToStories = () => {
     amplitude.track("Open Stories from Home Page");
     navigate("/courses/stories");
@@ -100,320 +104,261 @@ export function IndexPage() {
     setIsVisibleStoriesCard(false);
   };
 
-  console.log(i18n.language);
+  const groupedCourses = CoursesData.reduce((acc, course) => {
+    if (!acc[course.category]) {
+      acc[course.category] = [];
+    }
+    acc[course.category].push(course);
+    return acc;
+  }, {});
+
+  // Разделим категории на те, в которых есть курсы, и те, в которых их нет
+  const categoriesWithCourses = Object.keys(groupedCourses).filter(
+    (categoryName) => groupedCourses[categoryName].length > 0
+  );
+
+  const categoriesWithoutCourses = CategoriesData.filter(
+    (category) => !groupedCourses[category.name]
+  );
+
+  const allCategories = CategoriesData.map((category) => category.name);
+  const [search, setSearch] = useState("");
+
+  const CourseButton = () => {
+    return <Button children="Start" size="s" mode="bezeled" />;
+  };
+  const filteredCourses = CoursesData.filter((course) => {
+    const courseName = t(course.id.toString() + ".Course_name").toLowerCase();
+    return courseName.includes(search.toLowerCase());
+  });
+
   return (
-    <div>
-      <div
-        style={{
-          padding: 16,
-          gap: 8,
-          marginBottom: 80,
-        }}
-      >
-        {isVisibleStoriesCard && (
-          <Card>
-            <Cell
-              subhead={
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  {t("whatIsTarget")}
-                  <Icon16Clear onClick={handleCloseHint} />
-                </div>
-              }
-              children={t("Check_out_a")}
-              multiline
-              subtitle={
-                <Button
-                  size="s"
-                  onClick={handleGoToStories}
-                  style={{ marginTop: "20px" }}
-                >
-                  {t("ReadMore")}
-                </Button>
-              }
-            />
-            {/* <Button
+    <div style={{ overflowX: "hidden" }}>
+      <div style={{}}>
+        <Input
+          header="Search"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          after={
+            <Tappable
+              Component="div"
+              style={{
+                display: "flex",
+              }}
+              onClick={() => setSearch("")}
+            >
+              {search ? <Icon24Dismiss /> : <Icon24Search />}
+            </Tappable>
+          }
+        />
+
+        {!search && <CategoryBubbles />}
+
+        {search && (
+          <>
+            {filteredCourses.length > 0 ? (
+              <Section
+                header={<Section.Header>{t("FoundCourses")}</Section.Header>}
+                style={{
+                  height: "100%",
+                }}
+              >
+                {filteredCourses.map((course) => (
+                  <Cell
+                    key={course.id}
+                    before={<Image size={48} src={course.img} />}
+                    children={t(course.id.toString() + ".Course_name")}
+                    subtitle={`${course.chapters.length} ${t("chapters")}`}
+                    after={<CourseButton />}
+                    onClick={() => handleGoToCourse(course)}
+                  />
+                ))}
+              </Section>
+            ) : (
+              <></> // Сообщение, если курсы не найдены
+            )}
+          </>
+        )}
+
+        {!search && (
+          <>
+            {isVisibleStoriesCard && (
+              <Card style={{ marginTop: "20px" }}>
+                <Cell
+                  subhead={
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        width: "100%",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      {t("whatIsTarget")}
+                      <Icon16Clear onClick={handleCloseHint} />
+                    </div>
+                  }
+                  children={t("Check_out_a")}
+                  multiline
+                  subtitle={
+                    <Button
+                      size="s"
+                      onClick={handleGoToStories}
+                      style={{ marginTop: "20px" }}
+                    >
+                      {t("ReadMore")}
+                    </Button>
+                  }
+                />
+                {/* <Button
             onClick={handleGoToStories}
             style={{ width: "100vw", margin: "20px 0" }}
           >
             {t("whatIsTarget")}
           </Button> */}
-          </Card>
-        )}
-        <Title
-          weight="2"
-          style={{
-            marginBottom: 4,
-          }}
-        >
-          {" "}
-          {t("Popular_courses")}
-        </Title>
+              </Card>
+            )}
 
-        {filteredCourses?.map((course) => (
-          <Card
-            key={course.id}
-            style={{
-              width: "100%",
-              textAlign: "left",
-              height: "265px",
-              marginTop: 8,
-            }}
-            onClick={() => handleGoToCourse(course)}
-          >
-            <img
-              alt="Course Image"
-              src={courseConfig[course.id]?.img || "default_image_path_here"}
-              style={{
-                display: "block",
-                height: "170px",
-                objectFit: "cover",
-                width: "100%",
-              }}
-            />
-            <Card.Cell
-              readOnly
-              subtitle={
-                // <div>
-                //   {t('Course')}
-                //   <div className='card-items-inf'>
-                //     <div>{courseConfig[course.id]?.chapters || "N/A"}</div>
-                //     •
-                //     <div>{courseConfig[course.id]?.videos || "N/A"}</div>
-                //     •
-                //     <div>{courseConfig[course.id]?.duration || "N/A"}</div>
-                //   </div>
-                // </div>
-                <div>
-                  {t("Course")}
-                  <div className="card-items-inf">
-                    <div>
-                      {courseConfig[course.id]?.chapters} {t("chapters")}
-                    </div>
-                    •
-                    {courseConfig[course.id]?.videos !== "0 " && (
-                      <>
-                        <div>
-                          {courseConfig[course.id]?.videos} {t("videos")}
-                        </div>
-                        •
-                      </>
+            <div style={{ marginTop: "20px" }}>
+              {categoriesWithCourses.map((categoryName) => {
+                const courses = groupedCourses[categoryName];
+                const limitedCourses = courses.slice(0, 3);
+                return (
+                  <Section
+                    key={categoryName}
+                    header={<Section.Header>{t(categoryName)}</Section.Header>}
+                    style={{
+                      height: "100%",
+                    }}
+                  >
+                    <Section>
+                      {limitedCourses.map((course) => (
+                        <Cell
+                          key={course.id}
+                          after={
+                            <Button
+                              children="Start"
+                              size="s"
+                              mode="bezeled"
+                              onClick={() => handleGoToCourse(course)}
+                            />
+                          }
+                          before={
+                            <Image
+                              src={course.img}
+                              size={48}
+                              style={{ borderRadius: "5px" }}
+                            />
+                          }
+                          subtitle={`${course.chapters.length} ${t(
+                            "chapters"
+                          )}`}
+                          onClick={() => handleGoToCourse(course)}
+                          children={t(course.id.toString() + ".Course_name")}
+                        />
+                      ))}
+                    </Section>
+
+                    {/* Показывать кнопку "Browse all", если курсов больше 3 */}
+                    {courses.length > 3 && (
+                      <Section>
+                        <Button
+                          style={{
+                            width: "100%",
+                          }}
+                          children="Browse all"
+                          size="m"
+                          mode="plain"
+                          onClick={() => {
+                            console.log(categoryName);
+                            navigate(`/category/${categoryName}`);
+                          }}
+                        />
+                      </Section>
                     )}
-                    <div>
-                      {courseConfig[course.id]?.duration} {t("duration")}
-                    </div>
-                  </div>
-                </div>
-              }
-            >
-              {t(course.id.toString() + ".Course_name")}
-            </Card.Cell>
-          </Card>
-        ))}
+                  </Section>
+                );
+              })}
+
+              {categoriesWithoutCourses.length > 0 && (
+                <Section style={{ marginTop: 16, marginBottom: 80 }}>
+                  <Cell
+                    before={
+                      <Image size={48}>
+                        <Icon24Info />
+                      </Image>
+                    }
+                    children="More courses coming"
+                    subtitle="Follow Target community for updates"
+                    after={
+                      <Button
+                        children="Follow"
+                        size="s"
+                        mode="bezeled"
+                        onClick={() =>
+                          window.open(
+                            i18n.language === "ru"
+                              ? "https://t.me/thetarget_courses_ru"
+                              : "https://t.me/thetarget_courses",
+                            "_blank"
+                          )
+                        }
+                      />
+                    }
+                    multiline
+                  />
+                </Section>
+              )}
+            </div>
+          </>
+        )}
       </div>
-      {/* <List>
 
-        <Section
-          header={<Cell
-           
-            before=""
-            description=""
-            hint=""
-            interactiveAnimation=""
-            subhead=""
-            subtitle=""
-            titleBadge=""
-          >
-            Choise of the day
-          </Cell>} />
-
-
-
-
-            <div className='centered'>
-          {courses.map((course, index) => (
-          <Card
-            key={index}
-            style={{
-              width: "85%",
-              textAlign: "left",
-              height: "250px" 
-            }}
-            onClick={() => handleGoToCourse(course)}
-          >
-            <img
-              alt="Course Image"
-              src="https://i.ibb.co/zmv0JD2/image-2024-11-06-19-37-49.png"
-              style={{
-                display: 'block',
-                height: "170px", 
-                objectFit: 'cover',
-                width: "100%"
-              }}
-            />
-            <Card.Cell readOnly
-              subtitle={<div>
-                Course
-                
-              </div>}
-            >
-              {course.title}
-            </Card.Cell>
-          </Card>
-        ))}
-</div>
-      </List> */}
-
-      {/* <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}> */}
-
-      {/* <Section
-          header={
-            <Cell
-              style={{ pointerEvents: 'none' }} 
-              before={<Icon20FireAltOutline style={{marginRight:-10}}/>}
-              description=""
-              hint=""
-              interactiveAnimation=""
-              subhead=""
-              subtitle=""
-              titleBadge=""
-            >
-              {t('Popular_courses')}
-            </Cell>
-          }
-        >
-          
-          <Cell
-             after={<Icon20ChevronRightOutline />}
-            before={<Avatar 
-              size={48}
-              style={{borderRadius: "5px"}} 
-              src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
-            />}
-            subtitle={`9 ${t("chapters")}`}
-            onClick={() => handleGoToCourse(courses[0])}
-          >
-            TON Blockchain & Telegram
-          </Cell>
-          <Cell
-             after={<Icon20ChevronRightOutline />}
-            before={<Avatar
-              src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
-              size={48} style={{borderRadius: "5px"}} />}
-            subtitle={`3 ${t("chapters2")}`}
-            onClick={() => handleGoToCourse(courses[1])}
-          >
-            ProProduct
-          </Cell>
-
-        </Section>
-
-        <Section
-          header={
-            <Cell
-               style={{ pointerEvents: 'none' }} 
-              before=""
-              description=""
-              hint=""
-              interactiveAnimation=""
-              subhead=""
-              subtitle=""
-              titleBadge=""
-            >
-              TON & Telegram {t("courses")}
-            </Cell>
-          }
-        >
-          
-          <Cell
-             after={<Icon20ChevronRightOutline />}
-            before={<Avatar 
-              size={48}
-              style={{borderRadius: "5px"}} 
-              src='https://i.ibb.co/zrJfDsc/image-2024-11-07-04-31-19.png'
-            />}
-            subtitle={`9 ${t("chapters")}`}
-            onClick={() => handleGoToCourse(courses[0])}
-          >
-            TON Blockchain & Telegram
-          </Cell>
-
-          <Cell
-          before={<Avatar 
-            size={48}
-            style={{borderRadius: "5px"}} 
-            children={<Icon24Clock />}
-          />}
-          subtitle={
-            <Link>{t('Coming_sson')}</Link>
-          }
-        >
-          Telegram Mini Apps
-        </Cell>
-
-        </Section>
-
-        <Section
-          header={
-            <Cell
-               style={{ pointerEvents: 'none' }} 
-              before=""
-              description=""
-              hint=""
-              interactiveAnimation=""
-              subhead=""
-              subtitle=""
-              titleBadge=""
-            >
-              Product Management {t('courses')}
-            </Cell>
-          }
-        >
-          
-          <Cell
-             after={<Icon20ChevronRightOutline />}
-            before={<Avatar
-              src='https://i.ibb.co/KDtp0XK/image-2024-11-07-04-31-31.png'
-              size={48} style={{borderRadius: "5px"}} />}
-            subtitle={`3  ${t("chapters2")}`}
-            onClick={() => handleGoToCourse(courses[1])}
-          >
-            ProProduct
-          </Cell>
-
-        </Section> */}
-
-      {/* <Cell
-          style={{border:'none',alignItems:"flex-start"}}
-              hint=""
-              interactiveAnimation=""
-              subhead=""
+      {/* <Section style={{ marginTop: 16 }}>
+        <Cell
+          style={{
+            border: "none",
+            alignItems: "flex-start",
+            marginBottom: 100,
+          }}
+          hint=""
+          interactiveAnimation=""
+          subhead=""
           titleBadge=""
-          children={t('more_courses')}
-          subtitle={t('more_courses_soon')}
-          description={<Button style={{borderRadius:40,margin:"8px 0",height:"5vh"}}>{t('follow_us')}</Button>}
-          after=''
+          children={t("more_courses")}
+          subtitle={t("more_courses_soon")}
+          description={
+            <Button
+              style={{ borderRadius: 40, margin: "8px 0", height: "5vh" }}
+            >
+              {t("follow_us")}
+            </Button>
+          }
+          after=""
           before={
-                    <Avatar
-                      size={48}
-                      style={{ borderRadius: "5px", marginTop:"30%" }}
-                      src="https://i.ibb.co/CtPSccK/photo-2024-11-10-13-12-28.jpg" 
-                    />
-                  }
-        onClick={() => window.open(i18n.language === 'ru' ? "https://t.me/thetarget_courses_ru" : "https://t.me/thetarget_courses", "_blank")}
-
-        >
-        </Cell>
+            <Avatar
+              size={48}
+              style={{ borderRadius: "5px", marginTop: "30%" }}
+              src="https://i.ibb.co/CtPSccK/photo-2024-11-10-13-12-28.jpg"
+            />
+          }
+          onClick={() =>
+            window.open(
+              i18n.language === "ru"
+                ? "https://t.me/thetarget_courses_ru"
+                : "https://t.me/thetarget_courses",
+              "_blank"
+            )
+          }
+        ></Cell>
       </Section> */}
+
       {!courses && (
         <Placeholder
-          style={{ paddingTop: 20, paddingBottom: 20 }}
+          style={{ paddingTop: 16, paddingBottom: 16 }}
           description="Gotcha! That's the end!"
         >
           <img

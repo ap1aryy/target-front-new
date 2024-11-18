@@ -20,6 +20,7 @@ export const options = [
 export const mentors = [
   { name: "David Kruel", status: "1", price: 1, company: "Kruel Live" },
 ];
+
 export const CoursesData = [
   {
     id: 2925675,
@@ -27,7 +28,7 @@ export const CoursesData = [
     description:
       "Курс предназначен для разработчиков и IT-специалистов. Он даёт теоретические и практические знания о технологиях и концепциях блокчейна TON, включая язык программирования FunC, смарт-контракты и их тестирование, а также создание мини-приложений.",
     slug: "my-course",
-    category: "Crypto",
+    category: "Crypto", // Здесь оставляем категорию как есть, так как она уже соответствует новым названиям
     chapters: [
       "1. Introduction to TON Blockchain",
       "2. TVM, Transactions, Scalability, and Business Cases",
@@ -39,6 +40,7 @@ export const CoursesData = [
       "8. Smart Contract Security",
       "9. Ecosystem Products, Future Plans, and Vision",
     ],
+    img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
   },
   {
     id: 2930629,
@@ -46,7 +48,7 @@ export const CoursesData = [
     description:
       "Получите фундаментальное понимание аналитики продукта и ее роли в бизнесе. К концу этой главы студенты узнают, что такое продуктовая аналитика, поймут, почему она имеет решающее значение для успеха продукта, и познакомятся с ключевыми показателями и терминами в этой области.",
     slug: "ai-placeholder",
-    category: "Digital marketing",
+    category: "Digital Marketing", // Категория обновлена на английский
     chapters: [
       "1. Introduction to Product Analytics",
       "2. Setting Up Analytics Frameworks",
@@ -54,13 +56,14 @@ export const CoursesData = [
       "4. Experimentation and A/B Testing",
       "5. Making Data-Driven Decisions and Communicating Insights",
     ],
+    img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
   },
   {
     id: 2930630,
     title: "Introduction to UX Research",
     description:
       "В этой главе вы получите глубокое представление об UX-исследованиях, важности UX в дизайне и основных концепциях UX-исследований. После завершения этой главы вы поймете основную роль UX-исследований в разработке продукта, как они формируют пользовательский опыт, а также основные концепции, которые лежат в основе работы UX-исследователей.",
-    category: "Дизайн UX/UI",
+    category: "UX&UI Design", // Обновлена категория на английский
     chapters: [
       "1. Understanding the Foundations of UX Research",
       "2. User Research Methods",
@@ -68,13 +71,14 @@ export const CoursesData = [
       "4. Communicating UX Research Findings",
       "5. Applying UX Research to Design Decisions",
     ],
+    img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
   },
   {
     id: 2930631,
     title: "Data Science for Beginners",
     description:
       "Этот курс для начинающих знакомит с основными понятиями, инструментами и методами data science. Благодаря практическим занятиям учащиеся получат прочную основу для работы с данными, их анализа, визуализации и основ машинного обучения. К концу курса студенты будут обладать навыками анализа данных, раскрытия сути и построения простых прогностических моделей.",
-    category: "Machine learning",
+    category: "Machine Learning", // Обновлена категория на английский
     chapters: [
       "1. Introduction to Data Science",
       "2. Data Collection and Preparation",
@@ -82,6 +86,7 @@ export const CoursesData = [
       "4. Data Visualization",
       "5. Basic Machine Learning",
     ],
+    img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
   },
   {
     id: 2930632,
@@ -90,7 +95,7 @@ export const CoursesData = [
       "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
     description:
       "Unlock the potential of Telegram Mini Apps with this beginner's course! Learn to create engaging mini apps that enhance user interaction and boost productivity.",
-    category: "Тестировщик/тестирование",
+    category: "QA Tester&Testing", // Обновлена категория на английский
     chapters: [
       "1. Introduction to Telegram Mini Apps",
       "2. Basics of Creating Mini Apps",
@@ -98,6 +103,7 @@ export const CoursesData = [
       "4. Designing Mini Apps Functionality and UX",
       "5. Deploying the App",
     ],
+    img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
   },
   {
     id: 2926478,
@@ -106,7 +112,7 @@ export const CoursesData = [
       "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
     description:
       "Програма онлайн тренеровок и питания от професионального тренера и нутрициолога. Улучши свою физическую форму.",
-    category: "Психология",
+    category: "Psychology", // Обновлена категория на английский
     chapters: [
       "1. Full-Body Workout with Resistance Bands",
       "2. Roller Workout",
@@ -118,40 +124,52 @@ export const CoursesData = [
       "8. Coordination Training",
       "9. 20-Minute Dumbbell Circuit",
     ],
+    img: "https://i.postimg.cc/yN5FN1Rx/photo-2024-11-13-21-10-14.jpg",
   },
 ];
 
 export const CategoriesData = [
   {
-    name: "Тестировщик/тестирование",
-    description: "скоро тут появятся 10+ курсов",
-  },
-  { name: "Машинное обучение", description: "скоро тут появятся 10+ курсов" },
-  { name: "СММ", description: "скоро тут появятся 10+ курсов" },
-  { name: "Бухгалтерия/юристы", description: "скоро тут появятся 10+ курсов" },
-  { name: "1С", description: "скоро тут появятся 10+ курсов" },
-  { name: "Маникюр", description: "скоро тут появятся 10+ курсов" },
-  { name: "Дизайн UX/UI", description: "Courses related to UX/UI design" },
-  {
-    name: "Психология",
-    description: "Courses related to psychology and self-improvement",
+    name: "QA Tester&Testing",
   },
   {
-    name: "Digital marketing",
-    description: "Courses on digital marketing and analytics",
+    name: "Machine Learning",
   },
   {
-    name: "Machine learning",
-    description: "Courses introducing the basics of machine learning and AI",
+    name: "SMM",
   },
-  { name: "SQL", description: "скоро тут появятся 10+ курсов" },
   {
-    name: "Stock market (finance)",
-    description: "скоро тут появятся 10+ курсов",
+    name: "Accounting&Lawyers",
+  },
+  {
+    name: "1C",
+  },
+  {
+    name: "Manicure",
+  },
+  {
+    name: "UX&UI Design",
+  },
+  {
+    name: "Psychology",
+  },
+  {
+    name: "Digital Marketing",
+  },
+  {
+    name: "Machine Learning",
+  },
+  {
+    name: "SQL",
+  },
+  {
+    name: "Stock Market (Finance)",
   },
   {
     name: "Crypto",
-    description: "Courses related to blockchain and cryptocurrency",
+  },
+  {
+    name: "Ads",
   },
 ];
 

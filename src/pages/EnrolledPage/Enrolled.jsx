@@ -162,32 +162,41 @@ export function EnrollmentsPage() {
               </div>
             ))}
       </Section>
-      {/* <Section style={{ height: "100%", margin:" 0 16px 80px 16px"}}>
+      {/* <Section style={{ height: "100%", margin: " 0 16px 80px 16px" }}>
         <Cell
-          style={{border:'none',alignItems:"flex-start"}}
+          style={{ border: "none", alignItems: "flex-start" }}
           multiline
-              hint=""
-              interactiveAnimation=""
-              subhead=""
+          hint=""
+          interactiveAnimation=""
+          subhead=""
           titleBadge=""
-          children={t('follow_our_channel')}
-          subtitle={t('follow_our_channel_desc')}
+          children={t("follow_our_channel")}
+          subtitle={t("follow_our_channel_desc")}
           before={
-                    <Avatar
-                      size={48}
-                      style={{ borderRadius: "5px", marginTop:"30%" }}
-                      src="https://i.ibb.co/CtPSccK/photo-2024-11-10-13-12-28.jpg" 
-                    />
-                  }
-          description={<Button style={{borderRadius:40,margin:"8px 0",height:"5vh"}}>{t('follow_us')}</Button>}
-          after=''
-          
-           onClick={() => window.open(i18n.language === 'ru' ? "https://t.me/thetarget_courses_ru" : "https://t.me/thetarget_courses", "_blank")}
-
-        >
-          
-            </Cell>
-</Section> */}
+            <Avatar
+              size={48}
+              style={{ borderRadius: "5px", marginTop: "30%" }}
+              src="https://i.ibb.co/CtPSccK/photo-2024-11-10-13-12-28.jpg"
+            />
+          }
+          description={
+            <Button
+              style={{ borderRadius: 40, margin: "8px 0", height: "5vh" }}
+            >
+              {t("follow_us")}
+            </Button>
+          }
+          after=""
+          onClick={() =>
+            window.open(
+              i18n.language === "ru"
+                ? "https://t.me/thetarget_courses_ru"
+                : "https://t.me/thetarget_courses",
+              "_blank"
+            )
+          }
+        ></Cell>
+      </Section> */}
       {Array.isArray(courses) &&
       !courses.some((course) => course?.my === true) ? (
         <Placeholder

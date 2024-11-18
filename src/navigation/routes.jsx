@@ -4,6 +4,7 @@ import { EnrollmentsPage } from "@/pages/EnrolledPage/Enrolled";
 import { Chapters } from "@/pages/Courses/Chapters1";
 import { PopUp } from "@/pages/PurchasePage/PopUp";
 import { StoriesPage } from "@/pages/StoriesPage/Stories";
+import { TargetCategory } from "@/pages/IndexPage/CategoryPage";
 /**
  * @typedef {object} Route
  * @property {string} path
@@ -26,4 +27,9 @@ export const routes = [
   },
   { path: "/buy", Component: PopUp, title: "PopUp" },
   { path: "/courses/stories", Component: StoriesPage, title: "StoriesPage" },
+  {
+    path: "/category/:categoryName",
+    Component: TargetCategory,
+    title: "TargetCategory",
+  },
 ];
