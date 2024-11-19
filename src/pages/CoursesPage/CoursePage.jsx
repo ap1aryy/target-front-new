@@ -275,6 +275,7 @@ export function CoursePage() {
     navigate("/buy", { state: { course } });
   };
   const handleShareCourse = () => {
+    amplitude.track("share_course");
     const shareLink = `https://t.me/share/url?url=http://t.me/thetargetbot/learn?startapp=course-${course.id}_source-${user.id}\n`;
     window.open(shareLink, "_blank");
   };
