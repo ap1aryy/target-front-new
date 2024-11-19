@@ -30,7 +30,7 @@ import {
   Icon20PlayCircle,
   Icon16StarAlt,
   Icon16Clear,
-  Icon16CheckCircleLarge,
+  Icon24ShareOutline,
 } from "@vkontakte/icons";
 import { groupedVideos } from "@/Utils/Constants";
 import { format } from "date-fns";
@@ -274,6 +274,10 @@ export function CoursePage() {
     console.log(course);
     navigate("/buy", { state: { course } });
   };
+  const handleShareCourse = () => {
+    const shareLink = `https://t.me/share/url?url=http://t.me/thetargetbot/learn?startapp=course-${course.id}_source-${user.id}\n`;
+    window.open(shareLink, "_blank");
+  };
 
   if (loading) {
     return null;
@@ -301,8 +305,18 @@ export function CoursePage() {
         <Title level="1" weight="2">
           {t(course?.id.toString() + ".Course_name")}
         </Title>
-        <Text weight="3">{t("Course")}</Text>
-
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <Text weight="3">{t("Course")}</Text>
+          <Icon24ShareOutline onClick={handleShareCourse} />
+        </div>
         <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
           {getTranslatedTags(course?.id).map((translatedTag, index) => (
             <Chip key={index} mode="mono">
