@@ -135,13 +135,15 @@ export function StoriesPage() {
       <img
         src={images[currentIndex]}
         style={{
-          position: "absolute",
-          width: "100vw",
-          height: "100vh",
-          top: 0,
-          bottom: 0,
+          position: "fixed", // Фиксируем картинку, чтобы она не прокручивалась
+          width: "100vw", // Полная ширина экрана
+          height: "auto", // Поддержание пропорций
+          top: 0, // Прикрепить к верхней части экрана
           left: 0,
           right: 0,
+          bottom: 0, // Картинка может выходить за пределы снизу
+          objectFit: "cover", // Картинка будет покрывать экран без искажения
+          zIndex: -1, // Опционально: если нужно, чтобы картинка была на заднем плане
         }}
         onClick={(e) => {
           const { clientX, currentTarget } = e;
