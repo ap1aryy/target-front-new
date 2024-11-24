@@ -259,3 +259,12 @@ export const courseConfig = {
     duration: "6 ",
   },
 };
+
+export const courseTagsConfig = {
+  2925675: ["Digital", "TON", "Telegram"],
+  2926478: ["Fitness", "Training"],
+  2930629: ["Analytic", "Beginners"],
+  2930630: ["Digital", "UX"],
+  2930631: ["Digital", "Beginners", "Data"],
+  2930632: ["Telegram", "TON", "Digital", "TMA"],
+};
