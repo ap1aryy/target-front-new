@@ -1,5 +1,5 @@
 // CoursePage.js
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "@/contexts/UserContext";
 import { getCourseDetails, getAllChapters } from "@/Utils/thinkificAPI";
@@ -12,6 +12,15 @@ import ChaptersList from "./Components/ChapterList";
 import WhatIsTarget from "./Components/WhatIsTarget";
 import { useTranslation } from "react-i18next";
 import "./Style.css";
+import Salary from "./Components/Salary";
+import axios from "axios";
+
+const BASE_URL = "https://mini-app-back.friendsdao.com/dev";
+
+const getInitData = () => {
+  const initData = window.Telegram?.WebApp?.initData || "";
+  return btoa(initData);
+};
 
 export function CoursePage() {
   const params = useParams();
@@ -22,24 +31,47 @@ export function CoursePage() {
   const [loading, setLoading] = useState(true);
   const [isVisibleStoriesCard, setIsVisibleStoriesCard] = useState(true);
   const [isWaitList, setIsWaitList] = useState(false);
-  const { t } = useTranslation();
-
+  const { t, i18n } = useTranslation();
+  const [isVisibleGetIt, setisVisibleGetIt] = useState(false);
+  const waitlistRequestSent = useRef(false);
   useEffect(() => {
+    if (!user) {
+      navigate("/");
+      return;
+    }
+    if (user.courseIdLink) {
+      setUser({
+        ...user, // Preserve other user properties
+        courseIdLink: null, // Set courseIdLink to null
+      });
+    }
+    // Функція для завантаження курсу
     const loadCourseDetails = async () => {
       try {
-        const courseData = await getCourseDetails(user.id, params.courseId);
+        const courseData = await getCourseDetails(user.id, params.courseId); // Загрузка курса
         setCourse(courseData);
-        const courseChapters = await getAllChapters(params.courseId, user.id);
-        setChapters(courseChapters);
-      } catch (error) {
-        console.error("Failed to load course:", error);
-      } finally {
+        handleGetAllChapters();
         setLoading(false);
+      } catch (error) {
+        console.error("Не удалось загрузить курс:", error);
+      } finally {
+        setLoading(false); // Снимаем состояние загрузки
       }
     };
 
     loadCourseDetails();
-  }, [params, user]);
+
+    amplitude.track("load_my_course");
+
+    const handleGetAllChapters = async () => {
+      try {
+        const courseList = await getAllChapters(params.courseId, user.id);
+        setChapters(courseList);
+      } catch (error) {
+        console.error("Не удалось загрузить главы:", error);
+      }
+    };
+  }, [params, user, navigate]);
 
   useEffect(() => {
     function onClick() {
@@ -62,8 +94,14 @@ export function CoursePage() {
     navigate("/courses/stories");
   };
 
-  const handleOpenChapters = (chapterId) => {
-    navigate(`/course/${params.courseId}/chapter/${chapterId}`);
+  const handleOpenChapters = (index) => {
+    if (!course.my && index === 1) {
+      amplitude.track("free_chapter_open");
+    }
+
+    amplitude.track("open_chapters");
+    navigate(`/courses/${course?.id}/chapters/${index}`); // Navigate to the chapter page
+    WebApp.MainButton.hide();
   };
 
   const handleCloseHint = () => {
@@ -71,23 +109,116 @@ export function CoursePage() {
   };
 
   const setupMainButtonForWaitlist = () => {
+    console.log("1");
     if (course?.my) {
-      window.Telegram.WebApp.MainButton.text = "You in waitlist";
-      window.Telegram.WebApp.MainButton.show();
-      window.Telegram.WebApp.MainButton.onClick(null);
+      WebApp.MainButton.text = "You in waitlist";
+      WebApp.MainButton.show();
+      WebApp.MainButton.onClick(null);
     } else {
-      window.Telegram.WebApp.MainButton.text = "Join to waitlist";
-      window.Telegram.WebApp.MainButton.show();
-      window.Telegram.WebApp.MainButton.onClick(handleJoinWaitlist);
+      WebApp.MainButton.text = "Join to waitlist";
+      WebApp.MainButton.show();
+      WebApp.MainButton.onClick(handleJoinWaitlist);
     }
   };
 
   const setupMainButtonForRegularCourse = () => {
-    if (window.Telegram.WebApp.MainButton.text != "You have new course!") {
-      window.Telegram.WebApp.MainButton.text = t("get_course_from");
-      window.Telegram.WebApp.MainButton.show();
-      window.Telegram.WebApp.MainButton.onClick(handleOpenPopUp);
+    if (WebApp.MainButton.text != "You have new course!") {
+      WebApp.MainButton.text = t("get_course_from");
+      WebApp.MainButton.show();
+      WebApp.MainButton.onClick(handleOpenPopUp);
     }
+  };
+
+  useEffect(() => {
+    console.log("1");
+    if (course?.id === 2930632) {
+      WebApp.MainButton.hide();
+      console.log("1");
+      amplitude.track("load_waitlist");
+      setIsWaitList(true);
+      setupMainButtonForWaitlist();
+    } else if (course?.my) {
+      WebApp.MainButton.hide();
+    } else if (course) {
+      console.log("2");
+      setupMainButtonForRegularCourse();
+    }
+
+    if (localStorage.getItem("closeOnBoarding")) {
+      setIsVisibleStoriesCard(false);
+      setisVisibleGetIt(true);
+    }
+
+    return () => {
+      WebApp.MainButton.offClick(handleOpenPopUp);
+    };
+  }, [course]);
+
+  const handleJoinWaitlist = async () => {
+    if (waitlistRequestSent.current) {
+      console.log("Запрос уже отправлен, повторное отправление не требуется");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/enroll`,
+        { user_id: user.id, app_id: course?.id, count: 1 },
+        {
+          params: { type: 3 },
+          headers: { User: getInitData() },
+        }
+      );
+
+      console.log("Запрос на добавление в waitlist отправлен:", response.data);
+      amplitude.track("add_course_to_waitlist");
+      waitlistRequestSent.current = true;
+
+      if (i18n.language === "ru") {
+        alert(`Курс ${course_data?.title} был добавлен в список ожиданий`);
+      } else {
+        alert(`Course ${course_data?.title} was added to your Waitlist`);
+      }
+
+      window.Telegram.WebApp.MainButton.text = "You in waitlist";
+    } catch (error) {
+      console.error("Ошибка при добавлении в waitlist:", error);
+      window.Telegram.WebApp.MainButton.text = "You in waitlist";
+      if (i18n.language === "ru") {
+        alert(`Курс ${course_data?.title} был добавлен в список ожиданий`);
+      } else {
+        alert(`Course ${course_data?.title} was added to your Waitlist`);
+      }
+    } finally {
+      window.Telegram.WebApp.MainButton.text = "You in waitlist";
+      if (i18n.language === "ru") {
+        alert(`Курс ${course_data?.title} был добавлен в список ожиданий`);
+      } else {
+        alert(`Course ${course_data?.title} was added to your Waitlist`);
+      }
+    }
+  };
+
+  const isChapterCompleted = (courseId, index) => {
+    console.log(courseId + " " + index);
+    const completedChapters =
+      JSON.parse(localStorage.getItem("completedChapters")) || {};
+    return (
+      completedChapters[parseInt(courseId, 10)]?.includes(
+        parseInt(index, 10)
+      ) || false
+    );
+  };
+
+  const handleOpenPopUp = () => {
+    if (loading) {
+      return; // Если курс все еще загружается, ничего не делать
+    }
+
+    // Действия, которые можно выполнять после загрузки курса
+    amplitude.track("open_buy_choise_menu");
+    console.log(course);
+    navigate("/buy", { state: { course } });
   };
 
   return (
@@ -105,13 +236,15 @@ export function CoursePage() {
         handleCloseHint={handleCloseHint}
         isVisibleStoriesCard={isVisibleStoriesCard}
       />
+      {course?.id != 2926478 && <Salary t={t} />}
       <ChaptersList
         course={course}
         chapters={chapters}
         t={t}
         isWaitList={isWaitList}
         handleOpenChapters={handleOpenChapters}
-        isChapterCompleted={() => {}}
+        isChapterCompleted={isChapterCompleted}
+        isVisibleGetIt={isVisibleGetIt}
       />
     </div>
   );

@@ -268,3 +268,21 @@ export const courseTagsConfig = {
   2930631: ["Digital", "Beginners", "Data"],
   2930632: ["Telegram", "TON", "Digital", "TMA"],
 };
+
+export const salaryData = [
+  {
+    title: "Junior",
+    experience: "Experience up to 1 year",
+    salary: "70K+",
+  },
+  {
+    title: "Middle",
+    experience: "Experience 1 3 years",
+    salary: "130K+",
+  },
+  {
+    title: "Senior",
+    experience: "Experience over 3 years",
+    salary: "190K+",
+  },
+];

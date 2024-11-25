@@ -68,7 +68,7 @@ export function StoriesPage() {
   // Сохранение состояния в localStorage, когда пользователь дошел до последнего изображения
   const handleClose = () => {
     if (currentIndex === images.length - 1) {
-      localStorage.setItem("hasSeenAllStories", "true"); // Сохраняем, что пользователь просмотрел все сторисы
+      localStorage.setItem("closeOnBoarding", "true"); // Сохраняем, что пользователь просмотрел все сторисы
       navigate(-1); // Закрываем или переходим назад
     } else {
       handleNext(); // Если не последняя, продолжаем к следующей

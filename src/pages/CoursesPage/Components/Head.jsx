@@ -5,13 +5,20 @@ import {
   Button,
   AvatarStack,
   Avatar,
-  Chip,
   Info,
   Caption,
   Cell,
 } from "@telegram-apps/telegram-ui";
 import { shareIcon } from "@/pages/CoursesPage/Utils";
-export function Head({ course, user, t, handleShareCourse }) {
+import { courseConfig } from "@/Utils/Constants";
+import * as amplitude from "@amplitude/analytics-browser";
+export function Head({ course, user, t }) {
+  const handleShareCourse = () => {
+    amplitude.track("share_course");
+    const shareLink = `https://t.me/share/url?url=http://t.me/thetargetbot/learn?startapp=course-${course.id}_source-${user.id}\n`;
+    window.open(shareLink, "_blank");
+  };
+
   return (
     <>
       <div
@@ -21,19 +28,18 @@ export function Head({ course, user, t, handleShareCourse }) {
           left: 0,
           right: 0,
           width: "100vw",
-          height: "180px",
-          marginBottom: 200,
+          height: "220px",
         }}
       >
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
           <Image
-            src="https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png"
+            src={courseConfig[course?.id]?.img || "default_image_path_here"}
             style={{
               position: "absolute",
               top: -5,
               left: 0,
               right: 0,
-              height: "180px",
+              height: "220px",
               width: "100%",
               objectFit: "cover",
               borderRadius: "0 0 16px 16px",
@@ -47,30 +53,35 @@ export function Head({ course, user, t, handleShareCourse }) {
               color: "white",
               padding: "5px 10px",
               borderRadius: "5px",
-              maxWidth: "60%",
+              maxWidth: "50%",
               wordWrap: "break-word",
             }}
           >
-            <Title level="3" weight="3" children="TON & Telegram " />
+            <Title
+              level="3"
+              weight="3"
+              children={t(course?.id.toString() + ".Course_name")}
+            />
           </div>
           <Button
-            children="Share"
+            children={t("Share")}
             style={{
               position: "absolute",
-              bottom: "15%",
+              bottom: "10%",
               right: "5%",
               borderRadius: "40px",
               wordWrap: "break-word",
             }}
             after={shareIcon}
             size="s"
+            onClick={handleShareCourse}
           />
         </div>
       </div>
 
       <div
         style={{
-          marginTop: "200px",
+          marginTop: "236px",
           marginBottom: 16,
           marginLeft: 16,
           display: "flex",
@@ -83,14 +94,24 @@ export function Head({ course, user, t, handleShareCourse }) {
             <Info
               avatarStack={
                 <AvatarStack>
-                  <Avatar size={28} />
-                  <Avatar size={28} />
-                  <Avatar size={28} />
+                  <Avatar
+                    size={28}
+                    src="https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/82bec838-05c8-4d68-b173-2284a6ad4e52/how-to-stop-being-a-people-pleaser"
+                  />
+                  <Avatar
+                    size={28}
+                    src="https://magazine.scienceconnected.org/wp-content/uploads/2021/03/qtq80-uMPS9J.jpeg"
+                  />
+                  <Avatar
+                    size={28}
+                    src="https://thehumanbean.com/cdn/shop/files/woman_smiling_holding_drink_hot_cup_brown_cup_adrian_august_2022.jpg?v=1679677878&width=1500"
+                  />
                 </AvatarStack>
               }
               type="avatarStack"
             >
-              1+K enrolled
+              {t("enrolled_count", { count: "1K+" })}{" "}
+              {/* Translated enrolled count */}
             </Info>
           }
           type="avatarStack"
@@ -99,16 +120,28 @@ export function Head({ course, user, t, handleShareCourse }) {
 
       <div
         style={{
-          marginBottom: 16,
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           gap: 5,
         }}
       >
-        <Cell children="Language:" />
-        <Button mode="bezeled" children="English" />
-        <Button mode="bezeled" children="Russian" />
+        <Cell
+          subtitle={
+            <Title children={t("Language")} style={{ fontSize: "2.5vh" }} />
+          }
+          style={{ pointerEvents: "none" }}
+        />
+        <Button
+          mode="bezeled"
+          children={t("English")}
+          style={{ pointerEvents: "none" }}
+        />
+        <Button
+          mode="bezeled"
+          children={t("Russian")}
+          style={{ pointerEvents: "none" }}
+        />
       </div>
     </>
   );

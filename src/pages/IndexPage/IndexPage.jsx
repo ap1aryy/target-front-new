@@ -134,7 +134,6 @@ export function IndexPage() {
     const courseName = t(course.id.toString() + ".Course_name").toLowerCase();
     return courseName.includes(search.toLowerCase());
   });
-
   return (
     <div style={{ overflowX: "hidden" }}>
       <div style={{}}>
