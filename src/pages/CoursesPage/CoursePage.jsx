@@ -222,7 +222,6 @@ export function CoursePage() {
     console.log(course);
     navigate("/buy", { state: { course } });
   };
-  localStorage.clear();
   return (
     <div>
       <Head
