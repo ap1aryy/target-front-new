@@ -248,6 +248,7 @@ export function CoursePage() {
         handleOpenChapters={handleOpenChapters}
         isChapterCompleted={isChapterCompleted}
         isVisibleGetIt={isVisibleGetIt}
+        handleOpenPopUp={handleOpenPopUp}
       />
     </div>
   );

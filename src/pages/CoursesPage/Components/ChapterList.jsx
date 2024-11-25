@@ -161,7 +161,15 @@ export function ChaptersList({
                       </div>
                     )
                   }
-                  onClick={!isWaitList ? handleOpenPopUp : null}
+                  onClick={
+                    isWaitList
+                      ? null
+                      : course?.my
+                      ? () => handleOpenChapters(chapter?.id) // передаємо функцію, не викликаємо її
+                      : index !== 0
+                      ? () => handleOpenPopUp() // також передаємо функцію без виклику
+                      : () => handleOpenChapters(chapters[0]?.id) // передаємо функцію
+                  }
                 />
               </Section>
 

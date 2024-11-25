@@ -1,9 +1,11 @@
 import { Title, Text, Cell } from "@telegram-apps/telegram-ui";
 import React from "react";
 import { salaryData } from "@/Utils/Constants";
-import * as amplitude from "@amplitude/analytics-browser";
+
+import { useTranslation } from "react-i18next";
 export function Salary({ t }) {
-  // Added t for translation function
+  const { i18n } = useTranslation();
+  const currencySymbol = i18n.language === "en" ? "$" : "₽";
   return (
     <Cell multiline style={{ pointerEvents: "none" }}>
       <div style={{ marginBottom: "20px" }}>
@@ -25,11 +27,11 @@ export function Salary({ t }) {
               )}{" "}
             </div>
             <div style={salaryContainerStyle}>
-              <Text weight="1" style={salaryStyle}>
-                {item.salary} {/* Salary stays as it is */}
-              </Text>
               <Text style={currencyStyle} weight="2">
-                ₽
+                {currencySymbol}
+              </Text>
+              <Text weight="1" style={salaryStyle}>
+                {item.salary}
               </Text>
             </div>
           </div>
@@ -66,9 +68,9 @@ const subtitleStyle = {
 
 const salaryContainerStyle = {
   display: "flex",
-  alignItems: "flex-end",
+  alignItems: "center",
   marginTop: "1vh",
-  justifyContent: "space-between",
+  justifyContent: "flex-start",
 };
 
 const salaryStyle = {

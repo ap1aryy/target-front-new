@@ -58,36 +58,38 @@ export function Description({ course, t }) {
         />
       )}
 
-      <Cell
-        subtitle={
-          <div style={{ fontSize: 12, lineHeight: "15px" }}>
-            {t("price_description")}
-          </div>
-        } // Translated price description
-        multiline
-        children={
-          <Button
-            style={{
-              width: "100vw",
-              height: "48px",
-              borderRadius: "38px",
-              marginBottom: "16px",
-              backgroundColor: "transparent",
-              border: "2px solid rgba(0, 122, 255, 1)",
-              color: "rgba(0, 122, 255, 1)",
-              transition: "all 0.3s ease",
-            }}
-            children={t("course_price")}
-            after={<Icon16StarAlt />}
-            mode="outline"
-            size="s"
-            onMouseEnter={(e) => (e.target.style.borderColor = "#007aff")}
-            onMouseLeave={(e) =>
-              (e.target.style.borderColor = "rgba(0, 122, 255, 1)")
-            }
-          />
-        }
-      />
+      {!course?.my && (
+        <Cell
+          subtitle={
+            <div style={{ fontSize: 12, lineHeight: "15px" }}>
+              {t("price_description")}
+            </div>
+          } // Translated price description
+          multiline
+          children={
+            <Button
+              style={{
+                width: "100vw",
+                height: "48px",
+                borderRadius: "38px",
+                marginBottom: "16px",
+                backgroundColor: "transparent",
+                border: "2px solid rgba(0, 122, 255, 1)",
+                color: "rgba(0, 122, 255, 1)",
+                transition: "all 0.3s ease",
+              }}
+              children={t("course_price")}
+              after={<Icon16StarAlt />}
+              mode="outline"
+              size="s"
+              onMouseEnter={(e) => (e.target.style.borderColor = "#007aff")}
+              onMouseLeave={(e) =>
+                (e.target.style.borderColor = "rgba(0, 122, 255, 1)")
+              }
+            />
+          }
+        />
+      )}
     </>
   );
 }
