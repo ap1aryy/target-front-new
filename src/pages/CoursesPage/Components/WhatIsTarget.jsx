@@ -21,7 +21,7 @@ export function WhatIsTarget({ t, handleGoToStories, isVisibleStoriesCard }) {
       setTimeout(() => {
         setIsEntering(true);
       }, 50);
-    }, 2000);
+    }, 100);
 
     const hideTimeout = setTimeout(() => {
       setIsHidden(true);
@@ -59,7 +59,7 @@ export function WhatIsTarget({ t, handleGoToStories, isVisibleStoriesCard }) {
         style={{
           position: "absolute",
           zIndex: 10,
-          top: isHidden ? "-20px" : isEntering ? "10px" : "-100px",
+          top: isHidden ? "-20px" : isEntering ? "16px" : "-100px",
           left: 10,
           right: 10,
           transition: "top 0.5s ease, opacity 0.5s ease",
@@ -77,7 +77,7 @@ export function WhatIsTarget({ t, handleGoToStories, isVisibleStoriesCard }) {
           before={
             <Avatar
               src={"/logo.png"}
-              size={48}
+              size={55}
               style={{ borderRadius: "5px" }}
             />
           }

@@ -209,7 +209,9 @@ export function CoursePage() {
       ) || false
     );
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0); // Прокрутка страницы к верхней части
+  }, []);
   const handleOpenPopUp = () => {
     if (loading) {
       return; // Если курс все еще загружается, ничего не делать
@@ -220,7 +222,7 @@ export function CoursePage() {
     console.log(course);
     navigate("/buy", { state: { course } });
   };
-
+  localStorage.clear();
   return (
     <div>
       <Head
@@ -230,12 +232,14 @@ export function CoursePage() {
         handleShareCourse={handleShareCourse}
       />
       <Description course={course} t={t} />
-      <WhatIsTarget
-        t={t}
-        handleGoToStories={handleGoToStories}
-        handleCloseHint={handleCloseHint}
-        isVisibleStoriesCard={isVisibleStoriesCard}
-      />
+      {isVisibleStoriesCard && (
+        <WhatIsTarget
+          t={t}
+          handleGoToStories={handleGoToStories}
+          handleCloseHint={handleCloseHint}
+          isVisibleStoriesCard={isVisibleStoriesCard}
+        />
+      )}
       {course?.id != 2926478 && <Salary t={t} />}
       <ChaptersList
         course={course}

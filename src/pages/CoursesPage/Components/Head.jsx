@@ -6,7 +6,7 @@ import {
   AvatarStack,
   Avatar,
   Info,
-  Caption,
+  Text,
   Cell,
 } from "@telegram-apps/telegram-ui";
 import { shareIcon } from "@/pages/CoursesPage/Utils";
@@ -36,7 +36,7 @@ export function Head({ course, user, t }) {
             src={courseConfig[course?.id]?.img || "default_image_path_here"}
             style={{
               position: "absolute",
-              top: -5,
+              top: 0,
               left: 0,
               right: 0,
               height: "240px",
@@ -59,7 +59,7 @@ export function Head({ course, user, t }) {
           >
             <Title
               level="3"
-              weight="3"
+              weight="1"
               children={t(course?.id.toString() + ".Course_name")}
             />
           </div>
@@ -71,6 +71,7 @@ export function Head({ course, user, t }) {
               right: "5%",
               borderRadius: "40px",
               wordWrap: "break-word",
+              fontWeight: 400,
             }}
             after={shareIcon}
             size="s"
@@ -130,9 +131,7 @@ export function Head({ course, user, t }) {
         }}
       >
         <Cell
-          subtitle={
-            <Title children={t("Language")} style={{ fontSize: "2.3 vh" }} />
-          }
+          subtitle={t("Language")}
           style={{ pointerEvents: "none" }}
           after={
             <>
@@ -143,6 +142,7 @@ export function Head({ course, user, t }) {
                   pointerEvents: "none",
                   marginLeft: "-4%",
                   borderRadius: 6,
+                  fontWeight: 400,
                 }}
                 size="s"
               />

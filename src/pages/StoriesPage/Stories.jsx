@@ -1,9 +1,11 @@
-import { Image, Button } from "@telegram-apps/telegram-ui";
+import { Button } from "@telegram-apps/telegram-ui"; // Убираем Button, так как он не нужен
 import { useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "@/contexts/UserContext";
 import { useTranslation } from "react-i18next";
 import * as amplitude from "@amplitude/analytics-browser";
+import { Icon24Cancel } from "@vkontakte/icons"; // Импортируем иконку крестика
+
 /**
  * @returns {JSX.Element}
  */
@@ -61,18 +63,11 @@ export function StoriesPage() {
     navigate(-1); // Сразу возвращаемся назад
   };
 
-  // Определяем текст для кнопки в зависимости от текущего индекса
-  const buttonText =
-    currentIndex === images.length - 1 ? t("close") : t("next");
-
   // Сохранение состояния в localStorage, когда пользователь дошел до последнего изображения
   const handleClose = () => {
-    if (currentIndex === images.length - 1) {
-      localStorage.setItem("closeOnBoarding", "true"); // Сохраняем, что пользователь просмотрел все сторисы
-      navigate(-1); // Закрываем или переходим назад
-    } else {
-      handleNext(); // Если не последняя, продолжаем к следующей
-    }
+    // Закрытие сторис и возвращение назад
+    localStorage.setItem("closeOnBoarding", "true"); // Сохраняем, что пользователь просмотрел все сторисы
+    navigate(-1); // Закрываем или переходим назад
   };
 
   const trackStoryView = (index) => {
@@ -159,20 +154,19 @@ export function StoriesPage() {
         }}
       />
 
-      <Button
+      {/* Иконка закрытия */}
+      <div
         style={{
           position: "absolute",
-          bottom: 20,
+          top: "16px",
           right: 20,
-          left: 20,
-          backgroundColor: "white",
-          color: "black",
+          zIndex: 2,
+          cursor: "pointer",
         }}
-        onClick={handleClose} // Обработчик нажатия на кнопку
-        backgroundColor="white"
-        children={buttonText}
-        size="l"
-      />
+        onClick={handleClose}
+      >
+        <Icon24Cancel width={24} height={24} color="white" />
+      </div>
     </div>
   );
 }

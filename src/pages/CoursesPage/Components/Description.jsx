@@ -12,8 +12,8 @@ export function Description({ course, t }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const description = t(course?.id.toString() + ".Description") || "";
   const truncatedDescription =
-    description.length > 140
-      ? description.substring(0, 140) + "..."
+    description.length > 124
+      ? description.substring(0, 124) + "..."
       : description;
 
   const handleToggleDescription = () => {
@@ -35,7 +35,7 @@ export function Description({ course, t }) {
         subtitle={isExpanded ? description : truncatedDescription}
         onClick={handleToggleDescription}
       />
-      {description.length > 140 && (
+      {description.length > 124 && (
         <Button
           style={{
             pointerEvents: "auto",
@@ -60,7 +60,9 @@ export function Description({ course, t }) {
 
       <Cell
         subtitle={
-          <Text style={{ fontSize: 12 }}>{t("price_description")}</Text>
+          <div style={{ fontSize: 12, lineHeight: "15px" }}>
+            {t("price_description")}
+          </div>
         } // Translated price description
         multiline
         children={

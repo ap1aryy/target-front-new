@@ -17,13 +17,13 @@ export function Salary({ t }) {
             <Title weight="2" style={titleStyle}>
               {t(`salary_titles.${item.title.toLowerCase()}`)}{" "}
             </Title>
-            <Title style={subtitleStyle}>
+            <div style={subtitleStyle}>
               {t(
                 `salary_experience.${item.experience
                   .toLowerCase()
                   .replace(/ /g, "_")}`
               )}{" "}
-            </Title>
+            </div>
             <div style={salaryContainerStyle}>
               <Text weight="1" style={salaryStyle}>
                 {item.salary} {/* Salary stays as it is */}
@@ -59,8 +59,9 @@ const titleStyle = {
 };
 
 const subtitleStyle = {
+  fontWeight: 400,
   fontSize: "12px",
-  lineHeight: "1.5",
+  lineHeight: "15px",
 };
 
 const salaryContainerStyle = {
