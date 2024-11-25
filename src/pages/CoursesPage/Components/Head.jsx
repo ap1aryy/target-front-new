@@ -28,7 +28,7 @@ export function Head({ course, user, t }) {
           left: 0,
           right: 0,
           width: "100vw",
-          height: "220px",
+          height: "240px",
         }}
       >
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
@@ -39,7 +39,7 @@ export function Head({ course, user, t }) {
               top: -5,
               left: 0,
               right: 0,
-              height: "220px",
+              height: "240px",
               width: "100%",
               objectFit: "cover",
               borderRadius: "0 0 16px 16px",
@@ -81,7 +81,7 @@ export function Head({ course, user, t }) {
 
       <div
         style={{
-          marginTop: "236px",
+          marginTop: "256px",
           marginBottom: 16,
           marginLeft: 16,
           display: "flex",
@@ -95,14 +95,17 @@ export function Head({ course, user, t }) {
               avatarStack={
                 <AvatarStack>
                   <Avatar
+                    style={{ boxShadow: "none" }}
                     size={28}
                     src="https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/82bec838-05c8-4d68-b173-2284a6ad4e52/how-to-stop-being-a-people-pleaser"
                   />
                   <Avatar
+                    style={{ boxShadow: "none" }}
                     size={28}
                     src="https://magazine.scienceconnected.org/wp-content/uploads/2021/03/qtq80-uMPS9J.jpeg"
                   />
                   <Avatar
+                    style={{ boxShadow: "none" }}
                     size={28}
                     src="https://thehumanbean.com/cdn/shop/files/woman_smiling_holding_drink_hot_cup_brown_cup_adrian_august_2022.jpg?v=1679677878&width=1500"
                   />
@@ -128,19 +131,33 @@ export function Head({ course, user, t }) {
       >
         <Cell
           subtitle={
-            <Title children={t("Language")} style={{ fontSize: "2.5vh" }} />
+            <Title children={t("Language")} style={{ fontSize: "2.3 vh" }} />
           }
           style={{ pointerEvents: "none" }}
-        />
-        <Button
-          mode="bezeled"
-          children={t("English")}
-          style={{ pointerEvents: "none" }}
-        />
-        <Button
-          mode="bezeled"
-          children={t("Russian")}
-          style={{ pointerEvents: "none" }}
+          after={
+            <>
+              <Button
+                mode="bezeled"
+                children={t("English")}
+                style={{
+                  pointerEvents: "none",
+                  marginLeft: "-4%",
+                  borderRadius: 6,
+                }}
+                size="s"
+              />
+              <Button
+                mode="bezeled"
+                children={t("Russian")}
+                style={{
+                  pointerEvents: "none",
+                  borderRadius: 6,
+                  marginLeft: "4%",
+                }}
+                size="s"
+              />
+            </>
+          }
         />
       </div>
     </>

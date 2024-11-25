@@ -25,7 +25,7 @@ export function Salary({ t }) {
               )}{" "}
             </Title>
             <div style={salaryContainerStyle}>
-              <Text weight="2" style={salaryStyle}>
+              <Text weight="1" style={salaryStyle}>
                 {item.salary} {/* Salary stays as it is */}
               </Text>
               <Text style={currencyStyle} weight="2">
@@ -40,6 +40,7 @@ export function Salary({ t }) {
 }
 
 const cardStyle = {
+  position: "relative", // Для можливості додавання псевдоелемента
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -50,14 +51,15 @@ const cardStyle = {
   background:
     "linear-gradient(141.43deg, #007AFF 16.4%, rgba(0, 102, 214, 0.9) 65.76%, #D9EBFF 118.17%)",
   borderRadius: "20px",
+  overflow: "hidden", // Забезпечує, щоб псевдоелемент не виходив за межі картки
+  border: "px solid",
 };
-
 const titleStyle = {
   fontSize: "3vh",
 };
 
 const subtitleStyle = {
-  fontSize: "1.5vh",
+  fontSize: "12px",
   lineHeight: "1.5",
 };
 
@@ -69,11 +71,11 @@ const salaryContainerStyle = {
 };
 
 const salaryStyle = {
-  fontSize: "3vh",
+  fontSize: "3.5vh",
 };
 
 const currencyStyle = {
-  fontSize: "2.5vh",
+  fontSize: "3vh",
 };
 
 export default Salary;

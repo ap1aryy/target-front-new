@@ -1,31 +1,57 @@
 import React, { useState, useEffect } from "react";
-import { Section, Cell, Avatar, Image } from "@telegram-apps/telegram-ui";
+import { Section, Cell, Avatar } from "@telegram-apps/telegram-ui";
 import { Icon28ChevronRightOutline } from "@vkontakte/icons";
 import "../Style.css";
 import * as amplitude from "@amplitude/analytics-browser";
-export function WhatIsTarget({
-  t,
-  handleGoToStories,
-  handleCloseHint,
-  isVisibleStoriesCard,
-}) {
-  const [isVisible, setIsVisible] = useState(isVisibleStoriesCard);
-  const [isHidden, setIsHidden] = useState(false);
 
-  // Show the component for 4 seconds upon mounting and then hide it with animation
+export function WhatIsTarget({ t, handleGoToStories, isVisibleStoriesCard }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const [isEntering, setIsEntering] = useState(false);
+
+  // Значення для визначення свайпа
+  let touchStartY = 0;
+  let touchEndY = 0;
+
   useEffect(() => {
     amplitude.track("show_what_is_target");
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        setIsHidden(true); // Trigger the sliding-up animation
-        setTimeout(() => {
-          setIsVisible(false); // Actually hide the component after animation
-        }, 300); // Duration of the sliding animation (matches CSS transition)
-      }, 6000);
 
-      return () => clearTimeout(timer); // Clear the timeout on component unmount
+    const showTimeout = setTimeout(() => {
+      setIsVisible(true);
+      setTimeout(() => {
+        setIsEntering(true);
+      }, 50);
+    }, 2000);
+
+    const hideTimeout = setTimeout(() => {
+      setIsHidden(true);
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 300);
+    }, 12000);
+
+    return () => {
+      clearTimeout(showTimeout);
+      clearTimeout(hideTimeout);
+    };
+  }, []);
+
+  // Обробники подій для свайпа
+  const handleTouchStart = (e) => {
+    touchStartY = e.touches[0].clientY;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndY = e.touches[0].clientY;
+
+    if (touchStartY - touchEndY > 50) {
+      // Визначення свайпа вгору
+      setIsHidden(true);
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 300);
     }
-  }, [isVisible]);
+  };
 
   return (
     isVisible && (
@@ -33,14 +59,19 @@ export function WhatIsTarget({
         style={{
           position: "absolute",
           zIndex: 10,
-          top: isHidden ? "-100px" : "10px", // Slide up when hidden
+          top: isHidden ? "-20px" : isEntering ? "10px" : "-100px",
           left: 10,
           right: 10,
-          transition: "top 0.3s ease", // Slide-up animation
+          transition: "top 0.5s ease, opacity 0.5s ease",
+          opacity: isHidden ? 0 : 1,
+          height: 80,
         }}
         onClick={handleGoToStories}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
       >
         <Cell
+          style={{ height: 80 }}
           multiline
           after={<Icon28ChevronRightOutline />}
           before={
@@ -50,8 +81,8 @@ export function WhatIsTarget({
               style={{ borderRadius: "5px" }}
             />
           }
-          subtitle={t("onboarding_subtitle")} // Translated subtitle
-          children={t("what_is_target")} // Translated title
+          subtitle={t("onboarding_subtitle")}
+          children={t("what_is_target")}
         />
       </Section>
     )

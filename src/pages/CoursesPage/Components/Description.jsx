@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Cell, Divider, Title, Button } from "@telegram-apps/telegram-ui";
+import { Text, Cell, Divider, Title, Button } from "@telegram-apps/telegram-ui";
 import { starIconSvg } from "@/pages/CoursesPage/Utils";
 import "../Style.css";
 import {
@@ -12,8 +12,8 @@ export function Description({ course, t }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const description = t(course?.id.toString() + ".Description") || "";
   const truncatedDescription =
-    description.length > 135
-      ? description.substring(0, 135) + "..."
+    description.length > 140
+      ? description.substring(0, 140) + "..."
       : description;
 
   const handleToggleDescription = () => {
@@ -29,15 +29,19 @@ export function Description({ course, t }) {
             children={t("about_course")} // Translated "About course"
             level="3"
             weight="2"
-            style={{ marginBottom: 16 }}
+            style={{ marginBottom: 8 }}
           />
         }
         subtitle={isExpanded ? description : truncatedDescription}
         onClick={handleToggleDescription}
       />
-      {description.length > 135 && (
+      {description.length > 140 && (
         <Button
-          style={{ pointerEvents: "auto", marginLeft: "55%", marginTop: -20 }}
+          style={{
+            pointerEvents: "auto",
+            marginLeft: "63%",
+            marginTop: -20,
+          }}
           children={isExpanded ? t("show_less") : t("show_more")} // Translated Show less / Show more
           mode="plain"
           size="s"
@@ -55,9 +59,10 @@ export function Description({ course, t }) {
       )}
 
       <Cell
-        subtitle={t("price_description")} // Translated price description
+        subtitle={
+          <Text style={{ fontSize: 12 }}>{t("price_description")}</Text>
+        } // Translated price description
         multiline
-        style={{ pointerEvents: "none" }}
         children={
           <Button
             style={{
@@ -70,7 +75,7 @@ export function Description({ course, t }) {
               color: "rgba(0, 122, 255, 1)",
               transition: "all 0.3s ease",
             }}
-            children={t("course_price")} // Translated "Course price"
+            children={t("course_price")}
             after={<Icon16StarAlt />}
             mode="outline"
             size="s"
