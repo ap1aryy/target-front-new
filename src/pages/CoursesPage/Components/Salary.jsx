@@ -132,6 +132,7 @@ const yearTextStyle = {
   textAlight: "center",
   fontSize: "1.8vh", // Уменьшаем размер шрифта для "/year"
   fontWeight: 400,
+  marginLeft: -4,
   whiteSpace: "nowrap", // Предотвращаем перенос текста
 };
 
