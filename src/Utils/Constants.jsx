@@ -273,16 +273,24 @@ export const salaryData = [
   {
     title: "Junior",
     experience: "Experience up to 1 year",
-    salary: "70K+",
+    salary: "70",
   },
   {
     title: "Middle",
     experience: "Experience 1 3 years",
-    salary: "130K+",
+    salary: "130",
   },
   {
     title: "Senior",
     experience: "Experience over 3 years",
-    salary: "190K+",
+    salary: "190",
   },
 ];
+
+export const averageSalaries = {
+  "Machine Learning": 120000, // Data Scientist
+  "UX&UI Design": 100000, // UX/UI Designer
+  "Digital Marketing": 95000, // Marketing
+  "QA Tester&Testing": 75000, // QA Tester
+  Crypto: 130000, // Blockchain Developer
+};

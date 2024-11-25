@@ -239,7 +239,7 @@ export function CoursePage() {
           isVisibleStoriesCard={isVisibleStoriesCard}
         />
       )}
-      {course?.id != 2926478 && <Salary t={t} />}
+      {course?.id != 2926478 && <Salary t={t} course={course} />}
       <ChaptersList
         course={course}
         chapters={chapters}
