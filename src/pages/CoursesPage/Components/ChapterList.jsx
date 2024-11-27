@@ -60,7 +60,7 @@ export function ChaptersList({
         children={<Title weight="2" level="3" children={t("course_program")} />}
       />
       <List>
-        {chapters.map((chapter, index) => {
+        {chapters?.map((chapter, index) => {
           const videosInChapter = groupedVideos[chapter.id]; // Получаем видео для этого раздела
           const videoCount = videosInChapter ? videosInChapter.length : 0; // Подсчитываем количество видео
           return (
@@ -82,7 +82,6 @@ export function ChaptersList({
                           position: "absolute",
                           marginBottom: "95px",
                           marginRight: "50px",
-                          padding: "0 8px",
                           borderRadius: 6,
                           height: 28,
                         }}

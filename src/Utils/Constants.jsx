@@ -40,7 +40,7 @@ export const CoursesData = [
       "8. Smart Contract Security",
       "9. Ecosystem Products, Future Plans, and Vision",
     ],
-    img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
+    img: "/courses/TON & TG.png",
   },
   {
     id: 2930629,
@@ -56,7 +56,7 @@ export const CoursesData = [
       "4. Experimentation and A/B Testing",
       "5. Making Data-Driven Decisions and Communicating Insights",
     ],
-    img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
+    img: "/courses/Product Analytics for Beginners.png",
   },
   {
     id: 2930630,
@@ -71,7 +71,7 @@ export const CoursesData = [
       "4. Communicating UX Research Findings",
       "5. Applying UX Research to Design Decisions",
     ],
-    img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
+    img: "/courses/Introduction to UX Research.png",
   },
   {
     id: 2930631,
@@ -86,13 +86,12 @@ export const CoursesData = [
       "4. Data Visualization",
       "5. Basic Machine Learning",
     ],
-    img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
+    img: "/courses/Data Science for Beginners.png",
   },
   {
     id: 2930632,
     title: "Telegram Mini Apps. First Steps.",
-    avatar:
-      "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
+    avatar: "Transform your body.png",
     description:
       "Unlock the potential of Telegram Mini Apps with this beginner's course! Learn to create engaging mini apps that enhance user interaction and boost productivity.",
     category: "QA Tester&Testing", // Обновлена категория на английский
@@ -103,13 +102,12 @@ export const CoursesData = [
       "4. Designing Mini Apps Functionality and UX",
       "5. Deploying the App",
     ],
-    img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
+    img: "/courses/Telegram Mini Apps. First steps.png",
   },
   {
     id: 2926478,
     title: "Прокачай свое тело за 21 день.",
-    avatar:
-      "https://cdn.thinkific.com/55/20240401/8b770df91347206eb0f1cd5657ee3a82.png",
+    avatar: "Transform your body.png",
     description:
       "Програма онлайн тренеровок и питания от професионального тренера и нутрициолога. Улучши свою физическую форму.",
     category: "Psychology", // Обновлена категория на английский
@@ -124,7 +122,7 @@ export const CoursesData = [
       "8. Coordination Training",
       "9. 20-Minute Dumbbell Circuit",
     ],
-    img: "https://i.postimg.cc/yN5FN1Rx/photo-2024-11-13-21-10-14.jpg",
+    img: "/courses/Transform your body.png",
   },
 ];
 
@@ -223,37 +221,37 @@ export const groupedVideos = {
 
 export const courseConfig = {
   2925675: {
-    img: "https://import.cdn.thinkific.com/999858/pyyc0rCgRaa3ekSGO7VK_image_2024-11-11_12-22-24.png",
+    img: "/courses/TON & TG.png",
     chapters: "9 ",
     videos: "32 ",
     duration: "15 ",
   },
   2926478: {
-    img: "https://i.postimg.cc/yN5FN1Rx/photo-2024-11-13-21-10-14.jpg",
+    img: "/courses/Transform your body.png",
     chapters: "9 ",
     videos: "9 ",
     duration: "4.5",
   },
   2930629: {
-    img: "https://import.cdn.thinkific.com/999858/t3mgnOnyQhWCbUwcTIU5_image_2024-11-11_12-22-33.png",
+    img: "/courses/Product Analytics for Beginners.png",
     chapters: "5 ",
     videos: "0 ",
     duration: "6 ",
   },
   2930630: {
-    img: "https://import.cdn.thinkific.com/999858/xZCJxhsvTmWvV0UVvhJe_image_2024-11-11_12-22-43.png",
+    img: "/courses/Introduction to UX Research.png",
     chapters: "5 ",
     videos: "0 ",
     duration: "6 ",
   },
   2930631: {
-    img: "https://import.cdn.thinkific.com/999858/KUfY4NlShCypqsMNRQy6_image_2024-11-11_12-22-54.png",
+    img: "/courses/Data Science for Beginners.png",
     chapters: "5 ",
     videos: "0 ",
     duration: "6 ",
   },
   2930632: {
-    img: "https://import.cdn.thinkific.com/999858/Z281jNKKSTKQcQsMne2K_image_2024-11-11_12-23-03.png",
+    img: "/courses/Telegram Mini Apps. First steps.png",
     chapters: "5 ",
     videos: "0 ",
     duration: "6 ",

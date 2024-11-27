@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, Cell, Divider, Title, Button } from "@telegram-apps/telegram-ui";
 import { starIconSvg } from "@/pages/CoursesPage/Utils";
+import Skeleton from "react-loading-skeleton"; // Импортируем Skeleton
 import "../Style.css";
 import {
   Icon16StarAlt,
@@ -8,8 +9,19 @@ import {
   Icon24ChevronUpSmall,
 } from "@vkontakte/icons";
 import * as amplitude from "@amplitude/analytics-browser";
+
 export function Description({ course, t }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
+
+  // Имитируем асинхронную загрузку данных (например, API вызов)
+  useEffect(() => {
+    // Эмуляция загрузки
+    setTimeout(() => {
+      setIsLoading(false); // После 2 секунд "загружаем" данные
+    }, 300);
+  }, []);
+
   const description = t(course?.id.toString() + ".Description") || "";
   const truncatedDescription =
     description.length > 124
@@ -25,17 +37,31 @@ export function Description({ course, t }) {
       <Cell
         multiline
         children={
-          <Title
-            children={t("about_course")} // Translated "About course"
-            level="3"
-            weight="2"
-            style={{ marginBottom: 8 }}
-          />
+          isLoading ? (
+            <Skeleton width={200} height={224} />
+          ) : (
+            <Title
+              children={t("about_course")} // Translated "About course"
+              level="3"
+              weight="2"
+              style={{ marginBottom: 8 }}
+            />
+          )
         }
-        subtitle={isExpanded ? description : truncatedDescription}
+        subtitle={
+          isLoading ? (
+            // Скелетон для описания
+            <Skeleton count={3} />
+          ) : isExpanded ? (
+            description
+          ) : (
+            truncatedDescription
+          )
+        }
         onClick={handleToggleDescription}
       />
-      {description.length > 124 && (
+
+      {description.length > 124 && !isLoading && (
         <Button
           style={{
             pointerEvents: "auto",
@@ -58,7 +84,7 @@ export function Description({ course, t }) {
         />
       )}
 
-      {!course?.my && (
+      {!course?.my && !isLoading && (
         <Cell
           subtitle={
             <div style={{ fontSize: 12, lineHeight: "15px" }}>
@@ -90,6 +116,9 @@ export function Description({ course, t }) {
           }
         />
       )}
+
+      {/* Добавим Divider, если данные загружены */}
+      {!isLoading && <Divider />}
     </>
   );
 }
