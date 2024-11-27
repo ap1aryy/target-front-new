@@ -1,21 +1,18 @@
-import "./Chapters.css";
 import { Title, List, Button, Text } from "@telegram-apps/telegram-ui";
 
 export const Lesson1_1 = () => {
   return (
     <List>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        1.1 Overview of the TON Ecosystem
-      </Title>
+      <Title weight="7">1.1 Overview of the TON Ecosystem</Title>
 
-      <Title style={{ fontSize: 16 }}>Dear Participants!</Title>
+      <Title>Dear Participants!</Title>
 
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         Welcome to our TON blockchain development course — an exciting journey
         into the world of advanced technologies and decentralized applications.
       </Title>
 
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         We are confident that successfully completing this course will open not
         only new horizons but also opportunities provided by the TON ecosystem.
         Along the way, you'll face engaging tasks, challenges, and practical
@@ -23,14 +20,12 @@ export const Lesson1_1 = () => {
         development skills.
       </Title>
 
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         Remember, each completed task brings you closer to the coveted SBT
         certificate.
       </Title>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Requirements for obtaining it:
-      </Title>
+      <Title weight="7">Requirements for obtaining it:</Title>
       <ul>
         <li>
           Honestly complete all course lessons, solve the provided tasks and
@@ -42,31 +37,27 @@ export const Lesson1_1 = () => {
         </li>
       </ul>
 
-      <Title style={{ fontSize: 16 }}>
-        We wish you inspiring learning and many projects! Let's go!
-      </Title>
+      <Title>We wish you inspiring learning and many projects! Let's go!</Title>
 
       <Title weight="4">💎 Welcome to the first part!</Title>
 
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         In this part, you will explore the entire TON blockchain, its
         architecture, principles, and key components.
       </Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         One lesson will cover the blockchain structure and a detailed
         description of its internal processes. Another lesson will focus on the
         principles of blockchain networks in general and their evolution over
         three generations. Finally, we will delve into TON network contracts and
         tokens.
       </Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         By the end of this section, you will have a comprehensive understanding
         of the TON ecosystem and its components.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        📝 You will learn:
-      </Title>
+      <Title weight="4">📝 You will learn:</Title>
       <ul>
         <li>
           about custodial and non-custodial services and the differences between
@@ -78,9 +69,7 @@ export const Lesson1_1 = () => {
 
       <div className="video-container">{/* Insert video as needed */}</div>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        📝 What you now know
-      </Title>
+      <Title weight="4">📝 What you now know</Title>
       <ul>
         <li>How custodial wallets differ from non-custodial ones.</li>
         <li>
@@ -92,16 +81,14 @@ export const Lesson1_1 = () => {
         </li>
       </ul>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        📚 Lesson Summary
-      </Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title weight="4">📚 Lesson Summary</Title>
+      <Title>
         In this section, we discuss the overall architecture, construction
         principles, and other essential components of the TON platform.
       </Title>
 
       <Title style={{ marginTop: 12 }}>What is TON?</Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         TON is a platform for decentralized applications, bringing together
         users, validators, and app developers. It is more than just a
         blockchain. The TON blockchain brings together three groups:
@@ -115,34 +102,32 @@ export const Lesson1_1 = () => {
       <Title style={{ marginTop: 12 }}>
         Custodial and Non-custodial Services
       </Title>
-      <Title style={{ fontSize: 16 }}>
-        Applications and services are divided into two groups:
-      </Title>
+      <Title>Applications and services are divided into two groups:</Title>
       <ul>
         <li>custodial,</li>
         <li>non-custodial.</li>
       </ul>
 
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         <strong>Custodial services</strong> are managed by the same party
         responsible for the funds stored on these services.
       </Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         Online exchanges are usually custodial because they need to use funds
         from wallets to guarantee the promised exchange.
       </Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         <strong>
           This is why online exchanges represent a risk, as attackers could hack
           them and steal funds without recovery options.
         </strong>
       </Title>
 
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         <strong>Non-custodial services</strong> are services that do not hold
         user funds and leave them entirely under the owner's control.
       </Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         <strong>
           Since all funds remain with users, hacking systems becomes more
           challenging.
@@ -152,13 +137,13 @@ export const Lesson1_1 = () => {
       <Title style={{ marginTop: 12 }}>
         Centralized and Decentralized Applications
       </Title>
-      <Title style={{ fontSize: 16 }}>Applications can be:</Title>
+      <Title>Applications can be:</Title>
       <ul>
         <li>centralized,</li>
         <li>decentralized.</li>
       </ul>
 
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         <strong>✨ Centralized applications</strong> are applications running on
         a server. <strong>Decentralized applications</strong> do not require a
         server and run directly on a blockchain smart contract.
@@ -167,12 +152,10 @@ export const Lesson1_1 = () => {
       <Title style={{ marginTop: 12 }}>
         What can be created on the blockchain
       </Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         A wide variety of tools and services can be created with the blockchain.
       </Title>
-      <Title style={{ fontSize: 16 }}>
-        Smart contracts form the foundation of:
-      </Title>
+      <Title>Smart contracts form the foundation of:</Title>
       <ul>
         <li>decentralized exchanges;</li>
         <li>tokens:</li>
@@ -186,7 +169,7 @@ export const Lesson1_1 = () => {
       </ul>
 
       <Title style={{ marginTop: 12 }}>Conclusion</Title>
-      <Title style={{ fontSize: 16 }}>
+      <Title>
         The TON ecosystem brings together wallets, exchanges, traders, and users
         interacting through smart contracts. This course focuses on authorized
         smart contracts, deploying them in TON, developing additional features,
@@ -199,9 +182,7 @@ export const Lesson1_1 = () => {
 export const Lesson1_2 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        1.1 Overview of the TON Ecosystem
-      </Title>
+      <Title weight="7">1.1 Overview of the TON Ecosystem</Title>
 
       <Title weight="4">What you now know:</Title>
       <ul>
@@ -225,9 +206,7 @@ export const Lesson1_2 = () => {
       </ul>
       <link></link>
       <Title weight="4">📚 Lesson Summary</Title>
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Blockchain and State Changes
-      </Title>
+      <Title weight="4">Blockchain and State Changes</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         The TON blockchain functions as a state registry of network accounts.
       </Title>
@@ -253,7 +232,7 @@ export const Lesson1_2 = () => {
         <li>Send messages to other contracts.</li>
       </ul>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
+      <Title weight="4">
         However, TON implies some restrictions set by network architecture:
       </Title>
       <ul>
@@ -280,9 +259,7 @@ export const Lesson1_2 = () => {
         </li>
       </ul>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Validator Consensus
-      </Title>
+      <Title weight="4">Validator Consensus</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Validators are responsible for message delivery.
       </Title>
@@ -302,13 +279,9 @@ export const Lesson1_2 = () => {
 export const Lesson1_3 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        1.3 Principles of Blockchain Operation
-      </Title>
+      <Title weight="7">1.3 Principles of Blockchain Operation</Title>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        📝 You will learn:
-      </Title>
+      <Title weight="7">📝 You will learn:</Title>
       <ul>
         <li>
           how Bitcoin and Ethereum are designed, and their key differences from
@@ -322,9 +295,7 @@ export const Lesson1_3 = () => {
         </li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        📝 What you now know
-      </Title>
+      <Title weight="7">📝 What you now know</Title>
       <ul>
         <li>
           The entire Bitcoin state is essentially a list of accounts that have
@@ -362,9 +333,7 @@ export const Lesson1_3 = () => {
         </li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        📚 Lesson Summary
-      </Title>
+      <Title weight="7">📚 Lesson Summary</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         This lesson explores the evolution of blockchain networks through three
         generations — Bitcoin, Ethereum, and TON.
@@ -452,9 +421,7 @@ export const Lesson1_3 = () => {
         </li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Conclusion
-      </Title>
+      <Title weight="7">Conclusion</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Blockchain has evolved from Bitcoin's simple yet crucial model to
         Ethereum's functional model, which faced scalability issues. The third
@@ -469,9 +436,7 @@ export const Lesson1_3 = () => {
 export const Lesson1_4 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Lesson 1.4: Account and Contract Concepts
-      </Title>
+      <Title weight="7">Lesson 1.4: Account and Contract Concepts</Title>
 
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         <strong>What you will learn:</strong>
@@ -508,9 +473,7 @@ export const Lesson1_4 = () => {
         <li>The rental fee throughout the contract’s lifecycle.</li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        What can be created with contracts:
-      </Title>
+      <Title weight="7">What can be created with contracts:</Title>
       <ul>
         <li>User account contracts.</li>
         <li>Multi-signature contracts.</li>
@@ -519,9 +482,7 @@ export const Lesson1_4 = () => {
         </li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        How to protect TON:
-      </Title>
+      <Title weight="7">How to protect TON:</Title>
       <ul>
         <li>
           Execution and data rental fees help prevent denial-of-service attacks.
@@ -529,9 +490,7 @@ export const Lesson1_4 = () => {
         <li>Gas fees depend on the execution time of instructions.</li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Frozen Contracts:
-      </Title>
+      <Title weight="7">Frozen Contracts:</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         If a contract cannot pay its rental fees, it is frozen, and its data is
         replaced with a hash of the last state.
@@ -543,9 +502,7 @@ export const Lesson1_4 = () => {
 export const Lesson1_5 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Lesson 1.5: Tokens, Currencies, DNS, etc.
-      </Title>
+      <Title weight="7">Lesson 1.5: Tokens, Currencies, DNS, etc.</Title>
 
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         <strong>What you will learn:</strong>
@@ -561,9 +518,7 @@ export const Lesson1_5 = () => {
         </li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        What are assets:
-      </Title>
+      <Title weight="7">What are assets:</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Assets in TON are any valuable items you want to add to your
         application, such as:
@@ -576,17 +531,13 @@ export const Lesson1_5 = () => {
         <li>Financial contracts</li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Tokenization
-      </Title>
+      <Title weight="7">Tokenization</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Tokenization is the process of distributing a system's total value as a
         set of transferable tokens.
       </Title>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Types of Tokens in TON
-      </Title>
+      <Title weight="7">Types of Tokens in TON</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>Tokens can be:</Title>
       <ul>
         <li>
@@ -599,9 +550,7 @@ export const Lesson1_5 = () => {
         </li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Token Scalability
-      </Title>
+      <Title weight="7">Token Scalability</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Token scalability means that transfer operations between users do not
         affect transfers between other users in the network. This enables the
@@ -611,9 +560,7 @@ export const Lesson1_5 = () => {
         <source src="https://cdn.stepik.net/video/326895/1080/32605e586e7f267ca655e087bb683ce9.mp4" />
       </video>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        Conclusion
-      </Title>
+      <Title weight="7">Conclusion</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Thus, fungible and non-fungible tokens allow you to implement any type
         of assets that can be sent directly to users. This is an essential
@@ -626,9 +573,7 @@ export const Lesson1_5 = () => {
 export const Lesson2_1 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        2.1 TVM and Memory Operation
-      </Title>
+      <Title weight="7">2.1 TVM and Memory Operation</Title>
 
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         <strong>💎 Welcome to the second part!</strong>
@@ -686,9 +631,7 @@ export const Lesson2_1 = () => {
         each individual contract cannot scale beyond its container.
       </Title>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        📚 Lesson Summary
-      </Title>
+      <Title weight="7">📚 Lesson Summary</Title>
 
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         In this lesson, we will learn about how memory and the TON Virtual
@@ -698,9 +641,7 @@ export const Lesson2_1 = () => {
       <Title weight="4">
         🏁 Let’s start with TON’s unique entity—the cell.
       </Title>
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Cells
-      </Title>
+      <Title weight="4">Cells</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         <strong>What are cells?</strong>
       </Title>
@@ -718,9 +659,7 @@ export const Lesson2_1 = () => {
         cells 🌳.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Data Model in TON
-      </Title>
+      <Title weight="4">Data Model in TON</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         The data model in TON creates certain challenges for developers, as data
         needs to be split into fragments of 1023 bits, which is slightly less
@@ -728,9 +667,7 @@ export const Lesson2_1 = () => {
         needs to be.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Why Cells?
-      </Title>
+      <Title weight="4">Why Cells?</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         ❗ The advantage of this structure is that the entire blockchain state
         can be combined into a binary tree (Merkle tree), allowing for Merkle
@@ -746,9 +683,7 @@ export const Lesson2_1 = () => {
         handy, allowing any system participant's misbehavior to be identified.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Other Data Types in TVM
-      </Title>
+      <Title weight="4">Other Data Types in TVM</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         The TON Virtual Machine supports several types of data:
       </Title>
@@ -769,9 +704,7 @@ export const Lesson2_1 = () => {
         one.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Memory Operation
-      </Title>
+      <Title weight="4">Memory Operation</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Let’s look at how a contract interacts with memory.
       </Title>
@@ -781,9 +714,7 @@ export const Lesson2_1 = () => {
         contract.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        What to Consider?
-      </Title>
+      <Title weight="4">What to Consider?</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Creating multi-level cells for small amounts of data is fine. If you’re
         creating a system with a small number of participants—such as a
@@ -794,9 +725,7 @@ export const Lesson2_1 = () => {
         storing the entire list of users within the contract.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Conclusion
-      </Title>
+      <Title weight="4">Conclusion</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Here’s what we’ve covered by the end of the lesson.
       </Title>
@@ -824,22 +753,16 @@ export const Lesson2_1 = () => {
 export const Lesson2_2 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        2.2 Message Types and Transaction Stages
-      </Title>
+      <Title weight="7">2.2 Message Types and Transaction Stages</Title>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        📝 You will learn:
-      </Title>
+      <Title weight="7">📝 You will learn:</Title>
       <ul>
         <li>the types of messages a contract can receive;</li>
         <li>what a transaction is;</li>
         <li>what the stages of a transaction are.</li>
       </ul>
 
-      <Title weight="7" style={{ marginTop: 16 }}>
-        📝 What you now know
-      </Title>
+      <Title weight="7">📝 What you now know</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         A contract can receive two types of messages—external and internal.
       </Title>
@@ -869,23 +792,17 @@ export const Lesson2_2 = () => {
 export const Lesson2_3 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        2.3 Message Authorization in Contracts
-      </Title>
+      <Title weight="7">2.3 Message Authorization in Contracts</Title>
 
       <section>
-        <Title weight="7" style={{ marginTop: 16 }}>
-          📝 What you will learn:
-        </Title>
+        <Title weight="7">📝 What you will learn:</Title>
         <ul>
           <li>What types of authentication exist in the TON blockchain?</li>
         </ul>
       </section>
 
       <section>
-        <Title weight="7" style={{ marginTop: 16 }}>
-          📝 What you now know
-        </Title>
+        <Title weight="7">📝 What you now know</Title>
         <Title style={{ fontSize: 16, marginTop: 4 }}>
           The first type of authentication is signature-based authentication.
           For example, when an external message is received, the wallet reads
@@ -916,14 +833,10 @@ export const Lesson2_3 = () => {
       </section>
 
       <section>
-        <Title weight="7" style={{ marginTop: 16 }}>
-          📚 Lesson Summary
-        </Title>
+        <Title weight="7">📚 Lesson Summary</Title>
         <Title weight="4">Overview of All Authentication Types</Title>
 
-        <Title weight="4" style={{ marginTop: 16 }}>
-          Signature-Based Authentication
-        </Title>
+        <Title weight="4">Signature-Based Authentication</Title>
         <Title style={{ fontSize: 16, marginTop: 4 }}>
           ❗ Any event in the TON blockchain must begin with an external
           message. When an external message arrives at the wallet, it reads 64
@@ -933,9 +846,7 @@ export const Lesson2_3 = () => {
           sending messages to other contracts on the blockchain.
         </Title>
 
-        <Title weight="4" style={{ marginTop: 16 }}>
-          Sender Authentication
-        </Title>
+        <Title weight="4">Sender Authentication</Title>
         <Title style={{ fontSize: 16, marginTop: 4 }}>
           All internal messages in TON are identified by the sender of the
           message. The correctness and security 🔓 at this stage are guaranteed
@@ -944,9 +855,7 @@ export const Lesson2_3 = () => {
           cheaper and more powerful option compared to signature verification.
         </Title>
 
-        <Title weight="4" style={{ marginTop: 16 }}>
-          Sender Code Verification
-        </Title>
+        <Title weight="4">Sender Code Verification</Title>
         <Title style={{ fontSize: 16, marginTop: 4 }}>
           Addresses in the TON ecosystem are not just unique identifiers of
           contracts, but also cryptographically protected hashes of the
@@ -956,9 +865,7 @@ export const Lesson2_3 = () => {
           verify the sender's message code.
         </Title>
 
-        <Title weight="4" style={{ marginTop: 16 }}>
-          Lack of Authentication to Avoid Limitations
-        </Title>
+        <Title weight="4">Lack of Authentication to Avoid Limitations</Title>
         <Title style={{ fontSize: 16, marginTop: 4 }}>
           ❓ Is it unsafe to not verify the authenticity of messages? In some
           situations, security lies precisely in this — if you are working with
@@ -972,9 +879,7 @@ export const Lesson2_3 = () => {
 export const Lesson2_5 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        2.5 Scalable Contracts
-      </Title>
+      <Title weight="7">2.5 Scalable Contracts</Title>
       <Title weight="4">📝 What you will learn</Title>
       <ul>
         <li>
@@ -1112,9 +1017,7 @@ export const Lesson2_5 = () => {
 export const Lesson2_6 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        2.6 Overview of Standard Business Problems
-      </Title>
+      <Title weight="7">2.6 Overview of Standard Business Problems</Title>
 
       <Title weight="4">📝 What you will learn</Title>
       <ul>
@@ -1140,9 +1043,7 @@ export const Lesson2_6 = () => {
         platform helps create scalable and secure applications.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        1. Tokens
-      </Title>
+      <Title weight="4">1. Tokens</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         In Ethereum or even in non-blockchain-based systems, tokens would be
         implemented as a simple account registry. You have a list of accounts
@@ -1180,9 +1081,7 @@ export const Lesson2_6 = () => {
         the same.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        2. Multi-Signature Contract
-      </Title>
+      <Title weight="4">2. Multi-Signature Contract</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         The multi-signature contract concept is used when multiple parties
         authorize actions by tokenizing requests initiated by users.
@@ -1198,9 +1097,7 @@ export const Lesson2_6 = () => {
         rather than individual shares in the contract or other values.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        3. Subscription Payment Model
-      </Title>
+      <Title weight="4">3. Subscription Payment Model</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         Starting from version 4, wallets support plugins that enable
         subscription payments. This is a very powerful feature that scales
@@ -1218,9 +1115,7 @@ export const Lesson2_6 = () => {
 export const Lesson3_1 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        3.1 The Life Cycle of Smart Contract Development
-      </Title>
+      <Title weight="7">3.1 The Life Cycle of Smart Contract Development</Title>
 
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         💎 Welcome to the third part!
@@ -1291,9 +1186,7 @@ export const Lesson3_1 = () => {
         finally, a deployed contract.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
-        Smart Contract in TON as a Satellite of Earth
-      </Title>
+      <Title weight="4">Smart Contract in TON as a Satellite of Earth</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
         This is the best analogy I could come up with to explain the life cycle
         of a TON smart contract: you can think of it as a satellite launched
@@ -1330,7 +1223,7 @@ export const Lesson3_1 = () => {
         where it works with everything you programmed into it.
       </Title>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
+      <Title weight="4">
         Explaining the Satellite Analogy in Smart Contracts on TON
       </Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
@@ -1352,7 +1245,7 @@ export const Lesson3_1 = () => {
         <li>Launch: Deploy the code to the mainnet.</li>
       </ol>
 
-      <Title weight="4" style={{ marginTop: 16 }}>
+      <Title weight="4">
         Are there standard local environments for writing, testing, and
         deploying smart contracts?
       </Title>
@@ -1383,9 +1276,7 @@ export const Lesson3_1 = () => {
 export const Lesson3_2 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        3.2 Setting Up the Compilation Process
-      </Title>
+      <Title weight="7">3.2 Setting Up the Compilation Process</Title>
 
       <Title weight="4">📚 Lesson Summary</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
@@ -1566,9 +1457,7 @@ export const Lesson3_2 = () => {
 export const Lesson3_3 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        3.3 Writing a Simple FunC Contract
-      </Title>
+      <Title weight="7">3.3 Writing a Simple FunC Contract</Title>
 
       <Title weight="4">📚 Lesson Summary</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
@@ -1697,9 +1586,7 @@ export const Lesson3_4 = () => {
 export const Lesson3_5 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        3.5 Deploying the Smart Contract
-      </Title>
+      <Title weight="7">3.5 Deploying the Smart Contract</Title>
 
       <Title weight="4">📚 Lesson Summary</Title>
       <Title style={{ fontSize: 16, marginTop: 4 }}>
@@ -1801,9 +1688,7 @@ deployScript();`}
 export const Lesson3_6 = () => {
   return (
     <div>
-      <Title weight="7" style={{ marginTop: 16 }}>
-        3.6 Deploying from Testnet to Mainnet
-      </Title>
+      <Title weight="7">3.6 Deploying from Testnet to Mainnet</Title>
 
       <Title weight="4">📝 In this lesson, you will learn</Title>
 

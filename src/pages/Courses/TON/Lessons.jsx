@@ -1,4 +1,3 @@
-import "./Chapters.css";
 import { Title, List, Button, Text } from "@telegram-apps/telegram-ui";
 
 export const Lesson1_1 = () => {

@@ -1,6 +1,6 @@
 // CoursesMapping.js
-import * as LessonsEN from "./lessonseng";
-import * as LessonsRU from "./Lessons";
+import * as LessonsEN from "./TON/lessonseng";
+import * as LessonsRU from "./TON/Lessons";
 import * as LessonDataScienceRU from "./Data Science for beginners/Ru";
 import * as LessonDataScienceEN from "./Data Science for beginners/En";
 import * as LessonUXResearchRU from "./Introduction to UX Research/Ru";

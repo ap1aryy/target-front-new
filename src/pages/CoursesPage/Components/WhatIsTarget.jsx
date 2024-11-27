@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Section, Cell, Avatar } from "@telegram-apps/telegram-ui";
+import { Section, Cell, Image } from "@telegram-apps/telegram-ui";
 import { Icon28ChevronRightOutline } from "@vkontakte/icons";
 import "../Style.css";
 import * as amplitude from "@amplitude/analytics-browser";
@@ -74,13 +74,7 @@ export function WhatIsTarget({ t, handleGoToStories, isVisibleStoriesCard }) {
           style={{ height: 80 }}
           multiline
           after={<Icon28ChevronRightOutline />}
-          before={
-            <Avatar
-              src={"/logo.png"}
-              size={55}
-              style={{ borderRadius: "5px" }}
-            />
-          }
+          before={<Image src={"/logo.png"} size={55} />}
           subtitle={t("onboarding_subtitle")}
           children={t("what_is_target")}
         />

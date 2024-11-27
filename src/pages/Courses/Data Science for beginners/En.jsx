@@ -1,7 +1,7 @@
 import "./Chapters.css";
 export const Lesson1_1 = () => {
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div>
       <h2>📚 Chapter 1: Introduction to Data Science</h2>
 
       <section>
@@ -109,7 +109,7 @@ export const Lesson1_1 = () => {
 
 export const Lesson1_2 = () => {
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div>
       <h2>📚 Chapter 1.3: Key Concepts in Data Science</h2>
 
       <section>

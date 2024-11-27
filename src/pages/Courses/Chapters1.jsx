@@ -102,13 +102,9 @@ export function Chapters() {
   };
 
   return (
-    <div className="popup-overlay" onClick={handleClose}>
-      <div
-        className={`popup-menu2`}
-        style={{ height: "100%" }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {renderLessons()}
+    <div onClick={handleClose}>
+      <div onClick={(e) => e.stopPropagation()}>
+        <div className="chapter">{renderLessons()}</div>
         <Button
           style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
           onClick={handleFinishLesson}

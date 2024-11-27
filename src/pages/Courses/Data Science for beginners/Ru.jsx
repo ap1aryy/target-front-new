@@ -2,7 +2,7 @@ import "./Chapters.css";
 import React from "react";
 export const Lesson1_1 = () => {
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div>
       <h2>📚 Глава 1: Введение в data science</h2>
 
       <section>

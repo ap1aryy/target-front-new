@@ -82,9 +82,9 @@ export function ChaptersList({
                           position: "absolute",
                           marginBottom: "95px",
                           marginRight: "50px",
-                          padding: "0 12px",
+                          padding: "0 8px",
                           borderRadius: 6,
-                          height: 32,
+                          height: 28,
                         }}
                         size="s"
                         onClick={() => handleOpenChapters(chapters[0]?.id)}
@@ -112,7 +112,10 @@ export function ChaptersList({
                     </div>
                   }
                   children={
-                    <div className="single-line-text">
+                    <div
+                      className="single-line-text"
+                      style={{ marginBottom: -1 }}
+                    >
                       {t(
                         course?.id.toString() + "." + "chapters." + chapter.id
                       )}
