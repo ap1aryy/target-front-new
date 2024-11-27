@@ -55,19 +55,35 @@ export function Head({ course, user, t }) {
             // Пока загружается изображение, показываем Skeleton
             <Skeleton height={240} width="100%" />
           ) : (
-            <Image
-              src={courseConfig[course?.id]?.img || "default_image_path_here"}
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: "240px",
-                width: "100%",
-                objectFit: "cover",
-                borderRadius: "0 0 16px 16px",
-              }}
-            />
+            <>
+              <Image
+                src={courseConfig[course?.id]?.img || "default_image_path_here"}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: "240px",
+                  width: "100%",
+                  objectFit: "cover",
+                  borderRadius: "0 0 16px 16px",
+                }}
+              />
+
+              {/* Полоска градиента */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "35%", // Высота полоски (1/4 от изображения)
+                  background:
+                    "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))",
+                  borderRadius: "0 0 16px 16px", // Обеспечивает скругление углов
+                }}
+              />
+            </>
           )}
           <div
             style={{
@@ -89,7 +105,8 @@ export function Head({ course, user, t }) {
                 level="3"
                 weight="1"
                 style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)", // Добавляем тень
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
+                  fontSize: "4vh",
                 }}
                 children={t(course?.id?.toString() + ".Course_name")}
               />
@@ -130,17 +147,23 @@ export function Head({ course, user, t }) {
             avatarStack={
               <AvatarStack>
                 <Avatar
-                  style={{ boxShadow: "none" }}
+                  style={{
+                    boxShadow: `0 0 0 3px var(--tg-theme-secondary-bg-color)`, // Цвет фона темы для тени
+                  }}
                   size={28}
                   src="https://images.squarespace-cdn.com/content/v1/656f4e4dababbd7c042c4946/82bec838-05c8-4d68-b173-2284a6ad4e52/how-to-stop-being-a-people-pleaser"
                 />
                 <Avatar
-                  style={{ boxShadow: "none" }}
+                  style={{
+                    boxShadow: `0 0 0 3px var(--tg-theme-secondary-bg-color)`, // Цвет фона темы для тени
+                  }}
                   size={28}
                   src="https://magazine.scienceconnected.org/wp-content/uploads/2021/03/qtq80-uMPS9J.jpeg"
                 />
                 <Avatar
-                  style={{ boxShadow: "none" }}
+                  style={{
+                    boxShadow: `0 0 0 3px var(--tg-theme-secondary-bg-color)`, // Цвет фона темы для тени
+                  }}
                   size={28}
                   src="https://thehumanbean.com/cdn/shop/files/woman_smiling_holding_drink_hot_cup_brown_cup_adrian_august_2022.jpg?v=1679677878&width=1500"
                 />
