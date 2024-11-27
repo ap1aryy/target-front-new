@@ -4,13 +4,3 @@ body {
   height: var(--viewport-height);
   overflow-x: hidden;
 }
-
-html {
-  height: 100dvh;
-  overflow: hidden
-}
-
-body {
-  height: 100%;
-  overflow-y: auto
-}
