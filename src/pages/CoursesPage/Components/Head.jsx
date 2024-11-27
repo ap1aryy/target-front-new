@@ -105,8 +105,7 @@ export function Head({ course, user, t }) {
                 level="3"
                 weight="1"
                 style={{
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.6)",
-                  fontSize: "4vh",
+                  fontSize: "24px",
                 }}
                 children={t(course?.id?.toString() + ".Course_name")}
               />
