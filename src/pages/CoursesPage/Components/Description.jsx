@@ -104,7 +104,9 @@ export function Description({ course, t }) {
                 color: "rgba(0, 122, 255, 1)",
                 transition: "all 0.3s ease",
               }}
-              children={t("course_price")}
+              children={
+                <span dangerouslySetInnerHTML={{ __html: t("course_price") }} />
+              }
               after={<Icon16StarAlt />}
               mode="outline"
               size="s"
