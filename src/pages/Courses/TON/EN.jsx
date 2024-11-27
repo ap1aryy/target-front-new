@@ -1633,8 +1633,6 @@ deployScript();`}
         the <code>StateInit</code>.
       </p>
 
-      <p>...</p>
-
       <video controls playsInline>
         <source src="https://cdn.stepik.net/video/326907/1080/eb93f2d96bf80ced9ce2bbe517e41025.mp4" />
       </video>
@@ -1749,7 +1747,7 @@ export const Lesson3_6 = () => {
 export const Lesson8_4 = () => {
   return (
     <div>
-      <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+      <div>
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <video controls playsInline>
             <source src="https://cdn.stepik.net/video/326955/1080/4f6db68c3ed2c0cf88ea5dfd8adcb77d.mp4" />
@@ -1870,7 +1868,7 @@ global slice var3;
         </section>
       </div>
 
-      <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+      <div>
         <h2>Use end_parse()</h2>
         <p>
           Use <code>end_parse()</code> whenever possible when reading data from
@@ -1959,7 +1957,7 @@ send_raw_message(msg.end_cell(), SEND_MODE_PAY_FEES_SEPARETELY);`}
 
 export const Lesson8_3 = () => {
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+    <div>
       <h2>📚 Lesson Summary</h2>
       <video controls playsInline>
         <source src="https://cdn.stepik.net/video/326935/1080/24d1980f21269eb52645ec991229884c.mp4" />
@@ -2113,7 +2111,7 @@ if (msg_value > 0) {    ;; there is still something to return
   );
 };
 export const Lesson8_2 = () => (
-  <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+  <div>
     <h2>📚 Lesson Summary</h2>
 
     <video controls playsInline>

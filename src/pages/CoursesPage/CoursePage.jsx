@@ -109,7 +109,6 @@ export function CoursePage() {
   };
 
   const setupMainButtonForWaitlist = () => {
-    console.log("1");
     if (course?.my) {
       WebApp.MainButton.text = "You in waitlist";
       WebApp.MainButton.show();
@@ -130,17 +129,14 @@ export function CoursePage() {
   };
 
   useEffect(() => {
-    console.log("1");
     if (course?.id === 2930632) {
       WebApp.MainButton.hide();
-      console.log("1");
       amplitude.track("load_waitlist");
       setIsWaitList(true);
       setupMainButtonForWaitlist();
     } else if (course?.my) {
       WebApp.MainButton.hide();
     } else if (course) {
-      console.log("2");
       setupMainButtonForRegularCourse();
     }
 
@@ -200,7 +196,6 @@ export function CoursePage() {
   };
 
   const isChapterCompleted = (courseId, index) => {
-    console.log(courseId + " " + index);
     const completedChapters =
       JSON.parse(localStorage.getItem("completedChapters")) || {};
     return (
@@ -219,7 +214,6 @@ export function CoursePage() {
 
     // Действия, которые можно выполнять после загрузки курса
     amplitude.track("open_buy_choise_menu");
-    console.log(course);
     navigate("/buy", { state: { course } });
   };
   return (

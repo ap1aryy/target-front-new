@@ -121,6 +121,7 @@
   width: 100%;
   word-wrap: break-word;
   word-break: break-word;
+  color: var(--tg-theme-accent-text-color);
 }
 
 /* Стиль для <code> */

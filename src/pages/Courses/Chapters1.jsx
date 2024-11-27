@@ -1,25 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Title,
-  List,
-  Button,
-  Text,
-  Section,
-  Cell,
-} from "@telegram-apps/telegram-ui";
-import "./Chapters.css";
-import { Icon16Cancel } from "@vkontakte/icons";
-import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { courseMappings } from "./CoursesMapping";
 import * as amplitude from "@amplitude/analytics-browser";
+import { useTranslation } from "react-i18next";
+import { Button } from "@telegram-apps/telegram-ui";
+import "./Chapters.css";
+
 export function Chapters() {
   const navigate = useNavigate();
   const { courseId, index } = useParams();
-  amplitude.track("load_chapter");
   const { t, i18n } = useTranslation();
 
+  const [progress, setProgress] = useState(0); // Состояние для прогресса
+  const chapterRef = useRef(null); // Реф для отслеживания прокрутки
+  const startTouch = useRef(null);
+
   useEffect(() => {
+    // Отключаем прокрутку на родительском элементе
+    document.body.style.overflow = "hidden";
+
     window.Telegram.WebApp.BackButton.show();
     window.Telegram.WebApp.BackButton.onClick(handleClose);
 
@@ -40,11 +39,10 @@ export function Chapters() {
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchend", handleTouchEnd);
 
-    const lastCompletedLesson = localStorage.getItem(
-      `chapter_${index}_lastLesson`
-    );
-
     return () => {
+      // Восстанавливаем прокрутку после выхода с компонента
+      document.body.style.overflow = "auto";
+
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
@@ -53,7 +51,7 @@ export function Chapters() {
 
   const handleClose = () => {
     amplitude.track("close_chapter");
-    navigate(-1);
+    navigate(`/courses/${courseId}`);
   };
 
   const handleFinishLesson = () => {
@@ -61,7 +59,6 @@ export function Chapters() {
     const completedChapters =
       JSON.parse(localStorage.getItem("completedChapters")) || {};
 
-    // Ensure there is an entry for this courseId
     if (!completedChapters[courseId]) {
       completedChapters[courseId] = [];
     }
@@ -88,7 +85,6 @@ export function Chapters() {
       return null;
     }
 
-    // Определение уроков на основе главы
     const lessonKey = `Lesson${index}`;
     const lessons = Object.keys(lessonsModule)
       .filter((key) => key.startsWith(lessonKey))
@@ -101,16 +97,54 @@ export function Chapters() {
     ));
   };
 
+  // Функция для вычисления прогресса
+  const handleScroll = () => {
+    const chapterElement = chapterRef.current;
+    if (chapterElement) {
+      const scrollTop = chapterElement.scrollTop;
+      const scrollHeight = chapterElement.scrollHeight;
+      const clientHeight = chapterElement.clientHeight;
+      const scrolled = (scrollTop / (scrollHeight - clientHeight)) * 100;
+      setProgress(scrolled);
+    }
+  };
+
   return (
-    <div onClick={handleClose}>
-      <div onClick={(e) => e.stopPropagation()}>
-        <div className="chapter">{renderLessons()}</div>
-        <Button
-          style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
-          onClick={handleFinishLesson}
-        >
-          {t("chapters1_finish")}
-        </Button>
+    <div>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "4px", // Высота полоски
+          backgroundColor: "var(--tg-theme-accent-text-color)", // Цвет полоски
+          width: `${progress}%`, // Прогресс полоски
+          zIndex: 1000, // Чтобы полоска была поверх контента
+        }}
+      ></div>
+
+      <div
+        ref={chapterRef}
+        onScroll={handleScroll}
+        style={{
+          paddingTop: "8px", // Отступ сверху для прогресс-бара
+          height: "100vh", // Ограничиваем высоту экрана
+          overflowY: "auto", // Разрешаем вертикальную прокрутку внутри компонента
+          overflowX: "hidden",
+        }}
+      >
+        <div>
+          <div onClick={(e) => e.stopPropagation()}>
+            <div className="chapter">{renderLessons()}</div>
+            <Button
+              style={{ width: "100%", marginTop: 16, marginBottom: 16 }}
+              onClick={handleFinishLesson}
+            >
+              {t("chapters1_finish")}
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
