@@ -224,13 +224,13 @@ export function CoursePage() {
 
   const handleConfirmPurchase = async () => {
     invoiceGenerated.current = false;
-    const price = 1;
+    const price = 249;
     amplitude.track({ event_type: "click_buy", price });
     try {
       const result = await generateInvoice(
         user.id,
         course.id,
-        1,
+        249,
         invoiceGenerated,
         1,
         user.startappParams,
