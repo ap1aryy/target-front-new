@@ -19,10 +19,8 @@ export function Head({ course, user, t }) {
 
   // Эмуляция загрузки данных
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false); // После 2 секунд "загружаем" данные
-    }, 200);
-  }, []);
+    if (course) setIsLoading(false);
+  }, [course]);
   const enrolledCounts = {
     2925675: "3K+", // Пример для курса с id=2925675
     2926478: "500+", // Пример для курса с id=2926478

@@ -13,7 +13,6 @@ const averageSalaries = {
   Crypto: { rub: 160000, usd: 130000 },
 };
 
-// Функция для получения зарплаты по категории в зависимости от языка
 const getSalaryByCategory = (id, language) => {
   const course = CoursesData.find((course) => course.id === id);
   if (course) {
@@ -29,12 +28,9 @@ export function Salary({ t, course }) {
 
   const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
 
-  // Эмуляция загрузки данных
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false); // Загружаем данные через 2 секунды
-    }, 200);
-  }, []);
+    if (course) setIsLoading(false);
+  }, [course]);
 
   // Функция для преобразования зарплаты в формат с "K+" (например, "70000" -> "70K+")
   const convertSalaryToKPlus = (salary) => {

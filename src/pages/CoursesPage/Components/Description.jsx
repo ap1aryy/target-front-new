@@ -14,13 +14,9 @@ export function Description({ course, t }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
 
-  // Имитируем асинхронную загрузку данных (например, API вызов)
   useEffect(() => {
-    // Эмуляция загрузки
-    setTimeout(() => {
-      setIsLoading(false); // После 2 секунд "загружаем" данные
-    }, 300);
-  }, []);
+    if (course) setIsLoading(false);
+  }, [course]);
 
   const description = t(course?.id.toString() + ".Description") || "";
   const truncatedDescription =
@@ -93,28 +89,56 @@ export function Description({ course, t }) {
           } // Translated price description
           multiline
           children={
-            <Button
-              style={{
-                width: "100vw",
-                height: "48px",
-                borderRadius: "38px",
-                marginBottom: "16px",
-                backgroundColor: "transparent",
-                border: "2px solid var(--tg-theme-button-color)",
-                color: "var(--tgui--link_color)",
-                transition: "all 0.3s ease",
-              }}
-              children={
-                <span dangerouslySetInnerHTML={{ __html: t("course_price") }} />
-              }
-              // after={<Icon16StarAlt />}
-              mode="outline"
-              size="s"
-              onMouseEnter={(e) => (e.target.style.borderColor = "#007aff")}
-              onMouseLeave={(e) =>
-                (e.target.style.borderColor = "rgba(0, 122, 255, 1)")
-              }
-            />
+            <>
+              <span
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 40,
+                  width: 30,
+                  height: 20,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifycontent: "center",
+                  alignItems: "center",
+                  backgroundColor: "var(--tg-theme-button-color)",
+                  color: "var(--tg-theme-button-text-color)",
+                  padding: "4px 8px",
+                  borderRadius: "4px",
+                  fontSize: "12px",
+                  zIndex: 200,
+                  fontWeight: "bold",
+                }}
+              >
+                {t("-90%")}
+              </span>
+              <Button
+                style={{
+                  width: "100vw",
+                  height: "48px",
+                  borderRadius: "38px",
+                  marginBottom: "16px",
+                  backgroundColor: "transparent",
+                  border: "2px solid var(--tg-theme-button-color)",
+                  color: "var(--tgui--link_color)",
+                  transition: "all 0.3s ease",
+                  position: "relative", // Добавляем позиционирование для родительского элемента
+                }}
+                children={
+                  <>
+                    <span
+                      dangerouslySetInnerHTML={{ __html: t("course_price") }}
+                    />
+                  </>
+                }
+                mode="outline"
+                size="s"
+                onMouseEnter={(e) => (e.target.style.borderColor = "#007aff")}
+                onMouseLeave={(e) =>
+                  (e.target.style.borderColor = "rgba(0, 122, 255, 1)")
+                }
+              />
+            </>
           }
         />
       )}

@@ -25,7 +25,7 @@
     "lessons": "Lessons: 6",
     "show_more": "Show more",
     "show_less": "Show less",
-    "course_price": "Course price: <del>50$</del> 8$",
+   "course_price": "Course price: <span class='new-price'>8 $</span> <del class='old-price'>80$</del>",
     "free": "FREE",
     "stars_info": "249 Telegram Stars equals approximately 8$. Price includes full access for one month.",
     "you_in_waitlist": "You in waitlist",

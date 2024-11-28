@@ -191,7 +191,7 @@
     "lessons": "Уроки: 6",
     "show_more": "Больше",
     "show_less": "Скрыть",
-   "course_price": "Цена курса: <del>5000₽</del> 490₽",
+"course_price": "Цена курса: <span class='new-price'>490 ₽</span> <del class='old-price'>5000₽</del>",
     "free": "БЕСПЛАТНО",
     "about_course": "О курсе",
     "stars_info": "249 Telegram Stars равно примерно 490₽. Цена включает полный доступ на один месяц.",
