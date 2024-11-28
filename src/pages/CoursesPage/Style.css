@@ -63,6 +63,5 @@ body::-webkit-scrollbar {
 }
 
 .old-price{
-    color: var(--tgui--destructive_text_color);
     font-size: 0.8em;
 }
