@@ -106,6 +106,9 @@ export function Salary({ t, course }) {
                     {i18n.language === "en" && (
                       <Text style={yearTextStyle}>/year</Text>
                     )}
+                    {i18n.language === "ru" && (
+                      <Text style={yearTextStyle}>/мес</Text>
+                    )}
                   </Text>
                 )}
               </div>
@@ -164,7 +167,6 @@ const yearTextStyle = {
   textAlight: "center",
   fontSize: "1.4vh",
   fontWeight: 400,
-  marginLeft: -4,
   whiteSpace: "nowrap",
 };
 

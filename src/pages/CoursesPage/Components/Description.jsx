@@ -100,14 +100,14 @@ export function Description({ course, t }) {
                 borderRadius: "38px",
                 marginBottom: "16px",
                 backgroundColor: "transparent",
-                border: "2px solid rgba(0, 122, 255, 1)",
-                color: "rgba(0, 122, 255, 1)",
+                border: "2px solid var(--tg-theme-button-color)",
+                color: "var(--tgui--link_color)",
                 transition: "all 0.3s ease",
               }}
               children={
                 <span dangerouslySetInnerHTML={{ __html: t("course_price") }} />
               }
-              after={<Icon16StarAlt />}
+              // after={<Icon16StarAlt />}
               mode="outline"
               size="s"
               onMouseEnter={(e) => (e.target.style.borderColor = "#007aff")}
