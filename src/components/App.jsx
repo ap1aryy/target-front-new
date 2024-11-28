@@ -1,14 +1,7 @@
 import WebApp from "@twa-dev/sdk";
 import { AppRoot } from "@telegram-apps/telegram-ui";
 import { useEffect } from "react";
-import {
-  Navigate,
-  Route,
-  BrowserRouter,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Navigate, Route, BrowserRouter, Routes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { TwaAnalyticsProvider } from "@tonsolutions/telemetree-react";
 

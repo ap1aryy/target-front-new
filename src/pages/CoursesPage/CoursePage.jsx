@@ -217,7 +217,7 @@ export function CoursePage() {
     navigate("/buy", { state: { course } });
   };
   return (
-    <div>
+    <div className="scroll-bar-hidden">
       <Head
         course={course}
         user={user}

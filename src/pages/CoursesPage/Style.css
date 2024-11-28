@@ -15,9 +15,7 @@
     position: absolute;
     right: -0.5rem;
     color: #333;
-    /* Adjust color as needed */
     font-size: 1.2rem;
-    /* Adjust size as needed */
     top: 50%;
     transform: translateY(-50%);
 }
@@ -33,11 +31,33 @@
 .single-line-text {
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    /* Ограничение текста до двух строк */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* Троеточие для обрезанного текста */
     margin-bottom: 5px;
-    /* Добавить отступ снизу для одного ряда текста */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    html::-webkit-scrollbar-thumb,
+    body::-webkit-scrollbar-thumb {
+        background: transparent !important;
+    }
 }
