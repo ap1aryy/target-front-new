@@ -65,6 +65,8 @@ export function WhatIsTarget({ t, handleGoToStories, isVisibleStoriesCard }) {
           transition: "top 0.5s ease, opacity 0.5s ease",
           opacity: isHidden ? 0 : 1,
           height: 80,
+          backgroundColor: "var(--tg-theme-section-bg-color)",
+          borderRadius: 16,
         }}
         onClick={handleGoToStories}
         onTouchStart={handleTouchStart}

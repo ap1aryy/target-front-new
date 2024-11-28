@@ -25,7 +25,7 @@ const getSalaryByCategory = (id, language) => {
 
 export function Salary({ t, course }) {
   const { i18n } = useTranslation();
-  const currencySymbol = i18n.language === "en" ? "$" : "₽";
+  const currencySymbol = i18n.language === "ru" ? "₽" : "$";
 
   const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
 
@@ -103,12 +103,7 @@ export function Salary({ t, course }) {
                     {i18n.language === "en"
                       ? `${convertSalaryToKPlus(categorySalary)} `
                       : convertSalaryToKPlus(categorySalary)}
-                    {i18n.language === "en" && (
-                      <Text style={yearTextStyle}>/year</Text>
-                    )}
-                    {i18n.language === "ru" && (
-                      <Text style={yearTextStyle}>/мес</Text>
-                    )}
+                    <Text style={yearTextStyle}>{t("/year")}</Text>
                   </Text>
                 )}
               </div>
