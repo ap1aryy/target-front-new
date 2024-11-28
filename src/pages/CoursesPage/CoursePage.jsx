@@ -2,7 +2,12 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "@/contexts/UserContext";
-import { getCourseDetails, getAllChapters } from "@/Utils/thinkificAPI";
+import {
+  getCourseDetails,
+  getAllChapters,
+  generateInvoice,
+  getAllCourses,
+} from "@/Utils/thinkificAPI";
 import * as amplitude from "@amplitude/analytics-browser";
 import { Button, FixedLayout } from "@telegram-apps/telegram-ui";
 import WebApp from "@twa-dev/sdk";
@@ -34,6 +39,8 @@ export function CoursePage() {
   const { t, i18n } = useTranslation();
   const [isVisibleGetIt, setisVisibleGetIt] = useState(false);
   const waitlistRequestSent = useRef(false);
+  const invoiceGenerated = useRef(false);
+
   useEffect(() => {
     if (!user) {
       navigate("/");
@@ -212,10 +219,59 @@ export function CoursePage() {
       return; // Если курс все еще загружается, ничего не делать
     }
 
-    // Действия, которые можно выполнять после загрузки курса
-    amplitude.track("open_buy_choise_menu");
-    navigate("/buy", { state: { course } });
+    handleConfirmPurchase();
   };
+
+  const handleConfirmPurchase = async () => {
+    invoiceGenerated.current = false;
+    const price = 1;
+    amplitude.track({ event_type: "click_buy", price });
+    try {
+      const result = await generateInvoice(
+        user.id,
+        course.id,
+        1,
+        invoiceGenerated,
+        1,
+        user.startappParams,
+        async () => {
+          if (
+            window.Telegram &&
+            window.Telegram.WebApp &&
+            window.Telegram.WebApp.MainButton
+          ) {
+            window.Telegram.WebApp.MainButton.hide();
+            window.Telegram.WebApp.MainButton.text = "You have new course!";
+          }
+          try {
+            setCourse((prevCourse) => ({
+              ...prevCourse,
+              my: true,
+            }));
+
+            if (i18n.language === "ru") {
+              alert(
+                `${t(
+                  course.id.toString() + ".Course_name"
+                )} был добавлен в ваш аккаунт`
+              );
+            } else {
+              alert(
+                `${t(
+                  course.id.toString() + ".Course_name"
+                )} was added to your account`
+              );
+            }
+          } catch (error) {
+            console.error("Error fetching courses:", error);
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Error during the purchase process:", error);
+    }
+  };
+
   return (
     <div className="scroll-bar-hidden">
       <Head
@@ -224,7 +280,7 @@ export function CoursePage() {
         t={t}
         handleShareCourse={handleShareCourse}
       />
-      <Description course={course} t={t} />
+      <Description course={course} t={t} handleOpenPopUp={handleOpenPopUp} />
       {isVisibleStoriesCard && (
         <WhatIsTarget
           t={t}

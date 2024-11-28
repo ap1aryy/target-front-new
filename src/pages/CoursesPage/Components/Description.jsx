@@ -10,7 +10,7 @@ import {
 } from "@vkontakte/icons";
 import * as amplitude from "@amplitude/analytics-browser";
 
-export function Description({ course, t }) {
+export function Description({ course, t, handleOpenPopUp }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Добавляем состояние загрузки
 
@@ -113,6 +113,7 @@ export function Description({ course, t }) {
                 {t("-90%")}
               </span>
               <Button
+                onClick={() => handleOpenPopUp()}
                 style={{
                   width: "100vw",
                   height: "48px",
@@ -133,10 +134,6 @@ export function Description({ course, t }) {
                 }
                 mode="outline"
                 size="s"
-                onMouseEnter={(e) => (e.target.style.borderColor = "#007aff")}
-                onMouseLeave={(e) =>
-                  (e.target.style.borderColor = "rgba(0, 122, 255, 1)")
-                }
               />
             </>
           }
